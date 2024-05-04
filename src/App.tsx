@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./components/authentication/LoginButton";
-import LogoutButton from "./components/authentication/LogoutButton";
+import NavBar from "./components/navbar/NavBar";
+import imagePath from "./assets/dumbling.png";
+
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App(): JSX.Element {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const navItems = ["Home", "Restaurants", "About us"];
 
   const checkIfUserIsInDb = async (): Promise<boolean> => {
     if (isAuthenticated && user?.email) {
@@ -19,7 +22,7 @@ function App(): JSX.Element {
             },
           }
         );
-
+        console.log(response.data);
         if (response.data === null) {
           return false;
         } else {
@@ -44,6 +47,7 @@ function App(): JSX.Element {
         });
 
         console.log("posted a new user!");
+        console.log(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -60,7 +64,15 @@ function App(): JSX.Element {
     return <div>Loading ...</div>;
   }
   console.log(user);
-  return <>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</>;
+  return (
+    <>
+      <NavBar
+        brandName="Food Harbour"
+        imageSrcPath={imagePath}
+        navItems={navItems}
+      />
+    </>
+  );
 }
 
 export default App;

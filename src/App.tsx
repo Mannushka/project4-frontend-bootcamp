@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/navbar/NavBar";
 import imagePath from "./assets/dumbling.png";
+import { BACKEND_URL } from "./constants";
 
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App(): JSX.Element {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -14,14 +15,11 @@ function App(): JSX.Element {
   const checkIfUserIsInDb = async (): Promise<boolean> => {
     if (isAuthenticated && user?.email) {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/users/finduser`,
-          {
-            params: {
-              email: user?.email,
-            },
-          }
-        );
+        const response = await axios.get(`${BACKEND_URL}/users/finduser`, {
+          params: {
+            email: user?.email,
+          },
+        });
         console.log(response.data);
         if (response.data === null) {
           return false;
@@ -64,6 +62,7 @@ function App(): JSX.Element {
     return <div>Loading ...</div>;
   }
   console.log(user);
+
   return (
     <>
       <NavBar

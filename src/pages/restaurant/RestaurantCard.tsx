@@ -1,46 +1,36 @@
 import React from "react";
-import axios from "axios";
-import { BACKEND_URL } from "../../constants";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Card, CardBody, Stack, Text, Heading, Link } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { formatPriceCategory } from "../../utils/formatPriceCategory";
+import { formatBusinessHours } from "../../utils/formatBusinessHours";
 
-const RestaurantCard = () => {
-  const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const { id } = useParams();
-  const restaurantId = Number(id);
+interface RestaurantCardProps {
+  restaurant: Restaurant;
+}
+const RestaurantCard = (props: RestaurantCardProps) => {
+  const restaurant = props.restaurant;
+  const restaurantCard = (
+    <Card direction="column" overflow="hidden" variant="outline" width={450}>
+      <Stack>
+        <CardBody>
+          <Heading className="restaurant-details" size="md">
+            Details
+          </Heading>
+          <Text>Cuisine: {restaurant.food_category.category_name}</Text>
+          <Text>{formatPriceCategory(restaurant.price_category)}</Text>
+          <Text>Rating:</Text>
 
-  const getRestaurantInfo = async () => {
-    if (restaurantId) {
-      try {
-        const response = await axios.get(
-          `${BACKEND_URL}/restaurants/${restaurantId}`
-        );
-        setRestaurant(response.data);
-        console.log(restaurant);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
+          <Link href={restaurant.website} isExternal>
+            Website <ExternalLinkIcon mx="2px" />
+            <Heading size="md">Business hours</Heading>
+            <Text>{formatBusinessHours(restaurant.business_hours)}</Text>
+          </Link>
+        </CardBody>
+      </Stack>
+    </Card>
+  );
 
-  // const showRestarauntInfo = () => {
-  //   if (accessToken) {
-  //     getRestaurantInfo();
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getToken();
-  // }, []);
-
-  useEffect(() => {
-    setLoading(true);
-    getRestaurantInfo();
-  }, [restaurantId]);
-
-  return <div>RestaurantCard</div>;
+  return <div>{restaurantCard}</div>;
 };
 
 export default RestaurantCard;

@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 import RestaurantInfo from "./pages/restaurant/RestaurantInfo.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -21,15 +22,17 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           "read:current_user update:current_user_metadata openid profile email read:user_metadata",
       }}
     >
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route
-            path="/restaurants/:restaurantId"
-            element={<RestaurantInfo />}
-          />
-        </Routes>
-      </BrowserRouter>
+      <ChakraProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route
+              path="/restaurants/:restaurantId"
+              element={<RestaurantInfo />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </ChakraProvider>
     </Auth0Provider>
   </React.StrictMode>
 );

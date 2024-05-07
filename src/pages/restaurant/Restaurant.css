@@ -1,0 +1,26 @@
+.restaurant-container {
+  margin: 40px 20px;
+}
+
+.restaurant-name {
+  text-align: center;
+  /* display: flex;
+  justify-content: center; */
+  font-weight: 500;
+  font-size: xx-large;
+  font-family: "Anton", sans-serif;
+  font-style: normal;
+  margin-bottom: 3vh;
+}
+
+.restaurant-image {
+  min-width: 300px;
+}
+
+.restaurant-details {
+  text-align: center;
+}
+
+.image-details-wrapper {
+  gap: 50px;
+}

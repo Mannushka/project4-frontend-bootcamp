@@ -2,13 +2,13 @@ interface Restaurant {
   id: number;
   name: string;
   address: string;
-  phone_number: string | null;
-  email: string | null;
-  website: string | null;
+  phone_number?: string;
+  email?: string;
+  website?: string;
   // location_id: number;
   // food_category_id: number;
   price_category: number;
-  img_url: string | null;
+  img_url?: string;
   business_hours: {
     [day: string]: string[];
   };
@@ -20,6 +20,9 @@ interface Restaurant {
   food_category: {
     category_name: string;
   };
+  [key: string]: string;
 }
 
-type RestaurantId = number;
+interface BusinessHours {
+  [day: string]: string[];
+}

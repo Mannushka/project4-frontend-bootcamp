@@ -16,7 +16,12 @@ const RestaurantCard = (props: RestaurantCardProps) => {
           <Heading className="restaurant-details" size="md">
             Details
           </Heading>
-          <Text>Cuisine: {restaurant.food_category.category_name}</Text>
+          <Text>
+            Cuisine:
+            {restaurant.food_category
+              ? restaurant.food_category.category_name
+              : ""}
+          </Text>
           <Text>{formatPriceCategory(restaurant.price_category)}</Text>
           <Text>Rating:</Text>
 

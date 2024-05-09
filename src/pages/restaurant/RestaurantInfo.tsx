@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import "./Restaurant.css";
 import { Flex, Box, Text } from "@chakra-ui/react";
+import Spinner from "../../components/ui/Spinner";
 
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
@@ -40,21 +41,24 @@ const RestaurantInfo = () => {
   };
 
   return (
-    <div className="restaurant-container">
-      <div className="restaurant-name">{restaurant.name}</div>
-      {/* <div className="restaurant-image"> */}
-      {/* <img src={`${restaurant.img_url}`} alt="image" /> */}
-      {/* </div> */}
-      <Flex flexWrap="wrap" className="image-details-wrapper">
-        <Box className="restaurant-image">
-          <img src={`${restaurant.img_url}`} alt="image" />
-        </Box>
+    <div>
+      <div>{loading && <Spinner />}</div>
+      <div className="restaurant-container">
+        <div className="restaurant-name">{restaurant.name}</div>
+        {/* <div className="restaurant-image"> */}
+        {/* <img src={`${restaurant.img_url}`} alt="image" /> */}
+        {/* </div> */}
+        <Flex flexWrap="wrap" className="image-details-wrapper">
+          <Box className="restaurant-image">
+            <img src={`${restaurant.img_url}`} alt="image" />
+          </Box>
 
-        <Box>
-          <RestaurantCard restaurant={restaurant} />
-        </Box>
-      </Flex>
-      {/* {displayRestaurantInfo()} */}
+          <Box>
+            <RestaurantCard restaurant={restaurant} />
+          </Box>
+        </Flex>
+        {/* {displayRestaurantInfo()} */}
+      </div>
     </div>
   );
 };

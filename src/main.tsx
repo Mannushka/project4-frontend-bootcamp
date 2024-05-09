@@ -9,6 +9,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import RestaurantInfo from "./pages/restaurant/RestaurantInfo.tsx";
+import RestaurantsList from "./pages/restaurants-list/RestaurantsList.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />} />
+            <Route path="/restaurants" element={<RestaurantsList />} />
             <Route
               path="/restaurants/:restaurantId"
               element={<RestaurantInfo />}

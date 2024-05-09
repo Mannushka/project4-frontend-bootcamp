@@ -27,9 +27,9 @@ const RestaurantCard = (props: RestaurantCardProps) => {
 
           <Link href={restaurant.website} isExternal>
             Website <ExternalLinkIcon mx="2px" />
-            <Heading size="md">Business hours</Heading>
-            <Text>{formatBusinessHours(restaurant.business_hours)}</Text>
           </Link>
+          <Heading size="md">Business hours</Heading>
+          <Text>{formatBusinessHours(restaurant.business_hours)}</Text>
         </CardBody>
       </Stack>
     </Card>

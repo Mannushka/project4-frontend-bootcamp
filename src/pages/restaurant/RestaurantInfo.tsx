@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import "./Restaurant.css";
-import { Flex, Box, Text } from "@chakra-ui/react";
+import { Flex, Box, Text, Image } from "@chakra-ui/react";
 import Spinner from "../../components/ui/Spinner";
 
 const RestaurantInfo = () => {
@@ -50,7 +50,13 @@ const RestaurantInfo = () => {
         {/* </div> */}
         <Flex flexWrap="wrap" className="image-details-wrapper">
           <Box className="restaurant-image">
-            <img src={`${restaurant.img_url}`} alt="image" />
+            <Image
+              src={`${restaurant.img_url}`}
+              alt="image"
+              width="40rem"
+              height="30rem"
+              objectFit="cover"
+            />
           </Box>
 
           <Box>

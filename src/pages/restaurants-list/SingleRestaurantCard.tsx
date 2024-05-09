@@ -3,7 +3,6 @@ import {
   Container,
   Card,
   CardBody,
-  CardFooter,
   Image,
   Heading,
   Stack,

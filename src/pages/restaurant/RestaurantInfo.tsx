@@ -53,9 +53,10 @@ const RestaurantInfo = () => {
             <Image
               src={`${restaurant.img_url}`}
               alt="image"
-              width="40rem"
-              height="30rem"
+              width="45rem"
+              height="32rem"
               objectFit="cover"
+              borderRadius={5}
             />
           </Box>
 

@@ -3,6 +3,7 @@ import LoginButton from "../authentication/LoginButton";
 import LogoutButton from "../authentication/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 interface NavBarProps {
   brandName: string;
@@ -12,8 +13,20 @@ interface NavBarProps {
 
 const NavBar = ({ brandName, imageSrcPath, navItems }: NavBarProps) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
+  const navigate = useNavigate();
+  const navigateToPage = (item: string) => {
+    if (item === "Home") {
+      navigate("/");
+    }
+    if (item === "Restaurants") {
+      navigate("/restaurants");
+    }
+    if (item === "About us") {
+      navigate("/about");
+    }
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-light bg-light shadow">
@@ -53,7 +66,11 @@ const NavBar = ({ brandName, imageSrcPath, navItems }: NavBarProps) => {
                 <li
                   key={items}
                   className="nav-item"
-                  onClick={() => setSelectedIndex(index)}
+                  // onClick={() => setSelectedIndex(index)}
+                  onClick={() => {
+                    setSelectedIndex(index);
+                    navigateToPage(items);
+                  }}
                 >
                   <a
                     className={
@@ -61,7 +78,7 @@ const NavBar = ({ brandName, imageSrcPath, navItems }: NavBarProps) => {
                         ? "nav-link active fw-bold"
                         : "nav-link"
                     }
-                    href="#"
+                    // href="#"
                   >
                     {items}
                   </a>

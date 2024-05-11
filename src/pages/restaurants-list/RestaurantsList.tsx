@@ -6,6 +6,7 @@ import SingleRestaurantCard from "./SingleRestaurantCard";
 import Spinner from "../../components/ui/Spinner";
 import FoodCategoryFilter from "../../components/filters/FoodCategoryFilter";
 import LocationFilter from "../../components/filters/LocationFilter";
+import FilterOptions from "../../components/filters/FilterOptions";
 
 const RestaurantsList = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -37,9 +38,6 @@ const RestaurantsList = () => {
           params.priceCategory = priceParams;
         }
 
-        // console.log(priceParams);
-        // console.log(isNaN(priceParams as number));
-
         const response = await axios.get(`${BACKEND_URL}/restaurants`, {
           params: params,
         });
@@ -64,16 +62,32 @@ const RestaurantsList = () => {
   });
   return (
     <div>
-      <div>
+      {/* <div>
         <FoodCategoryFilter
           selectedItems={categoryParams}
           setSelectedItems={setCategoryParams}
         />
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <LocationFilter
           selectedItems={locationParams}
           setSelectedItems={setLocationParams}
+        />
+      </div> */}
+      <div>
+        <FilterOptions
+          selectedItems={categoryParams}
+          setSelectedItems={setCategoryParams}
+          filterType="category"
+          path="categories"
+        />
+      </div>
+      <div>
+        <FilterOptions
+          selectedItems={locationParams}
+          setSelectedItems={setLocationParams}
+          filterType="location"
+          path="locations"
         />
       </div>
       <div>{loading && !restaurants.length && <Spinner />}</div>

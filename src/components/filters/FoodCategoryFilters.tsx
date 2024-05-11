@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../../constants";
 import FilterButtonGroup from "./FilterButtonGroup";
 interface FilterProps {
-  selectedItems: string | string[];
-  setSelectedItems: React.Dispatch<React.SetStateAction<string | string[]>>;
+  selectedItems: string[];
+  setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const FoodCategoryFilters = ({

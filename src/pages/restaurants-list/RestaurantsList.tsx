@@ -9,7 +9,7 @@ import FoodCategoryFilters from "../../components/filters/FoodCategoryFilters";
 const RestaurantsList = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-  const [categoryParams, setCategoryParams] = useState<string | string[]>("");
+  const [categoryParams, setCategoryParams] = useState<string[]>([]);
   const [locationParams, setLocationParams] = useState<string | string[]>("");
   const [priceParams, setPriceParams] = useState<number | number[]>();
   useEffect(() => {
@@ -18,7 +18,7 @@ const RestaurantsList = () => {
       try {
         const params: {
           location?: string | string[];
-          category?: string | string[];
+          category?: string[];
           priceCategory?: number | number[];
         } = {};
         if (
@@ -28,10 +28,7 @@ const RestaurantsList = () => {
           params.location = locationParams;
         }
 
-        if (
-          (Array.isArray(categoryParams) && categoryParams.length > 0) ||
-          (typeof categoryParams === "string" && categoryParams)
-        ) {
+        if (categoryParams.length) {
           params.category = categoryParams;
         }
 
@@ -42,8 +39,8 @@ const RestaurantsList = () => {
           params.priceCategory = priceParams;
         }
 
-        console.log(priceParams);
-        console.log(isNaN(priceParams as number));
+        // console.log(priceParams);
+        // console.log(isNaN(priceParams as number));
 
         const response = await axios.get(`${BACKEND_URL}/restaurants`, {
           params: params,

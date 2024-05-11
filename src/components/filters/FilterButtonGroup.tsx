@@ -3,8 +3,8 @@ import { Button, ButtonGroup, Wrap, WrapItem } from "@chakra-ui/react";
 
 interface FilterProps {
   filterItems: string[];
-  selectedItems: string | string[];
-  setSelectedItems: React.Dispatch<React.SetStateAction<string | string[]>>;
+  selectedItems: string[];
+  setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const FilterButtonGroup = ({
@@ -16,25 +16,13 @@ const FilterButtonGroup = ({
 
   const handleClick = (item: string) => {
     if (!selectedItems) {
-      setSelectedItems(item);
+      setSelectedItems([item]);
+    } else if (selectedItems.includes(item)) {
+      setSelectedItems((prevSelectedItems) =>
+        prevSelectedItems.filter((selectedItem) => selectedItem !== item)
+      );
     } else {
-      if (typeof selectedItems === "string") {
-        if (selectedItems === item) {
-          setSelectedItems("");
-        } else {
-          setSelectedItems([selectedItems, item]);
-        }
-      } else if (Array.isArray(selectedItems)) {
-        if (selectedItems.includes(item)) {
-          setSelectedItems((prevSelectedItems) =>
-            (prevSelectedItems as string[]).filter(
-              (selectedItem: string) => selectedItem !== item
-            )
-          );
-        } else {
-          setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
-        }
-      }
+      setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
     }
   };
   const isItemSelected = (item: string) => {
@@ -62,3 +50,27 @@ const FilterButtonGroup = ({
 };
 
 export default FilterButtonGroup;
+
+// const handleClick = (item: string) => {
+//   if (!selectedItems) {
+//     setSelectedItems(item);
+//   } else {
+//     if (typeof selectedItems === "string") {
+//       if (selectedItems === item) {
+//         setSelectedItems("");
+//       } else {
+//         setSelectedItems([selectedItems, item]);
+//       }
+//     } else if (Array.isArray(selectedItems)) {
+//       if (selectedItems.includes(item)) {
+//         setSelectedItems((prevSelectedItems) =>
+//           (prevSelectedItems as string[]).filter(
+//             (selectedItem: string) => selectedItem !== item
+//           )
+//         );
+//       } else {
+//         setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
+//       }
+//     }
+//   }
+// };

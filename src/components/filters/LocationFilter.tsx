@@ -8,32 +8,28 @@ interface FilterProps {
   setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const FoodCategoryFilters = ({
-  selectedItems,
-  setSelectedItems,
-}: FilterProps) => {
-  const [foodCategories, setFoodCategories] = useState<string[]>([]);
+const LocationFilter = ({ selectedItems, setSelectedItems }: FilterProps) => {
+  const [locations, setLocations] = useState<string[]>([]);
 
   useEffect(() => {
-    const getFoodCategoriesInfo = async (): Promise<void> => {
+    const getLocationsInfo = async (): Promise<void> => {
       try {
-        const response = await axios.get(`${BACKEND_URL}/categories`);
-        const categories = response.data;
-        setFoodCategories(
-          categories.map((category: FoodCategory) => category.category_name)
+        const response = await axios.get(`${BACKEND_URL}/locations`);
+        const locations = response.data;
+        setLocations(
+          locations.map((location: Location) => location.location_name)
         );
       } catch (error) {
         console.log(error);
       }
     };
-    getFoodCategoriesInfo();
+    getLocationsInfo();
   }, []);
-
   return (
     <div>
-      <p>Cuisine:</p>
+      <p>Location:</p>
       <FilterButtonGroup
-        filterItems={foodCategories}
+        filterItems={locations}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}
       />
@@ -41,4 +37,4 @@ const FoodCategoryFilters = ({
   );
 };
 
-export default FoodCategoryFilters;
+export default LocationFilter;

@@ -4,27 +4,25 @@ import { BACKEND_URL } from "../../constants";
 import { useState, useEffect } from "react";
 import SingleRestaurantCard from "./SingleRestaurantCard";
 import Spinner from "../../components/ui/Spinner";
-import FoodCategoryFilters from "../../components/filters/FoodCategoryFilters";
+import FoodCategoryFilter from "../../components/filters/FoodCategoryFilter";
+import LocationFilter from "../../components/filters/LocationFilter";
 
 const RestaurantsList = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [categoryParams, setCategoryParams] = useState<string[]>([]);
-  const [locationParams, setLocationParams] = useState<string | string[]>("");
+  const [locationParams, setLocationParams] = useState<string[]>([]);
   const [priceParams, setPriceParams] = useState<number | number[]>();
   useEffect(() => {
     setLoading(true);
     const getAllRestaurantsInfo = async (): Promise<void> => {
       try {
         const params: {
-          location?: string | string[];
+          location?: string[];
           category?: string[];
           priceCategory?: number | number[];
         } = {};
-        if (
-          (Array.isArray(locationParams) && locationParams.length > 0) ||
-          (typeof locationParams === "string" && locationParams)
-        ) {
+        if (locationParams.length) {
           params.location = locationParams;
         }
 
@@ -55,15 +53,6 @@ const RestaurantsList = () => {
     getAllRestaurantsInfo();
   }, [categoryParams, locationParams, priceParams]);
 
-  // const handleCategoryClick = (item: string) => {
-  //   setCategoryParams((prevCategoryParams) => {
-  //     if (!prevCategoryParams) {
-  //       return item;
-  //     } else {
-  //       return [...prevCategoryParams, item];
-  //     }
-  //   });
-  // };
   console.log(categoryParams);
 
   const restaurantsList = restaurants.map((restaurant) => {
@@ -76,9 +65,15 @@ const RestaurantsList = () => {
   return (
     <div>
       <div>
-        <FoodCategoryFilters
+        <FoodCategoryFilter
           selectedItems={categoryParams}
           setSelectedItems={setCategoryParams}
+        />
+      </div>
+      <div>
+        <LocationFilter
+          selectedItems={locationParams}
+          setSelectedItems={setLocationParams}
         />
       </div>
       <div>{loading && !restaurants.length && <Spinner />}</div>

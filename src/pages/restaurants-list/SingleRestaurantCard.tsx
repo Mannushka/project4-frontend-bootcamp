@@ -21,8 +21,6 @@ interface SingleRestaurantCardProps {
 const SingleRestaurantCard = (props: SingleRestaurantCardProps) => {
   const navigate = useNavigate();
   const restaurant = props.restaurant;
-  console.log(restaurant.food_category);
-  console.log(restaurant);
 
   const card = (
     <Card maxW="md">

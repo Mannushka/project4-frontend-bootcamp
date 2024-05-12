@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../../constants";
 import FilterButtonGroup from "./FilterButtonGroup";
+import { Heading } from "@chakra-ui/react";
 
 interface FilterProps {
   filterType: string;
@@ -40,7 +41,9 @@ const FilterOptions = ({
 
   return (
     <div>
-      <p>{capitalizedFilterType}:</p>
+      <Heading as="h5" size="sm">
+        {capitalizedFilterType}
+      </Heading>
       <FilterButtonGroup
         filterItems={filterItems}
         selectedItems={selectedItems}

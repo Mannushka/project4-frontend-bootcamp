@@ -47,7 +47,7 @@ const FilterButtonGroup = ({
   ));
 
   return (
-    <Flex wrap="wrap">
+    <Flex wrap="wrap" marginBottom={5}>
       <Wrap spacing={2}>{buttons}</Wrap>
     </Flex>
   );

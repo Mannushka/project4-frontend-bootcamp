@@ -9,7 +9,7 @@ import LocationFilter from "../../components/filters/LocationFilter";
 import FilterOptions from "../../components/filters/FilterOptions";
 import FilterButtonGroup from "../../components/filters/FilterButtonGroup";
 import { convertPriceCategoriesToNums } from "../../utils/convertPriceCategoriesToNums";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Heading, Wrap } from "@chakra-ui/react";
 import "./Restaurants.css";
 import NavBar from "../../components/navbar/NavBar";
 
@@ -63,8 +63,11 @@ const RestaurantsList = () => {
   return (
     <>
       <NavBar />
-      <Flex wrap="wrap">
+      <Flex wrap="wrap" margin={4} padding={2}>
         <Box className="restaurant-list-box" id="restaurant-filters">
+          <Heading as="h4" size="md" marginBottom={5}>
+            Filters
+          </Heading>
           <div>
             <FilterOptions
               selectedItems={categoryParams}
@@ -74,7 +77,9 @@ const RestaurantsList = () => {
             />
           </div>
           <div>
-            <p>Price:</p>
+            <Heading as="h5" size="sm">
+              Price
+            </Heading>
             <FilterButtonGroup
               filterItems={priceCategoriesArray}
               selectedItems={priceParams}

@@ -12,15 +12,15 @@ import { useNavigate } from "react-router-dom";
 //   navItems: string[];
 // }
 
-const NavBar = () => {
+const NavBar = (): JSX.Element => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const brandName = "Food Harbour";
   const navItems = ["Home", "Restaurants", "About us"];
   const imagePath = "src/assets/dumbling.png";
-
   const navigate = useNavigate();
-  const navigateToPage = (item: string) => {
+
+  const navigateToPage = (item: string): void => {
     if (item === "Home") {
       navigate("/");
     }
@@ -31,6 +31,7 @@ const NavBar = () => {
       navigate("/about");
     }
   };
+
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-light bg-light shadow">
@@ -70,7 +71,6 @@ const NavBar = () => {
                 <li
                   key={items}
                   className="nav-item"
-                  // onClick={() => setSelectedIndex(index)}
                   onClick={() => {
                     setSelectedIndex(index);
                     navigateToPage(items);
@@ -78,7 +78,7 @@ const NavBar = () => {
                 >
                   <a
                     className={
-                      selectedIndex == index
+                      selectedIndex === index
                         ? "nav-link active fw-bold"
                         : "nav-link"
                     }

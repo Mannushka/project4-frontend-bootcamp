@@ -7,13 +7,16 @@ import Spinner from "../../components/ui/Spinner";
 import FoodCategoryFilter from "../../components/filters/FoodCategoryFilter";
 import LocationFilter from "../../components/filters/LocationFilter";
 import FilterOptions from "../../components/filters/FilterOptions";
+import FilterButtonGroup from "../../components/filters/FilterButtonGroup";
+import { convertPriceCategoriesToNums } from "../../utils/convertPriceCategoriesToNums";
 
 const RestaurantsList = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [categoryParams, setCategoryParams] = useState<string[]>([]);
   const [locationParams, setLocationParams] = useState<string[]>([]);
-  const [priceParams, setPriceParams] = useState<number | number[]>();
+  const [priceParams, setPriceParams] = useState<string[]>([]);
+  const priceCategoriesArray = ["$", "$$", "$$$"];
   useEffect(() => {
     setLoading(true);
     const getAllRestaurantsInfo = async (): Promise<void> => {
@@ -21,7 +24,7 @@ const RestaurantsList = () => {
         const params: {
           location?: string[];
           category?: string[];
-          priceCategory?: number | number[];
+          priceCategory?: number[];
         } = {};
         if (locationParams.length) {
           params.location = locationParams;
@@ -31,18 +34,14 @@ const RestaurantsList = () => {
           params.category = categoryParams;
         }
 
-        if (
-          (Array.isArray(priceParams) && priceParams.length > 0) ||
-          (!isNaN(priceParams as number) && priceParams)
-        ) {
-          params.priceCategory = priceParams;
+        if (priceParams.length) {
+          params.priceCategory = convertPriceCategoriesToNums(priceParams);
         }
 
         const response = await axios.get(`${BACKEND_URL}/restaurants`, {
           params: params,
         });
         setRestaurants(response.data);
-        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -50,8 +49,6 @@ const RestaurantsList = () => {
     };
     getAllRestaurantsInfo();
   }, [categoryParams, locationParams, priceParams]);
-
-  console.log(categoryParams);
 
   const restaurantsList = restaurants.map((restaurant) => {
     return (
@@ -88,6 +85,13 @@ const RestaurantsList = () => {
           setSelectedItems={setLocationParams}
           filterType="location"
           path="locations"
+        />
+      </div>
+      <div>
+        <FilterButtonGroup
+          filterItems={priceCategoriesArray}
+          selectedItems={priceParams}
+          setSelectedItems={setPriceParams}
         />
       </div>
       <div>{loading && !restaurants.length && <Spinner />}</div>

@@ -10,7 +10,7 @@ import { BACKEND_URL } from "./constants";
 
 function App(): JSX.Element {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const navItems = ["Home", "Restaurants", "About us"];
+  // const navItems = ["Home", "Restaurants", "About us"];
 
   const checkIfUserIsInDb = async (): Promise<boolean> => {
     if (isAuthenticated && user?.email) {
@@ -66,9 +66,9 @@ function App(): JSX.Element {
   return (
     <>
       <NavBar
-        brandName="Food Harbour"
-        imageSrcPath={imagePath}
-        navItems={navItems}
+      // brandName="Food Harbour"
+      // imageSrcPath={imagePath}
+      // navItems={navItems}
       />
     </>
   );

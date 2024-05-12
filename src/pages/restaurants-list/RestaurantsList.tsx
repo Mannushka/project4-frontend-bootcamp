@@ -9,6 +9,8 @@ import LocationFilter from "../../components/filters/LocationFilter";
 import FilterOptions from "../../components/filters/FilterOptions";
 import FilterButtonGroup from "../../components/filters/FilterButtonGroup";
 import { convertPriceCategoriesToNums } from "../../utils/convertPriceCategoriesToNums";
+import { Flex, Box } from "@chakra-ui/react";
+import "./Restaurants.css";
 
 const RestaurantsList = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -58,46 +60,65 @@ const RestaurantsList = () => {
     );
   });
   return (
-    <div>
-      {/* <div>
-        <FoodCategoryFilter
-          selectedItems={categoryParams}
-          setSelectedItems={setCategoryParams}
-        />
-      </div> */}
-      {/* <div>
-        <LocationFilter
-          selectedItems={locationParams}
-          setSelectedItems={setLocationParams}
-        />
-      </div> */}
-      <div>
-        <FilterOptions
-          selectedItems={categoryParams}
-          setSelectedItems={setCategoryParams}
-          filterType="category"
-          path="categories"
-        />
-      </div>
-      <div>
-        <FilterOptions
-          selectedItems={locationParams}
-          setSelectedItems={setLocationParams}
-          filterType="location"
-          path="locations"
-        />
-      </div>
-      <div>
-        <FilterButtonGroup
-          filterItems={priceCategoriesArray}
-          selectedItems={priceParams}
-          setSelectedItems={setPriceParams}
-        />
-      </div>
-      <div>{loading && !restaurants.length && <Spinner />}</div>
-      <div>{!loading && restaurants.length > 0 && restaurantsList}</div>
-    </div>
+    <Flex wrap="wrap">
+      <Box className="restaurant-list-box" id="restaurant-filters">
+        <div>
+          <FilterOptions
+            selectedItems={categoryParams}
+            setSelectedItems={setCategoryParams}
+            filterType="category"
+            path="categories"
+          />
+        </div>
+        <div>
+          <p>Price:</p>
+          <FilterButtonGroup
+            filterItems={priceCategoriesArray}
+            selectedItems={priceParams}
+            setSelectedItems={setPriceParams}
+          />
+        </div>
+        <div>
+          <FilterOptions
+            selectedItems={locationParams}
+            setSelectedItems={setLocationParams}
+            filterType="location"
+            path="locations"
+          />
+        </div>
+      </Box>
+      <Box className="restaurant-list-box" id="restaurants">
+        <div>{loading && !restaurants.length && <Spinner />}</div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+          }}
+        >
+          {!loading && restaurants.length > 0 && restaurantsList}
+        </div>
+      </Box>
+    </Flex>
   );
 };
 
 export default RestaurantsList;
+
+{
+  /* <div>
+        <FoodCategoryFilter
+          selectedItems={categoryParams}
+          setSelectedItems={setCategoryParams}
+        />
+      </div> */
+}
+{
+  /* <div>
+        <LocationFilter
+          selectedItems={locationParams}
+          setSelectedItems={setLocationParams}
+        />
+      </div> */
+}

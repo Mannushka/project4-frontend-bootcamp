@@ -18,12 +18,14 @@ interface SingleRestaurantCardProps {
   restaurant: Restaurant;
 }
 
-const SingleRestaurantCard = (props: SingleRestaurantCardProps) => {
+const SingleRestaurantCard = (
+  props: SingleRestaurantCardProps
+): JSX.Element => {
   const navigate = useNavigate();
   const restaurant = props.restaurant;
 
   const card = (
-    <Card maxW="md">
+    <Card maxW="md" marginBottom={4} className="restaurant-card">
       <CardBody>
         <Image src={restaurant.img_url} alt="Image" />
         <Stack mt="6" spacing="3">
@@ -31,13 +33,13 @@ const SingleRestaurantCard = (props: SingleRestaurantCardProps) => {
           <Text color="blue.400" fontSize="md">
             Rating:
           </Text>
-          <Text>
+          <div>
             <ul>
               <li> {restaurant.food_category.category_name}</li>
               <li>{formatPriceCategory(restaurant.price_category)}</li>
               <li>{restaurant.address}</li>
             </ul>
-          </Text>
+          </div>
           <ButtonGroup justifyContent="space-between" alignItems="center">
             <Button
               variant="ghost"

@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, ButtonGroup, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Wrap,
+  WrapItem,
+  Flex,
+  Box,
+} from "@chakra-ui/react";
 
 interface FilterProps {
   filterItems: string[];
@@ -29,22 +36,20 @@ const FilterButtonGroup = ({
   };
 
   const buttons = filterItems.map((filterItem) => (
-    <WrapItem key={filterItem}>
+    <Box key={filterItem}>
       <Button
         variant={isItemSelected(filterItem) ? "solid" : "outline"}
         onClick={() => handleClick(filterItem)}
       >
         {filterItem}
       </Button>
-    </WrapItem>
+    </Box>
   ));
 
   return (
-    <div>
-      <Wrap spacing={2}>
-        <ButtonGroup>{buttons}</ButtonGroup>
-      </Wrap>
-    </div>
+    <Flex wrap="wrap">
+      <Wrap spacing={2}>{buttons}</Wrap>
+    </Flex>
   );
 };
 
@@ -73,3 +78,8 @@ export default FilterButtonGroup;
 //     }
 //   }
 // };
+
+//RETURN
+//  <Wrap spacing={2}>
+//    <ButtonGroup>{buttons}</ButtonGroup>
+//  </Wrap>;

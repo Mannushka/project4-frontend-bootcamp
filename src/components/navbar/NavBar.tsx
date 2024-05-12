@@ -4,16 +4,20 @@ import LogoutButton from "../authentication/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "bootstrap/dist/js/bootstrap.bundle.min.js";
-interface NavBarProps {
-  brandName: string;
-  imageSrcPath: string;
-  navItems: string[];
-}
 
-const NavBar = ({ brandName, imageSrcPath, navItems }: NavBarProps) => {
+// import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// interface NavBarProps {
+//   brandName: string;
+//   imageSrcPath: string;
+//   navItems: string[];
+// }
+
+const NavBar = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const brandName = "Food Harbour";
+  const navItems = ["Home", "Restaurants", "About us"];
+  const imagePath = "src/assets/dumbling.png";
 
   const navigate = useNavigate();
   const navigateToPage = (item: string) => {
@@ -33,7 +37,7 @@ const NavBar = ({ brandName, imageSrcPath, navItems }: NavBarProps) => {
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <img
-              src={imageSrcPath}
+              src={imagePath}
               width="55"
               height="50"
               className="d-inline-block align-center me-2"

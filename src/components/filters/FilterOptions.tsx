@@ -15,9 +15,8 @@ const FilterOptions = ({
   setSelectedItems,
   path,
   filterType,
-}: FilterProps) => {
+}: FilterProps): JSX.Element => {
   const [filterItems, setFilterItems] = useState<string[]>([]);
-
   const capitalizedFilterType =
     filterType.charAt(0).toUpperCase() + filterType.slice(1);
 
@@ -38,8 +37,6 @@ const FilterOptions = ({
     };
     getFilterItemsInfo();
   }, [filterType, path]);
-
-  console.log(filterItems);
 
   return (
     <div>

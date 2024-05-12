@@ -1,0 +1,17 @@
+.restaurant-list-box {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex: 1;
+}
+
+#restaurant-filters {
+  flex: 1;
+}
+#restaurants {
+  flex: 3;
+}
+
+.restaurant-card {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+}

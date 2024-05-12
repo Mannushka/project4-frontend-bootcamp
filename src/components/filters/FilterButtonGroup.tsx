@@ -11,10 +11,8 @@ const FilterButtonGroup = ({
   filterItems,
   selectedItems,
   setSelectedItems,
-}: FilterProps) => {
-  console.log(selectedItems);
-
-  const handleClick = (item: string) => {
+}: FilterProps): JSX.Element => {
+  const handleClick = (item: string): void => {
     if (!selectedItems) {
       setSelectedItems([item]);
     } else if (selectedItems.includes(item)) {
@@ -25,7 +23,8 @@ const FilterButtonGroup = ({
       setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
     }
   };
-  const isItemSelected = (item: string) => {
+
+  const isItemSelected = (item: string): boolean => {
     return selectedItems.includes(item);
   };
 

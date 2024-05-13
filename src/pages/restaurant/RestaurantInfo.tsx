@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import "./Restaurant.css";
-import { Flex, Box, Text, Image } from "@chakra-ui/react";
+import { Flex, Box, Image } from "@chakra-ui/react";
 import Spinner from "../../components/ui/Spinner";
 import RestaurantReviews from "../../components/review/restaurantReviews/RestaurantReviews";
 
@@ -33,13 +33,13 @@ const RestaurantInfo = () => {
     getRestaurantInfo();
   }, [restaurantId]);
 
-  const displayRestaurantInfo = (): JSX.Element[] => {
-    const infoElements = [];
-    for (const key in restaurant) {
-      infoElements.push(<p key={key}>{`${key}: ${restaurant[key]}`}</p>);
-    }
-    return infoElements;
-  };
+  // const displayRestaurantInfo = (): JSX.Element[] => {
+  //   const infoElements = [];
+  //   for (const key in restaurant) {
+  //     infoElements.push(<p key={key}>{`${key}: ${restaurant[key]}`}</p>);
+  //   }
+  //   return infoElements;
+  // };
 
   return (
     <div>
@@ -67,6 +67,7 @@ const RestaurantInfo = () => {
         </Flex>
         {/* {displayRestaurantInfo()} */}
       </div>
+
       <RestaurantReviews restaurantId={Number(restaurantId)} />
     </div>
   );

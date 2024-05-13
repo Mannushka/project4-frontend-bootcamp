@@ -5,10 +5,11 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
-  Input,
+  Textarea,
   Flex,
   Heading,
 } from "@chakra-ui/react";
+
 import { useState } from "react";
 import StarRatingInput from "../starRating/StarRatingInput";
 import axios from "axios";
@@ -17,12 +18,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 interface ReviewFormProps {
   restaurantId: number;
+  showReviewForm: boolean;
+  setShowReviewForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const ReviewForm = ({ restaurantId }: ReviewFormProps) => {
+const ReviewForm = ({
+  restaurantId,
+  showReviewForm,
+  setShowReviewForm,
+}: ReviewFormProps) => {
   const [reviewText, setReviewText] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const { user } = useAuth0();
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setReviewText(e.target.value);
   console.log(reviewText);
   console.log(rating);
@@ -31,8 +38,7 @@ const ReviewForm = ({ restaurantId }: ReviewFormProps) => {
   const reviewForm = (
     <FormControl>
       {/* <FormControlLabel>Write something</FormLabel> */}
-      <Input
-        type="text"
+      <Textarea
         value={reviewText}
         onChange={handleInputChange}
         height="200px"
@@ -70,6 +76,7 @@ const ReviewForm = ({ restaurantId }: ReviewFormProps) => {
 
       setReviewText("");
       setRating(0);
+      setShowReviewForm(!showReviewForm);
     } catch (error) {
       console.log(error);
     }
@@ -77,14 +84,22 @@ const ReviewForm = ({ restaurantId }: ReviewFormProps) => {
   // const handleSubmitReview = async (): Promise<void> => {
   //   await postReview();
   // };
+  const handleCancel = () => {
+    setShowReviewForm((prevState) => !prevState);
+  };
   return (
     <Flex direction="column" width="400px" margin="20px">
       <Heading>Your review</Heading>
       <StarRatingInput rating={rating} setRating={setRating} />
       {reviewForm}
-      <Button width="25%" marginTop="10px" onClick={postReview}>
-        Submit
-      </Button>
+      <Flex gap="10px">
+        <Button width="25%" marginTop="10px" onClick={postReview}>
+          Submit
+        </Button>
+        <Button width="25%" marginTop="10px" onClick={handleCancel}>
+          Cancel
+        </Button>
+      </Flex>
     </Flex>
   );
 };

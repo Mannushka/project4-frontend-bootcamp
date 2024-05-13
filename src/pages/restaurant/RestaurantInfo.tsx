@@ -5,13 +5,15 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import "./Restaurant.css";
-import { Flex, Box, Image } from "@chakra-ui/react";
+import { Flex, Box, Image, Button } from "@chakra-ui/react";
 import Spinner from "../../components/ui/Spinner";
 import RestaurantReviews from "../../components/review/restaurantReviews/RestaurantReviews";
+import ReviewForm from "../../components/review/restaurantReviews/ReviewForm";
 
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showReviewForm, setShowReviewForm] = useState<boolean>(false);
   const { restaurantId } = useParams();
 
   useEffect(() => {
@@ -41,6 +43,10 @@ const RestaurantInfo = () => {
   //   return infoElements;
   // };
 
+  const handleLeaveReview = () => {
+    setShowReviewForm((prevState) => !prevState);
+  };
+
   return (
     <div>
       <div>{loading && <Spinner />}</div>
@@ -65,9 +71,14 @@ const RestaurantInfo = () => {
             <RestaurantCard restaurant={restaurant} />
           </Box>
         </Flex>
-        {/* {displayRestaurantInfo()} */}
       </div>
-
+      <Box margin="20px">
+        {!showReviewForm && (
+          <Button onClick={handleLeaveReview}>Leave a review</Button>
+        )}
+        {showReviewForm && <ReviewForm restaurantId={Number(restaurantId)} />}
+        {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>}
+      </Box>
       <RestaurantReviews restaurantId={Number(restaurantId)} />
     </div>
   );

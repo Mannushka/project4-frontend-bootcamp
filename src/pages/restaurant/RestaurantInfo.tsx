@@ -7,6 +7,7 @@ import RestaurantCard from "./RestaurantCard";
 import "./Restaurant.css";
 import { Flex, Box, Text, Image } from "@chakra-ui/react";
 import Spinner from "../../components/ui/Spinner";
+import RestaurantReviews from "../../components/review/restaurantReviews/RestaurantReviews";
 
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
@@ -66,6 +67,7 @@ const RestaurantInfo = () => {
         </Flex>
         {/* {displayRestaurantInfo()} */}
       </div>
+      <RestaurantReviews restaurantId={Number(restaurantId)} />
     </div>
   );
 };

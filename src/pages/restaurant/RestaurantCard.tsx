@@ -15,8 +15,7 @@ import { formatBusinessHours } from "../../utils/formatBusinessHours";
 interface RestaurantCardProps {
   restaurant: Restaurant;
 }
-const RestaurantCard = (props: RestaurantCardProps) => {
-  const restaurant = props.restaurant;
+const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
   const restaurantCard = (
     <Card
       direction="column"

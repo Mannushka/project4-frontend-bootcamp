@@ -9,7 +9,7 @@ import { Flex, Box, Image, Button } from "@chakra-ui/react";
 import Spinner from "../../components/ui/Spinner";
 import RestaurantReviews from "../../components/review/restaurantReviews/RestaurantReviews";
 import ReviewForm from "../../components/review/restaurantReviews/ReviewForm";
-
+import NavBar from "../../components/navbar/NavBar";
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
   const [loading, setLoading] = useState<boolean>(false);
@@ -49,6 +49,7 @@ const RestaurantInfo = () => {
 
   return (
     <div>
+      <NavBar />
       <div>{loading && <Spinner />}</div>
       <div className="restaurant-container">
         <div className="restaurant-name">{restaurant.name}</div>
@@ -76,8 +77,14 @@ const RestaurantInfo = () => {
         {!showReviewForm && (
           <Button onClick={handleLeaveReview}>Leave a review</Button>
         )}
-        {showReviewForm && <ReviewForm restaurantId={Number(restaurantId)} />}
-        {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>}
+        {showReviewForm && (
+          <ReviewForm
+            restaurantId={Number(restaurantId)}
+            showReviewForm={showReviewForm}
+            setShowReviewForm={setShowReviewForm}
+          />
+        )}
+        {/* {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>} */}
       </Box>
       <RestaurantReviews restaurantId={Number(restaurantId)} />
     </div>

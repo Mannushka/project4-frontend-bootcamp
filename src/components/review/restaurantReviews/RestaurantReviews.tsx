@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { BACKEND_URL } from "../../../constants";
 import axios from "axios";
+import ReviewCard from "./ReviewCard";
+import { Heading, Flex } from "@chakra-ui/react";
 
 interface RestaurantReviewsProps {
   restaurantId: number;
@@ -10,7 +12,7 @@ interface RestaurantReviewsProps {
 const RestaurantReviews = ({
   restaurantId,
 }: RestaurantReviewsProps): JSX.Element => {
-  const [reviews, setReviews] = useState<Review>({} as Review);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -34,7 +36,20 @@ const RestaurantReviews = ({
     };
     getReviews();
   }, [restaurantId]);
-  return <div>RestaurantReviews</div>;
+
+  const reviewsList = reviews.map((review) => (
+    <div key={review.id}>
+      <ReviewCard review={review} />
+    </div>
+  ));
+  return (
+    <Flex direction="column" margin="20px">
+      <Heading as="h4" size="md">
+        Reviews
+      </Heading>
+      {reviews.length ? reviewsList : <p>No reviews yet.</p>}
+    </Flex>
+  );
 };
 
 export default RestaurantReviews;

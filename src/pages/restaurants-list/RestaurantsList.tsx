@@ -19,6 +19,7 @@ const RestaurantsList = () => {
   const [categoryParams, setCategoryParams] = useState<string[]>([]);
   const [locationParams, setLocationParams] = useState<string[]>([]);
   const [priceParams, setPriceParams] = useState<string[]>([]);
+
   const priceCategoriesArray = ["$", "$$", "$$$"];
   useEffect(() => {
     setLoading(true);

@@ -1,5 +1,12 @@
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter, Text } from "@chakra-ui/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Text,
+  Box,
+} from "@chakra-ui/react";
 import StarRatingDisplay from "../starRating/StarRatingDisplay";
 import { formatDate } from "../../../utils/formatDate";
 
@@ -21,7 +28,7 @@ const ReviewCard = ({ review }: ReviewCardProps): JSX.Element => {
       </CardBody>
     </Card>
   );
-  return <div>{reviewCard}</div>;
+  return <Box marginBottom="15px">{reviewCard}</Box>;
 };
 
 export default ReviewCard;

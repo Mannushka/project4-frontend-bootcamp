@@ -20,11 +20,15 @@ interface ReviewFormProps {
   restaurantId: number;
   showReviewForm: boolean;
   setShowReviewForm: React.Dispatch<React.SetStateAction<boolean>>;
+  newReview: boolean;
+  setNewReview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const ReviewForm = ({
   restaurantId,
   showReviewForm,
   setShowReviewForm,
+  newReview,
+  setNewReview,
 }: ReviewFormProps) => {
   const [reviewText, setReviewText] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
@@ -73,7 +77,7 @@ const ReviewForm = ({
         rating_value: rating,
         text: reviewText,
       });
-
+      setNewReview((prevState) => !prevState);
       setReviewText("");
       setRating(0);
       setShowReviewForm(!showReviewForm);
@@ -83,6 +87,7 @@ const ReviewForm = ({
   };
   // const handleSubmitReview = async (): Promise<void> => {
   //   await postReview();
+
   // };
   const handleCancel = () => {
     setShowReviewForm((prevState) => !prevState);

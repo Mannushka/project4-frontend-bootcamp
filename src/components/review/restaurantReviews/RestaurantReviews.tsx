@@ -7,10 +7,14 @@ import { Heading, Flex } from "@chakra-ui/react";
 
 interface RestaurantReviewsProps {
   restaurantId: number;
+  newReview: boolean;
+  setNewReview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const RestaurantReviews = ({
   restaurantId,
+  newReview,
+  setNewReview,
 }: RestaurantReviewsProps): JSX.Element => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -35,7 +39,7 @@ const RestaurantReviews = ({
       }
     };
     getReviews();
-  }, [restaurantId]);
+  }, [restaurantId, newReview]);
 
   const reviewsList = reviews.map((review) => (
     <div key={review.id}>

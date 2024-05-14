@@ -14,6 +14,7 @@ const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
   const [loading, setLoading] = useState<boolean>(false);
   const [showReviewForm, setShowReviewForm] = useState<boolean>(false);
+  const [newReview, setNewReview] = useState<boolean>(false);
   const { restaurantId } = useParams();
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const RestaurantInfo = () => {
   const handleLeaveReview = () => {
     setShowReviewForm((prevState) => !prevState);
   };
-
+  console.log(newReview);
   return (
     <div>
       <NavBar />
@@ -82,11 +83,17 @@ const RestaurantInfo = () => {
             restaurantId={Number(restaurantId)}
             showReviewForm={showReviewForm}
             setShowReviewForm={setShowReviewForm}
+            newReview={newReview}
+            setNewReview={setNewReview}
           />
         )}
         {/* {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>} */}
       </Box>
-      <RestaurantReviews restaurantId={Number(restaurantId)} />
+      <RestaurantReviews
+        restaurantId={Number(restaurantId)}
+        newReview={newReview}
+        setNewReview={setNewReview}
+      />
     </div>
   );
 };

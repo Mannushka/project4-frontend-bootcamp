@@ -10,6 +10,7 @@ import Spinner from "../../components/ui/Spinner";
 import RestaurantReviews from "../../components/review/restaurantReviews/RestaurantReviews";
 import ReviewForm from "../../components/review/restaurantReviews/ReviewForm";
 import NavBar from "../../components/navbar/NavBar";
+import GoogleMap from "../../components/map/GoogleMap";
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
   const [loading, setLoading] = useState<boolean>(false);
@@ -73,6 +74,7 @@ const RestaurantInfo = () => {
             <RestaurantCard restaurant={restaurant} />
           </Box>
         </Flex>
+        <GoogleMap address={restaurant.address} />
       </div>
       <Box margin="20px">
         {!showReviewForm && (

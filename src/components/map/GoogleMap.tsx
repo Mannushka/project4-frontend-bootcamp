@@ -57,14 +57,17 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
     <div>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
         <Map
-          style={{ width: "30vw", height: "50vh" }}
+          style={{ width: "30vw", height: "40vh" }}
           center={
             latitude && longitude ? { lat: latitude, lng: longitude } : position
           }
-          zoom={18}
+          // zoom={18}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
           mapId={import.meta.env.VITE_MAP_ID}
+          zoomControl={true}
+          maxZoom={20}
+          minZoom={14}
         />
         {latitude && longitude && (
           <AdvancedMarker

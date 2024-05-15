@@ -10,6 +10,8 @@ import {
   MapMouseEvent,
 } from "@vis.gl/react-google-maps";
 
+import { Box } from "@chakra-ui/react";
+
 interface GoogleMapProps {
   address: string;
 }
@@ -54,7 +56,7 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
   }, [newAddress]);
 
   return (
-    <div>
+    <Box marginTop="20px">
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
         <Map
           style={{ width: "30vw", height: "40vh" }}
@@ -91,7 +93,7 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
           </InfoWindow>
         )}
       </APIProvider>
-    </div>
+    </Box>
   );
 };
 

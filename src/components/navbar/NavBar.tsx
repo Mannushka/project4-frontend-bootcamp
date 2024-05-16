@@ -17,7 +17,9 @@ const NavBar = (): JSX.Element => {
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const brandName = "Food Harbour";
   const navItems = ["Home", "Restaurants", "About us"];
-  const imagePath = "src/assets/dumbling.png";
+  const imagePath = `https://firebasestorage.googleapis.com/v0/b/food-harbour.appspot.com/o/navbar-img%2Fdumbling.png?alt=media&token=${
+    import.meta.env.VITE_NAVBAR_IMG_TOKEN
+  }`;
   const navigate = useNavigate();
 
   const navigateToPage = (item: string): void => {

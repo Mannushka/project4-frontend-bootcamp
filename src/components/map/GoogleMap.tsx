@@ -22,8 +22,8 @@ interface GeoLocation {
 
 const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
-  const [latitude, setLatitude] = useState<number | null>(null);
-  const [longitude, setLongitude] = useState<number | null>(null);
+  const [latitude, setLatitude] = useState<number>(22.28100746317362);
+  const [longitude, setLongitude] = useState<number>(114.15245889816494);
   const position = { lat: 22.28100746317362, lng: 114.15245889816494 }; // Hong Kong
   const newAddress = address + ", Hong Kong";
 
@@ -60,16 +60,14 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
         <Map
           style={{ width: "30vw", height: "40vh" }}
-          center={
-            latitude && longitude ? { lat: latitude, lng: longitude } : position
-          }
-          // zoom={18}
+          center={{ lat: latitude, lng: longitude }}
+          defaultZoom={15}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
           mapId={import.meta.env.VITE_MAP_ID}
           zoomControl={true}
           maxZoom={20}
-          minZoom={14}
+          minZoom={8}
         />
         {latitude && longitude && (
           <AdvancedMarker
@@ -84,7 +82,7 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
             />
           </AdvancedMarker>
         )}
-        {open && latitude && longitude && (
+        {open && (
           <InfoWindow
             position={{ lat: latitude, lng: longitude }}
             onCloseClick={() => setOpen(false)}

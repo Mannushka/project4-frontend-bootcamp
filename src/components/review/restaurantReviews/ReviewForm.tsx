@@ -41,7 +41,7 @@ const ReviewForm = ({
 }: ReviewFormProps) => {
   const [reviewText, setReviewText] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
-  const [imgURLs, setImgURLs] = useState<string[]>([]);
+  // const [imgURLs, setImgURLs] = useState<string[]>([]);
   const [rating, setRating] = useState<number>(0);
   const { user } = useAuth0();
 
@@ -65,28 +65,7 @@ const ReviewForm = ({
     console.log(validFiles);
   };
 
-  // const handleFilesUpload = async () => {
-  //   const maxNumOfPhotos = 5;
-  //   if (files.length > maxNumOfPhotos) {
-  //     throw new Error("Sorry but you can only upload 5 pictures max. 🥺");
-  //   }
-
-  //   const fullStorageRef = storageRef(storage, STORAGE_KEY);
-  //   try {
-  //     const updatedURLs = [];
-  //     for (const file of files) {
-  //       const childRef = storageRef(fullStorageRef, file.name);
-  //       await uploadBytes(childRef, file);
-  //       const downloadURL = await getDownloadURL(childRef);
-  //       console.log("File uploaded successfully:", downloadURL);
-  //       updatedURLs.push(downloadURL);
-  //     }
-  //     setImgURLs(updatedURLs);
-  //   } catch (error) {
-  //     console.error("Error uploading file:", error);
-  //   }
-  // };
-  const uploadPhotosToStorage = async (): Promise<void> => {
+  const uploadPhotosToStorage = async (): Promise<string[]> => {
     const maxNumOfPhotos = 5;
     if (files.length > maxNumOfPhotos) {
       throw new Error("Sorry but you can only upload 5 pictures max. 🥺");
@@ -110,9 +89,10 @@ const ReviewForm = ({
       );
 
       console.log("Files uploaded successfully:", updatedURLs);
-      setImgURLs(updatedURLs);
+      return updatedURLs;
     } catch (error) {
       console.error("Error uploading files:", error);
+      throw error;
     }
   };
   const reviewForm = (
@@ -133,7 +113,7 @@ const ReviewForm = ({
     </FormControl>
   );
 
-  const postReview = async (): Promise<void> => {
+  const postReview = async (imgURLs: string[]): Promise<void> => {
     try {
       if (!user?.email) {
         throw new Error("User email is required 🥺");
@@ -155,7 +135,7 @@ const ReviewForm = ({
       if (reviewText.length < 80) {
         throw new Error("Review  should be at least 80 characters long");
       }
-      console.log(imgURLs);
+
       const response = await axios.post(`${BACKEND_URL}/reviews`, {
         email: user?.email,
         restaurant_id: restaurantId,
@@ -167,20 +147,19 @@ const ReviewForm = ({
       setReviewText("");
       setRating(0);
       setShowReviewForm(!showReviewForm);
-      setImgURLs([]);
+      // setImgURLs([]);
       console.log("Review posted");
     } catch (error) {
       console.log(error);
     }
   };
-  // const handleSubmitReview = async (): Promise<void> => {
-  //   await postReview();
 
-  // };
   const handleSubmit = async (): Promise<void> => {
     try {
-      await uploadPhotosToStorage(); // Upload pictures to Firebase Storage
-      await postReview(); // Make POST request to backend
+      const newImgURLs = await uploadPhotosToStorage();
+      // setImgURLs(newImgURLs);
+      console.log(newImgURLs);
+      postReview(newImgURLs);
     } catch (error) {
       console.log(error);
     }
@@ -189,17 +168,11 @@ const ReviewForm = ({
     setShowReviewForm((prevState) => !prevState);
   };
 
-  console.log(files.length);
-  console.log(files);
-  console.log(imgURLs);
   return (
     <Flex direction="column" width="400px" margin="20px">
       <Heading>Your review</Heading>
       <StarRatingInput rating={rating} setRating={setRating} />
       {reviewForm}
-      <Button onClick={uploadPhotosToStorage}>
-        Upload pictures to storage
-      </Button>
       <Flex gap="10px">
         <Button width="25%" marginTop="10px" onClick={handleSubmit}>
           Submit

@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import StarRatingDisplay from "../starRating/StarRatingDisplay";
 import { formatDate } from "../../../utils/formatDate";
+import { ImageGrid } from "../../ui/imageGallery/ImageGrid";
 
 interface ReviewCardProps {
   review: Review;
@@ -16,15 +17,17 @@ interface ReviewCardProps {
 
 const ReviewCard = ({ review }: ReviewCardProps): JSX.Element => {
   const date = formatDate(review.createdAt);
+  const images = review.review_photos;
+  const userName = review.user.first_name;
   const reviewCard = (
     <Card width="50%">
       <CardBody>
         <Text>
-          {review.user.first_name} wrote on {date}:
+          {userName} wrote on {date}:
         </Text>
-
-        <Text> {review.text}</Text>
         <StarRatingDisplay rating={review.rating_value} />
+        <Text> {review.text}</Text>
+        <ImageGrid images={images} />
       </CardBody>
     </Card>
   );

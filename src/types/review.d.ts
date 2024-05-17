@@ -2,6 +2,7 @@ interface Review {
   id: number;
   user_id: number;
   restaurant_id: number;
+  review_photos: [];
   rating_value: number;
   text: text;
   createdAt: string;

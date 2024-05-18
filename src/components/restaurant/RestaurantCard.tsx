@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Card,
   CardBody,
@@ -7,16 +6,26 @@ import {
   Heading,
   Link,
   CardFooter,
+  Box,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { formatPriceCategory } from "../../utils/formatPriceCategory";
 import { formatBusinessHours } from "../../utils/formatBusinessHours";
+import RestaurantRating from "./RestaurantRating";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
 }
 const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
-  // console.log(restaurant);
+  const displayRating = () => {
+    if (restaurant.reviews) {
+      const rating = restaurant.reviews;
+      const array = rating.map((ratingElement) => ratingElement.rating_value);
+      return array;
+    }
+    return [];
+  };
+  const ratingArray = displayRating();
   const restaurantCard = (
     <Card
       direction="column"
@@ -30,6 +39,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
           <Heading className="restaurant-details" size="md">
             Details
           </Heading>
+
           <Text>
             {restaurant.food_category
               ? restaurant.food_category.category_name
@@ -37,11 +47,13 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
             , {formatPriceCategory(restaurant.price_category)}
           </Text>
           {/* <Text>{formatPriceCategory(restaurant.price_category)}</Text> */}
-          <Text>Rating:</Text>
 
           <Link href={restaurant.website} isExternal>
             Website <ExternalLinkIcon mx="2px" />
           </Link>
+          <Box marginTop={4}>
+            <RestaurantRating ratingArray={ratingArray} />
+          </Box>
         </CardBody>
       </Stack>
       <CardFooter>

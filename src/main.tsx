@@ -11,6 +11,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import RestaurantInfo from "./pages/restaurant/RestaurantInfo.tsx";
 import RestaurantsList from "./pages/restaurants-list/RestaurantsList.tsx";
 import { RestaurantInfoProvider } from "./context/RestaurantInfoContext.tsx";
+import { UserInfoProvider } from "./context/UserInfoContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -25,18 +26,20 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       }}
     >
       <ChakraProvider>
-        <RestaurantInfoProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/restaurants" element={<RestaurantsList />} />
-              <Route
-                path="/restaurants/:restaurantId"
-                element={<RestaurantInfo />}
-              />
-            </Routes>
-          </BrowserRouter>
-        </RestaurantInfoProvider>
+        <UserInfoProvider>
+          <RestaurantInfoProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/restaurants" element={<RestaurantsList />} />
+                <Route
+                  path="/restaurants/:restaurantId"
+                  element={<RestaurantInfo />}
+                />
+              </Routes>
+            </BrowserRouter>
+          </RestaurantInfoProvider>
+        </UserInfoProvider>
       </ChakraProvider>
     </Auth0Provider>
   </React.StrictMode>

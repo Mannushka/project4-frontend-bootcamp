@@ -5,12 +5,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/navbar/NavBar";
 import imagePath from "./assets/dumbling.png";
 import { BACKEND_URL } from "./constants";
+import { useUserInfo } from "./context/UserInfoContext";
 
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App(): JSX.Element {
   const { user, isAuthenticated, isLoading } = useAuth0();
   // const navItems = ["Home", "Restaurants", "About us"];
+  const { updateUserId } = useUserInfo();
 
   const checkIfUserIsInDb = async (): Promise<boolean> => {
     if (isAuthenticated && user?.email) {
@@ -21,6 +23,7 @@ function App(): JSX.Element {
           },
         });
         console.log(response.data);
+        updateUserId(response.data);
         if (response.data === null) {
           return false;
         } else {
@@ -38,11 +41,12 @@ function App(): JSX.Element {
 
     if (!isUserInDb) {
       try {
-        const response = await axios.post(`http://localhost:3000/users`, {
+        const response = await axios.post(`${BACKEND_URL}/users`, {
           email: user?.email,
           first_name: user?.first_name,
           last_name: user?.last_name,
         });
+        updateUserId(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -58,7 +62,6 @@ function App(): JSX.Element {
   if (isLoading) {
     return <div>Loading ...</div>;
   }
-  console.log(user);
 
   return (
     <>

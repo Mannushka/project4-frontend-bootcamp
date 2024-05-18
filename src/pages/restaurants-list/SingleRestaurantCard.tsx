@@ -13,16 +13,19 @@ import {
 import { MdBookmarks } from "react-icons/md";
 import { formatPriceCategory } from "../../utils/formatPriceCategory";
 import { useNavigate } from "react-router-dom";
+import RestaurantRating from "../../components/restaurant/RestaurantRating";
 
 interface SingleRestaurantCardProps {
   restaurant: Restaurant;
 }
 
-const SingleRestaurantCard = (
-  props: SingleRestaurantCardProps
-): JSX.Element => {
+const SingleRestaurantCard = ({
+  restaurant,
+}: SingleRestaurantCardProps): JSX.Element => {
   const navigate = useNavigate();
-  const restaurant = props.restaurant;
+
+  const rating = restaurant.reviews;
+  const ratingArray = rating.map((ratingElement) => ratingElement.rating_value);
 
   const card = (
     <Card maxW="md" marginBottom={4} className="restaurant-card">
@@ -30,9 +33,12 @@ const SingleRestaurantCard = (
         <Image src={restaurant.img_url} alt="Image" />
         <Stack mt="6" spacing="3">
           <Heading size="md">{restaurant.name}</Heading>
-          <Text color="blue.400" fontSize="md">
-            Rating:
-          </Text>
+
+          {/* <Text color="blue.400" fontSize="md">
+              Rating:
+            </Text> */}
+          <RestaurantRating ratingArray={ratingArray} />
+
           <div>
             <ul>
               <li> {restaurant.food_category.category_name}</li>

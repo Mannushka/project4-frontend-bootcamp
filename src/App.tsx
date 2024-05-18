@@ -35,7 +35,7 @@ function App(): JSX.Element {
 
   const postNewUserToDb = async (): Promise<void> => {
     const isUserInDb = await checkIfUserIsInDb();
-    console.log(isUserInDb);
+
     if (!isUserInDb) {
       try {
         const response = await axios.post(`http://localhost:3000/users`, {
@@ -43,9 +43,6 @@ function App(): JSX.Element {
           first_name: user?.first_name,
           last_name: user?.last_name,
         });
-
-        console.log("posted a new user!");
-        console.log(response.data);
       } catch (err) {
         console.log(err);
       }

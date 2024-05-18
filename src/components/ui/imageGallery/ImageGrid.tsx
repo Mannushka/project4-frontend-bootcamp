@@ -37,7 +37,7 @@ export const ImageGrid = ({ images }: ImageGridProps): JSX.Element => {
   const handleClickImage = (index: number) => {
     setIndex(index);
   };
-  console.log(slides.length);
+
   return (
     <div className="images-container">
       {images.length ? imageList : null}

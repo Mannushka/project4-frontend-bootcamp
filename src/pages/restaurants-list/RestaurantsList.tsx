@@ -9,7 +9,7 @@ import LocationFilter from "../../components/filters/LocationFilter";
 import FilterOptions from "../../components/filters/FilterOptions";
 import FilterButtonGroup from "../../components/filters/FilterButtonGroup";
 import { convertPriceCategoriesToNums } from "../../utils/convertPriceCategoriesToNums";
-import { Flex, Box, Heading, Wrap } from "@chakra-ui/react";
+import { Flex, Box, Heading } from "@chakra-ui/react";
 import "./Restaurants.css";
 import NavBar from "../../components/navbar/NavBar";
 
@@ -46,7 +46,6 @@ const RestaurantsList = () => {
           params: params,
         });
         setRestaurants(response.data);
-        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error(error);

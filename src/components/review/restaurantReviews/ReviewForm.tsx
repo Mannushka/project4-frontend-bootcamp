@@ -63,8 +63,8 @@ const ReviewForm = ({
       allowedFormats.includes(file.type)
     );
     setFiles(validFiles);
-    console.log(files);
-    console.log(validFiles);
+    // console.log(files);
+    // console.log(validFiles);
   };
 
   const uploadPhotosToStorage = async (): Promise<string[]> => {
@@ -160,7 +160,6 @@ const ReviewForm = ({
     try {
       const newImgURLs = await uploadPhotosToStorage();
       // setImgURLs(newImgURLs);
-      console.log(newImgURLs);
       postReview(newImgURLs);
     } catch (error) {
       console.log(error);

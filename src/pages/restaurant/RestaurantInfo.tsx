@@ -29,7 +29,6 @@ const RestaurantInfo = () => {
             `${BACKEND_URL}/restaurants/${restaurantId}`
           );
           setRestaurant(response.data);
-          console.log(response.data.reviews);
           updateRestaurantId(response.data.id);
           setLoading(false);
         } catch (error) {
@@ -51,7 +50,7 @@ const RestaurantInfo = () => {
   const handleLeaveReview = () => {
     setShowReviewForm((prevState) => !prevState);
   };
-  console.log(newReview);
+
   return (
     <div>
       <NavBar />

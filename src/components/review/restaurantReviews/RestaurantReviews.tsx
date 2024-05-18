@@ -19,7 +19,7 @@ const RestaurantReviews = ({
 }: RestaurantReviewsProps): JSX.Element => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const { restaurantId, updateRatingArray } = useRestaurantInfo();
+  const { restaurantId } = useRestaurantInfo();
 
   useEffect(() => {
     setLoading(true);
@@ -34,7 +34,7 @@ const RestaurantReviews = ({
 
         const response = await axios.get(`${BACKEND_URL}/reviews`, { params });
         setReviews(response.data);
-        console.log(response.data);
+
         setLoading(false);
       } catch (error) {
         console.error(error);

@@ -17,7 +17,7 @@ interface RestaurantCardProps {
   restaurant: Restaurant;
 }
 const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
-  const displayRating = () => {
+  const displayRating = (): number[] => {
     if (restaurant.reviews) {
       const rating = restaurant.reviews;
       const array = rating.map((ratingElement) => ratingElement.rating_value);

@@ -20,7 +20,12 @@ interface Restaurant {
   food_category: {
     category_name: string;
   };
-  [key: string]: string;
+
+  reviews: {
+    rating_value: number;
+  }[];
+  // [key: string]: string;
+  [key: string]: string | number | object;
 }
 
 interface BusinessHours {

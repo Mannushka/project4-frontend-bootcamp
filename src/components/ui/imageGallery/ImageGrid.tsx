@@ -10,10 +10,10 @@ import {
 } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
+import LightBox from "./LightBox";
 
 interface ImageGridProps {
   images: Image[];
-  // onClick: (id: number) => void;
 }
 interface Image {
   id: number;
@@ -35,16 +35,15 @@ export const ImageGrid = ({ images }: ImageGridProps): JSX.Element => {
   const slides = images.map((image) => ({ src: image.photo }));
 
   const handleClickImage = (index: number) => {
-    // console.log(id);
-    // setImageId(id);
     setIndex(index);
   };
   console.log(slides.length);
   return (
     <div className="images-container">
       {images.length ? imageList : null}
-      <div>
-        <Lightbox
+      <LightBox index={index} setIndex={setIndex} slides={slides} />
+
+      {/* <Lightbox
           plugins={[Download, Fullscreen, Zoom, Thumbnails]}
           // open={open}
           // close={() => setOpen(false)}
@@ -53,8 +52,7 @@ export const ImageGrid = ({ images }: ImageGridProps): JSX.Element => {
           open={index >= 0}
           close={() => setIndex(-1)}
           slides={slides}
-        />
-      </div>
+        /> */}
     </div>
   );
 };

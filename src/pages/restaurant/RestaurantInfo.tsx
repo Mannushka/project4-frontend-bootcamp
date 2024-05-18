@@ -1,9 +1,8 @@
-import React from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../../constants";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard from "../../components/restaurant/RestaurantCard";
 import "./Restaurant.css";
 import { Flex, Box, Image, Button } from "@chakra-ui/react";
 import Spinner from "../../components/ui/Spinner";
@@ -11,12 +10,15 @@ import RestaurantReviews from "../../components/review/restaurantReviews/Restaur
 import ReviewForm from "../../components/review/restaurantReviews/ReviewForm";
 import NavBar from "../../components/navbar/NavBar";
 import GoogleMap from "../../components/map/GoogleMap";
+import { useRestaurantInfo } from "../../context/RestaurantInfoContext";
+
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
   const [loading, setLoading] = useState<boolean>(false);
   const [showReviewForm, setShowReviewForm] = useState<boolean>(false);
   const [newReview, setNewReview] = useState<boolean>(false);
   const { restaurantId } = useParams();
+  const { updateRestaurantId } = useRestaurantInfo();
 
   useEffect(() => {
     setLoading(true);
@@ -28,6 +30,7 @@ const RestaurantInfo = () => {
           );
           setRestaurant(response.data);
           console.log(response.data);
+          updateRestaurantId(response.data.id);
           setLoading(false);
         } catch (error) {
           console.error(error);
@@ -82,7 +85,7 @@ const RestaurantInfo = () => {
         )}
         {showReviewForm && (
           <ReviewForm
-            restaurantId={Number(restaurantId)}
+            // restaurantId={Number(restaurantId)}
             showReviewForm={showReviewForm}
             setShowReviewForm={setShowReviewForm}
             newReview={newReview}
@@ -92,7 +95,7 @@ const RestaurantInfo = () => {
         {/* {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>} */}
       </Box>
       <RestaurantReviews
-        restaurantId={Number(restaurantId)}
+        // restaurantId={Number(restaurantId)}
         newReview={newReview}
         setNewReview={setNewReview}
       />

@@ -19,8 +19,8 @@ const RestaurantsList = () => {
   const [categoryParams, setCategoryParams] = useState<string[]>([]);
   const [locationParams, setLocationParams] = useState<string[]>([]);
   const [priceParams, setPriceParams] = useState<string[]>([]);
-
   const priceCategoriesArray = ["$", "$$", "$$$"];
+
   useEffect(() => {
     setLoading(true);
     const getAllRestaurantsInfo = async (): Promise<void> => {
@@ -46,6 +46,7 @@ const RestaurantsList = () => {
           params: params,
         });
         setRestaurants(response.data);
+        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error(error);

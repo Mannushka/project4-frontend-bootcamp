@@ -4,20 +4,22 @@ import { BACKEND_URL } from "../../../constants";
 import axios from "axios";
 import ReviewCard from "./ReviewCard";
 import { Heading, Flex } from "@chakra-ui/react";
+import { useRestaurantInfo } from "../../../context/RestaurantInfoContext";
 
 interface RestaurantReviewsProps {
-  restaurantId: number;
+  // restaurantId: number;
   newReview: boolean;
   setNewReview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const RestaurantReviews = ({
-  restaurantId,
+  // restaurantId,
   newReview,
   setNewReview,
 }: RestaurantReviewsProps): JSX.Element => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const { restaurantId, updateRatingArray } = useRestaurantInfo();
 
   useEffect(() => {
     setLoading(true);

@@ -29,7 +29,7 @@ const RestaurantInfo = () => {
             `${BACKEND_URL}/restaurants/${restaurantId}`
           );
           setRestaurant(response.data);
-          console.log(response.data);
+          console.log(response.data.reviews);
           updateRestaurantId(response.data.id);
           setLoading(false);
         } catch (error) {

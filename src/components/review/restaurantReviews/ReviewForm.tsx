@@ -22,9 +22,10 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
+import { useRestaurantInfo } from "../../../context/RestaurantInfoContext";
 
 interface ReviewFormProps {
-  restaurantId: number;
+  // restaurantId: number;
   showReviewForm: boolean;
   setShowReviewForm: React.Dispatch<React.SetStateAction<boolean>>;
   newReview: boolean;
@@ -33,12 +34,13 @@ interface ReviewFormProps {
 
 const STORAGE_KEY = "/review-photos";
 const ReviewForm = ({
-  restaurantId,
+  // restaurantId,
   showReviewForm,
   setShowReviewForm,
   newReview,
   setNewReview,
 }: ReviewFormProps) => {
+  const { restaurantId } = useRestaurantInfo();
   const [reviewText, setReviewText] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
   // const [imgURLs, setImgURLs] = useState<string[]>([]);

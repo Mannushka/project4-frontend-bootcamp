@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import StarRatingInput from "../starRating/StarRatingInput";
 import axios from "axios";
-import { BACKEND_URL } from "../../../constants";
+import { BACKEND_URL, RESTAURANT, USER } from "../../../constants";
 import { useAuth0 } from "@auth0/auth0-react";
 import { storage } from "../../../firebaseSetup";
 import {
@@ -23,6 +23,8 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { useRestaurantInfo } from "../../../context/RestaurantInfoContext";
+import { useUserInfo } from "../../../context/UserInfoContext";
+import { validateId } from "../../../utils/validateId";
 
 interface ReviewFormProps {
   // restaurantId: number;
@@ -46,6 +48,7 @@ const ReviewForm = ({
   // const [imgURLs, setImgURLs] = useState<string[]>([]);
   const [rating, setRating] = useState<number>(0);
   const { user } = useAuth0();
+  const { userId } = useUserInfo();
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setReviewText(e.target.value);
@@ -117,12 +120,15 @@ const ReviewForm = ({
 
   const postReview = async (imgURLs: string[]): Promise<void> => {
     try {
-      if (!user?.email) {
-        throw new Error("User email is required 🥺");
-      }
-      if (!restaurantId || isNaN(restaurantId)) {
-        throw new Error("Restaurant ID is missing or invalid 🥺");
-      }
+      // if (!user?.email) {
+      //   throw new Error("User email is required 🥺");
+      // }
+
+      // if (!restaurantId || isNaN(restaurantId)) {
+      //   throw new Error("Restaurant ID is missing or invalid 🥺");
+      // }
+      validateId(restaurantId, RESTAURANT);
+      validateId(userId, USER);
       if (!rating) {
         throw new Error("Please rate the restaurant 🥹");
       }
@@ -139,8 +145,9 @@ const ReviewForm = ({
       }
 
       const response = await axios.post(`${BACKEND_URL}/reviews`, {
-        email: user?.email,
-        restaurant_id: restaurantId,
+        // email: user?.email,
+        userId: userId,
+        restaurantId: restaurantId,
         rating_value: rating,
         text: reviewText,
         photoURLs: imgURLs,

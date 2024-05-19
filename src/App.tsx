@@ -17,7 +17,7 @@ function App(): JSX.Element {
   const checkIfUserIsInDb = async (): Promise<boolean> => {
     if (isAuthenticated && user?.email) {
       try {
-        const response = await axios.get(`${BACKEND_URL}/users/finduser`, {
+        const response = await axios.get(`${BACKEND_URL}/users/find-user`, {
           params: {
             email: user?.email,
           },

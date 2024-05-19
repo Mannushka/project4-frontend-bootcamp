@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Container,
   Card,
@@ -10,7 +9,7 @@ import {
   ButtonGroup,
   Button,
 } from "@chakra-ui/react";
-import { MdBookmarks } from "react-icons/md";
+
 import { formatPriceCategory } from "../../utils/formatPriceCategory";
 import { useNavigate } from "react-router-dom";
 import RestaurantRating from "../restaurant/RestaurantRating";
@@ -24,7 +23,6 @@ const SingleRestaurantCard = ({
   restaurant,
 }: SingleRestaurantCardProps): JSX.Element => {
   const navigate = useNavigate();
-
   const rating = restaurant.reviews;
   const ratingArray = rating.map((ratingElement) => ratingElement.rating_value);
 

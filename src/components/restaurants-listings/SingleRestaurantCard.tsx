@@ -13,7 +13,8 @@ import {
 import { MdBookmarks } from "react-icons/md";
 import { formatPriceCategory } from "../../utils/formatPriceCategory";
 import { useNavigate } from "react-router-dom";
-import RestaurantRating from "../../components/restaurant/RestaurantRating";
+import RestaurantRating from "../restaurant/RestaurantRating";
+import SaveButton from "./SaveButton";
 
 interface SingleRestaurantCardProps {
   restaurant: Restaurant;
@@ -58,7 +59,8 @@ const SingleRestaurantCard = ({
             {/* <Button variant="ghost" colorScheme="blue">
               Save
             </Button> */}
-            <MdBookmarks size="25px" />
+            {/* <MdBookmarks size="25px" /> */}
+            <SaveButton restaurantId={restaurant.id} />
           </ButtonGroup>
         </Stack>
       </CardBody>

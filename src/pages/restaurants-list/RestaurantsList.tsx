@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../../constants";
 import { useState, useEffect } from "react";
-import SingleRestaurantCard from "./SingleRestaurantCard";
+import SingleRestaurantCard from "../../components/restaurants-listings/SingleRestaurantCard";
 import Spinner from "../../components/ui/Spinner";
 import FoodCategoryFilter from "../../components/filters/FoodCategoryFilter";
 import LocationFilter from "../../components/filters/LocationFilter";

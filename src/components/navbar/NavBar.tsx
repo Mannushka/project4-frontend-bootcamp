@@ -3,7 +3,7 @@ import LogoutButton from "../authentication/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserMenu from "./userMenu";
+import UserMenu from "./UserMenu";
 
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // interface NavBarProps {

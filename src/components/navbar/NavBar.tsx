@@ -1,9 +1,9 @@
-import React from "react";
 import LoginButton from "../authentication/LoginButton";
 import LogoutButton from "../authentication/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UserMenu from "./userMenu";
 
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // interface NavBarProps {
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 // }
 
 const NavBar = (): JSX.Element => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const brandName = "Food Harbour";
   const navItems = ["Home", "Restaurants", "About us"];
@@ -157,7 +157,8 @@ const NavBar = (): JSX.Element => {
               </button>
             </form>
             <div className="me-4 mb-2 ">
-              {isAuthenticated && !isLoading && `Hello ${user?.first_name}`}
+              {/* {isAuthenticated && !isLoading && `Hello ${user?.first_name}`} */}
+              {isAuthenticated && !isLoading && <UserMenu />}
             </div>
             <div className="me-4 mb-2">
               {isAuthenticated && !isLoading && <LogoutButton />}

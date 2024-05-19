@@ -12,6 +12,8 @@ import RestaurantInfo from "./pages/restaurant/RestaurantInfo.tsx";
 import RestaurantsList from "./pages/restaurants-list/RestaurantsList.tsx";
 import { RestaurantInfoProvider } from "./context/RestaurantInfoContext.tsx";
 import { UserInfoProvider } from "./context/UserInfoContext.tsx";
+import SavedRestaurants from "./pages/saved-restaurants/SavedRestaurants.tsx";
+import CurrentUserReviews from "./pages/user-reviews/CurrentUserReviews.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -36,6 +38,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                   path="/restaurants/:restaurantId"
                   element={<RestaurantInfo />}
                 />
+                <Route path="/my-restaurants" element={<SavedRestaurants />} />
+                <Route path="/my-reviews" element={<CurrentUserReviews />} />
               </Routes>
             </BrowserRouter>
           </RestaurantInfoProvider>

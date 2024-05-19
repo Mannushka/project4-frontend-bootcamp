@@ -37,7 +37,7 @@ const RestaurantInfo = () => {
       }
     };
     getRestaurantInfo();
-  }, [restaurantId]);
+  }, [updateRestaurantId, restaurantId]);
 
   // const displayRestaurantInfo = (): JSX.Element[] => {
   //   const infoElements = [];

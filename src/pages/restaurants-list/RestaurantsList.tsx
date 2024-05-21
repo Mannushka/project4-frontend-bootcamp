@@ -19,6 +19,7 @@ const RestaurantsList = () => {
   const [categoryParams, setCategoryParams] = useState<string[]>([]);
   const [locationParams, setLocationParams] = useState<string[]>([]);
   const [priceParams, setPriceParams] = useState<string[]>([]);
+  const [page, setPage] = useState<number>(1);
   const priceCategoriesArray = ["$", "$$", "$$$"];
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const RestaurantsList = () => {
           location?: string[];
           category?: string[];
           priceCategory?: number[];
+          page?: number;
         } = {};
         if (locationParams.length) {
           params.location = locationParams;
@@ -42,17 +44,20 @@ const RestaurantsList = () => {
           params.priceCategory = convertPriceCategoriesToNums(priceParams);
         }
 
+        params.page = page;
+
         const response = await axios.get(`${BACKEND_URL}/restaurants`, {
           params: params,
         });
-        setRestaurants(response.data);
+        setRestaurants(response.data.restaurants);
+        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     getAllRestaurantsInfo();
-  }, [categoryParams, locationParams, priceParams]);
+  }, [categoryParams, locationParams, priceParams, page]);
 
   const restaurantsList = restaurants.map((restaurant) => {
     return (

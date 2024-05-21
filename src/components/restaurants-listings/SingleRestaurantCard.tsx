@@ -8,12 +8,14 @@ import {
   Text,
   ButtonGroup,
   Button,
+  CardFooter,
 } from "@chakra-ui/react";
 
 import { formatPriceCategory } from "../../utils/formatPriceCategory";
 import { useNavigate } from "react-router-dom";
 import RestaurantRating from "../restaurant/RestaurantRating";
 import SaveButton from "./SaveButton";
+import "./SingleRestaurant.css";
 
 interface SingleRestaurantCardProps {
   restaurant: Restaurant;
@@ -27,24 +29,22 @@ const SingleRestaurantCard = ({
   const ratingArray = rating.map((ratingElement) => ratingElement.rating_value);
 
   const card = (
-    <Card maxW="md" marginBottom={4} className="restaurant-card">
-      <CardBody>
-        <Image src={restaurant.img_url} alt="Image" />
+    <Card marginBottom={4} className="single-restaurant-card">
+      <CardBody className="single-card-body">
+        <Image src={restaurant.img_url} alt="Image" height={200} width="100%" />
         <Stack mt="6" spacing="3">
           <Heading size="md">{restaurant.name}</Heading>
 
-          {/* <Text color="blue.400" fontSize="md">
-              Rating:
-            </Text> */}
           <RestaurantRating ratingArray={ratingArray} />
 
-          <div>
+          <div className="card-info">
             <ul>
               <li> {restaurant.food_category.category_name}</li>
               <li>{formatPriceCategory(restaurant.price_category)}</li>
               <li>{restaurant.address}</li>
             </ul>
           </div>
+
           <ButtonGroup justifyContent="space-between" alignItems="center">
             <Button
               variant="ghost"
@@ -54,10 +54,6 @@ const SingleRestaurantCard = ({
             >
               View details
             </Button>
-            {/* <Button variant="ghost" colorScheme="blue">
-              Save
-            </Button> */}
-            {/* <MdBookmarks size="25px" /> */}
             <SaveButton restaurantId={restaurant.id} />
           </ButtonGroup>
         </Stack>

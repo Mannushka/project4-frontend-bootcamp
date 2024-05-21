@@ -104,12 +104,13 @@ const RestaurantsList = () => {
         <Box className="restaurant-list-box" id="restaurants">
           <div>{loading && !restaurants.length && <Spinner />}</div>
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
-            }}
+            // style={{
+            //   display: "flex",
+            //   flexDirection: "column",
+            //   alignItems: "flex-start",
+            //   justifyContent: "flex-start",
+            // }}
+            className="restaurants-list"
           >
             {!loading && restaurants.length > 0 && restaurantsList}
           </div>

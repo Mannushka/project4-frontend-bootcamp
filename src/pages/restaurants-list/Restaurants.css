@@ -6,12 +6,18 @@
 }
 
 #restaurant-filters {
-  flex: 1;
+  flex: 2;
 }
 #restaurants {
-  flex: 3;
+  flex: 8;
 }
 
 .restaurant-card {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+}
+
+.restaurants-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }

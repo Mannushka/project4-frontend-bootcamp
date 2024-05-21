@@ -1,0 +1,24 @@
+.single-restaurant-card {
+  height: 55vh;
+}
+
+/* .single-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+/* .card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-info ul li {
+  margin-bottom: 8px;
+} */

@@ -6,12 +6,8 @@ interface StarRatingDisplayProps {
 }
 const StarRatingDisplay = ({ rating }: StarRatingDisplayProps): JSX.Element => {
   const stars = [...Array(5)].map((_, index) => (
-    <Box>
-      <FaStar
-        key={index}
-        size={30}
-        color={index < rating ? "#FFD700" : "gray"}
-      />
+    <Box key={index}>
+      <FaStar size={30} color={index < rating ? "#FFD700" : "gray"} />
     </Box>
   ));
 

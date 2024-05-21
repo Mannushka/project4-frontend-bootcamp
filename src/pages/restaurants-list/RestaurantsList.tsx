@@ -12,6 +12,7 @@ import { convertPriceCategoriesToNums } from "../../utils/convertPriceCategories
 import { Flex, Box, Heading } from "@chakra-ui/react";
 import "./Restaurants.css";
 import NavBar from "../../components/navbar/NavBar";
+import PaginationComponent from "../../components/ui/pagination/PaginationComponent";
 
 const RestaurantsList = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,6 +21,8 @@ const RestaurantsList = () => {
   const [locationParams, setLocationParams] = useState<string[]>([]);
   const [priceParams, setPriceParams] = useState<string[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [totalPagesNum, setTotalPagesNum] = useState<number>(0);
+  const [totalRestaurantsNum, setTotalRestautantsNum] = useState<number>(0);
   const priceCategoriesArray = ["$", "$$", "$$$"];
 
   useEffect(() => {
@@ -50,6 +53,8 @@ const RestaurantsList = () => {
           params: params,
         });
         setRestaurants(response.data.restaurants);
+        setTotalPagesNum(response.data.totalPages);
+        setTotalRestautantsNum(response.data.totalCount);
         console.log(response.data);
         setLoading(false);
       } catch (error) {
@@ -66,6 +71,7 @@ const RestaurantsList = () => {
       </div>
     );
   });
+
   return (
     <>
       <NavBar />
@@ -114,6 +120,12 @@ const RestaurantsList = () => {
           >
             {!loading && restaurants.length > 0 && restaurantsList}
           </div>
+          <PaginationComponent
+            page={page}
+            setPage={setPage}
+            totalPagesNum={totalPagesNum}
+            totalItemsNum={totalRestaurantsNum}
+          />
         </Box>
       </Flex>
     </>

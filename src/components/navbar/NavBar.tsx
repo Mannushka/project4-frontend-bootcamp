@@ -142,7 +142,7 @@ const NavBar = (): JSX.Element => {
                 </form>
               </li> */}
             </ul>
-            <form className=" d-flex me-5 mb-2" role="search">
+            {/* <form className=" d-flex me-5 mb-2" role="search">
               <input
                 className="form-control me-2"
                 type="search"
@@ -155,7 +155,7 @@ const NavBar = (): JSX.Element => {
               >
                 Search
               </button>
-            </form>
+            </form> */}
             <div className="me-4 mb-2 ">
               {/* {isAuthenticated && !isLoading && `Hello ${user?.first_name}`} */}
               {isAuthenticated && !isLoading && <UserMenu />}

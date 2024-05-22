@@ -13,6 +13,7 @@ import { Flex, Box, Heading } from "@chakra-ui/react";
 import "./Restaurants.css";
 import NavBar from "../../components/navbar/NavBar";
 import PaginationComponent from "../../components/ui/pagination/PaginationComponent";
+import SearchBar from "../../components/SearchBar";
 
 const RestaurantsList = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,6 +21,7 @@ const RestaurantsList = () => {
   const [categoryParams, setCategoryParams] = useState<string[]>([]);
   const [locationParams, setLocationParams] = useState<string[]>([]);
   const [priceParams, setPriceParams] = useState<string[]>([]);
+  const [nameParams, setNameParams] = useState("");
   const [page, setPage] = useState<number>(1);
   const [totalPagesNum, setTotalPagesNum] = useState<number>(0);
   const [totalRestaurantsNum, setTotalRestautantsNum] = useState<number>(0);
@@ -33,6 +35,7 @@ const RestaurantsList = () => {
           location?: string[];
           category?: string[];
           priceCategory?: number[];
+          name?: string;
           page?: number;
         } = {};
         if (locationParams.length) {
@@ -48,6 +51,9 @@ const RestaurantsList = () => {
         }
 
         params.page = page;
+        if (nameParams) {
+          params.name = nameParams;
+        }
 
         const response = await axios.get(`${BACKEND_URL}/restaurants`, {
           params: params,
@@ -62,7 +68,7 @@ const RestaurantsList = () => {
       }
     };
     getAllRestaurantsInfo();
-  }, [categoryParams, locationParams, priceParams, page]);
+  }, [categoryParams, locationParams, priceParams, page, nameParams]);
 
   const restaurantsList = restaurants.map((restaurant) => {
     return (
@@ -77,6 +83,8 @@ const RestaurantsList = () => {
       <NavBar />
       <Flex wrap="wrap" margin={4} padding={2}>
         <Box className="restaurant-list-box" id="restaurant-filters">
+          <SearchBar nameParams={nameParams} setNameParams={setNameParams} />
+
           <Heading as="h4" size="md" marginBottom={5}>
             Filters
           </Heading>

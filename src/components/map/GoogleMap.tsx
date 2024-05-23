@@ -53,7 +53,7 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
       }
     };
     geocodeAddress();
-  }, [newAddress]);
+  }, [newAddress, latitude, longitude]);
 
   return (
     <Box marginTop="20px">

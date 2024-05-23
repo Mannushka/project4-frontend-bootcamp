@@ -14,6 +14,7 @@ import "./Restaurants.css";
 import NavBar from "../../components/navbar/NavBar";
 import PaginationComponent from "../../components/ui/pagination/PaginationComponent";
 import SearchBar from "../../components/SearchBar";
+import SortByMenu from "../../components/restaurants-listings/SortByMenu";
 
 const RestaurantsList = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -21,7 +22,8 @@ const RestaurantsList = () => {
   const [categoryParams, setCategoryParams] = useState<string[]>([]);
   const [locationParams, setLocationParams] = useState<string[]>([]);
   const [priceParams, setPriceParams] = useState<string[]>([]);
-  const [nameParams, setNameParams] = useState("");
+  const [nameParams, setNameParams] = useState<string>("");
+  const [sortByParams, setSortByParams] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [totalPagesNum, setTotalPagesNum] = useState<number>(0);
   const [totalRestaurantsNum, setTotalRestautantsNum] = useState<number>(0);
@@ -37,6 +39,7 @@ const RestaurantsList = () => {
           priceCategory?: number[];
           name?: string;
           page?: number;
+          sortBy?: string;
         } = {};
         if (locationParams.length) {
           params.location = locationParams;
@@ -50,10 +53,13 @@ const RestaurantsList = () => {
           params.priceCategory = convertPriceCategoriesToNums(priceParams);
         }
 
-        params.page = page;
         if (nameParams) {
           params.name = nameParams;
         }
+        if (sortByParams) {
+          params.sortBy = sortByParams;
+        }
+        params.page = page;
 
         const response = await axios.get(`${BACKEND_URL}/restaurants`, {
           params: params,
@@ -68,7 +74,14 @@ const RestaurantsList = () => {
       }
     };
     getAllRestaurantsInfo();
-  }, [categoryParams, locationParams, priceParams, page, nameParams]);
+  }, [
+    categoryParams,
+    locationParams,
+    priceParams,
+    page,
+    nameParams,
+    sortByParams,
+  ]);
 
   const restaurantsList = restaurants.map((restaurant) => {
     return (
@@ -116,6 +129,10 @@ const RestaurantsList = () => {
           </div>
         </Box>
         <Box className="restaurant-list-box" id="restaurants">
+          <SortByMenu
+            sortByParams={sortByParams}
+            setSortByParams={setSortByParams}
+          />
           <div>{loading && !restaurants.length && <Spinner />}</div>
           <div
             // style={{
@@ -126,14 +143,16 @@ const RestaurantsList = () => {
             // }}
             className="restaurants-list"
           >
-            {!loading && restaurants.length > 0 && restaurantsList}
+            {!loading && !!restaurants.length && restaurantsList}
           </div>
-          <PaginationComponent
-            page={page}
-            setPage={setPage}
-            totalPagesNum={totalPagesNum}
-            totalItemsNum={totalRestaurantsNum}
-          />
+          {!!restaurants.length && (
+            <PaginationComponent
+              page={page}
+              setPage={setPage}
+              totalPagesNum={totalPagesNum}
+              totalItemsNum={totalRestaurantsNum}
+            />
+          )}
         </Box>
       </Flex>
     </>

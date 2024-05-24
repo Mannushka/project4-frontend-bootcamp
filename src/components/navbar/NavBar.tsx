@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import "./Navbar.css";
 
 const NavBar = (): JSX.Element => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -105,7 +106,7 @@ const NavBar = (): JSX.Element => {
   // );
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary shadow">
+    <Navbar expand="lg" className="shadow" sticky="top" id="navbar">
       <Container fluid>
         <Navbar.Brand href="#">
           <img

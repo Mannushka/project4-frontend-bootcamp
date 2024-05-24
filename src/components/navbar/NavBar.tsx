@@ -106,7 +106,7 @@ const NavBar = (): JSX.Element => {
   // );
 
   return (
-    <Navbar expand="lg" className="shadow" sticky="top" id="navbar">
+    <Navbar expand="lg" className="shadow" id="navbar">
       <Container fluid>
         <Navbar.Brand href="#">
           <img

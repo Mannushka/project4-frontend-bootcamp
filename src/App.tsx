@@ -3,15 +3,13 @@ import "./App.css";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/navbar/NavBar";
-import imagePath from "./assets/dumbling.png";
 import { BACKEND_URL } from "./constants";
 import { useUserInfo } from "./context/UserInfoContext";
-
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// import imagePath from "./assets/dumbling.png";
 
 function App(): JSX.Element {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  // const navItems = ["Home", "Restaurants", "About us"];
   const { updateUserId } = useUserInfo();
 
   const checkIfUserIsInDb = async (): Promise<boolean> => {
@@ -64,13 +62,9 @@ function App(): JSX.Element {
   }
 
   return (
-    <>
-      <NavBar
-      // brandName="Food Harbour"
-      // imageSrcPath={imagePath}
-      // navItems={navItems}
-      />
-    </>
+    <div className="app">
+      <NavBar />
+    </div>
   );
 }
 

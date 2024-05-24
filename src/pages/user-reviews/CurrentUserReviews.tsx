@@ -4,6 +4,7 @@ import { useUserInfo } from "../../context/UserInfoContext";
 import { useState, useEffect } from "react";
 import { validateId } from "../../utils/validateId";
 import ReviewCard from "../../components/review/restaurantReviews/ReviewCard";
+import NavBar from "../../components/navbar/NavBar";
 const CurrentUserReviews = () => {
   const [myReviews, setMyReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,7 +40,12 @@ const CurrentUserReviews = () => {
     </div>
   ));
 
-  return <div>{myReviewsList}</div>;
+  return (
+    <div>
+      <NavBar />
+      {myReviewsList}
+    </div>
+  );
 };
 
 export default CurrentUserReviews;

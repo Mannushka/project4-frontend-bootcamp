@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 } */
+
+#root {
+  /* background-color: #f9fcfd; 
+ background: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);  */
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgba(234, 249, 249, 0.67) 0.1%,
+    rgba(239, 249, 251, 0.63) 90.1%
+  );
+}

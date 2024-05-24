@@ -4,6 +4,7 @@ import { useUserInfo } from "../../context/UserInfoContext";
 import { useState, useEffect } from "react";
 import { validateId } from "../../utils/validateId";
 import SingleRestaurantCard from "../../components/restaurants-listings/SingleRestaurantCard";
+import NavBar from "../../components/navbar/NavBar";
 const SavedRestaurants = () => {
   const [savedRestaurants, setSavedRestaurants] = useState<Restaurant[]>([]);
   const { userId } = useUserInfo();
@@ -35,7 +36,12 @@ const SavedRestaurants = () => {
     );
   });
 
-  return <div>{savedRestaurantsList}</div>;
+  return (
+    <div>
+      <NavBar />
+      {savedRestaurantsList}
+    </div>
+  );
 };
 
 export default SavedRestaurants;

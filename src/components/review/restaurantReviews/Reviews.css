@@ -1,0 +1,10 @@
+.centered-container {
+  display: flex;
+  justify-content: center;
+}
+.all-reviews-container {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 1rem;
+}

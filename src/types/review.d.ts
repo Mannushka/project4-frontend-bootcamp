@@ -2,7 +2,7 @@ interface Review {
   id: number;
   user_id: number;
   restaurant_id: number;
-  review_photos: string[];
+  review_photos: [];
   rating_value: number;
   text: string;
   createdAt: string;
@@ -10,5 +10,5 @@ interface Review {
   user: {
     first_name: string;
   };
-  restaurant?: { name: string };
+  restaurant: { name: string };
 }

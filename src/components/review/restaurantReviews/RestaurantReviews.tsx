@@ -47,7 +47,7 @@ const RestaurantReviews = ({
 
   const reviewsList = reviews.map((review) => (
     <div key={review.id}>
-      <ReviewCard review={review} />
+      <ReviewCard review={review} displayResturantName={false} />
     </div>
   ));
   return (

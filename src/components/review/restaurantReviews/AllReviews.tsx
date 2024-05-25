@@ -3,6 +3,8 @@ import { BACKEND_URL } from "../../../constants";
 import axios from "axios";
 import ReviewCard from "./ReviewCard";
 import { Box } from "@chakra-ui/react";
+import Spinner from "../../ui/Spinner";
+import "./Reviews.css";
 
 interface AllReviewsProps {
   reviewPage: number;
@@ -32,18 +34,20 @@ const AllReviews = ({ reviewPage }: AllReviewsProps): JSX.Element => {
     getReviews();
   }, [reviewPage]);
 
-  // const reviewsList = reviews.map((review) => (
-  //   <div key={review.id}>
-  //     <ReviewCard review={review} />
-  //   </div>
-  // ));
   console.log(reviews);
   const reviewsList = reviews.map((review) => (
     <Box key={review.id}>
-      <ReviewCard review={review} />
+      <ReviewCard review={review} displayResturantName={true} />
     </Box>
   ));
-  return <div> {reviewsList} </div>;
+  return (
+    <div className="centered-container">
+      {loading && <Spinner />}
+      <Box className="all-reviews-container">
+        {!loading && !!reviews.length && reviewsList}
+      </Box>
+    </div>
+  );
 };
 
 export default AllReviews;

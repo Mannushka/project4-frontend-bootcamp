@@ -36,7 +36,7 @@ const CurrentUserReviews = () => {
 
   const myReviewsList = myReviews.map((review) => (
     <div key={review.id}>
-      <ReviewCard review={review} />
+      <ReviewCard review={review} displayResturantName={true} />
     </div>
   ));
 

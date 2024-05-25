@@ -4,3 +4,10 @@
   /* margin: 20px 0;
   padding: 20px 0; */
 }
+
+.recent-activities {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}

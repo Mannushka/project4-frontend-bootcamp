@@ -84,18 +84,16 @@ const SaveButton = ({ restaurantId }: SaveButtonProps): JSX.Element => {
   };
 
   return (
-    <div>
-      {/* {!!userId && !isSaved && (
-        <MdBookmarks size="25px" onClick={saveRestaurant} />
-      )}
-      {!!userId && isSaved && (
-        <Button variant="ghost" onClick={removeRestaurant}>
-          Remove from saved
-        </Button>
-      )} */}
+    <div className="save-button">
       {!!userId && (
-        <Button variant={isSaved ? "ghost" : "solid"} onClick={handleClick}>
-          {isSaved ? "Remove from saved" : <MdBookmarks />}
+        <Button
+          variant={isSaved ? "ghost" : "solid"}
+          onClick={handleClick}
+          style={{ backgroundColor: "white" }}
+        >
+          <span className="single-restaurant-button-text">
+            {isSaved ? "Remove from saved" : <MdBookmarks />}
+          </span>
         </Button>
       )}
     </div>

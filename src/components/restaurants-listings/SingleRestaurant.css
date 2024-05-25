@@ -1,7 +1,13 @@
+.single-restaurant-card-container {
+  display: flex;
+  justify-content: center;
+}
 .single-restaurant-card {
-  height: 55vh;
+  /* height: 55vh; */
   overflow: hidden;
   padding: 2px;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px !important;
 }
 
 .single-card-body {
@@ -15,6 +21,7 @@
 .card-info {
   /* display: flex;
   flex-direction: row; */
+  height: 100px;
   overflow: hidden;
   padding: 2px;
 }
@@ -28,3 +35,11 @@
 /* .card-info ul li {
   margin-bottom: 8px;
 } */
+
+.restaurant-listing-img {
+  object-fit: cover;
+}
+
+.single-restaurant-button-text:hover {
+  color: rgb(115, 117, 117);
+}

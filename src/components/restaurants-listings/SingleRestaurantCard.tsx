@@ -1,5 +1,5 @@
 import {
-  Container,
+  Box,
   Card,
   CardBody,
   Image,
@@ -30,9 +30,15 @@ const SingleRestaurantCard = ({
   // const location = restaurant.location.location_name;
   console.log(restaurant);
   const card = (
-    <Card marginBottom={4} className="single-restaurant-card">
+    <Card className="single-restaurant-card">
       <CardBody className="single-card-body">
-        <Image src={restaurant.img_url} alt="Image" height={200} width="100%" />
+        <Image
+          src={restaurant.img_url}
+          alt="Image"
+          height={300}
+          width="100%"
+          className="restaurant-listing-img"
+        />
         <Stack mt="6" spacing="3">
           <Heading size="md">{restaurant.name}</Heading>
 
@@ -58,8 +64,11 @@ const SingleRestaurantCard = ({
               onClick={() => {
                 navigate(`/restaurants/${restaurant.id}`);
               }}
+              style={{ backgroundColor: "white" }}
             >
-              View details
+              <span className="single-restaurant-button-text">
+                View details
+              </span>
             </Button>
             <SaveButton restaurantId={restaurant.id} />
           </ButtonGroup>
@@ -67,11 +76,7 @@ const SingleRestaurantCard = ({
       </CardBody>
     </Card>
   );
-  return (
-    <div>
-      <Container justifyContent="center">{card}</Container>
-    </div>
-  );
+  return <Box className="single-restaurant-card-container">{card}</Box>;
 };
 
 export default SingleRestaurantCard;

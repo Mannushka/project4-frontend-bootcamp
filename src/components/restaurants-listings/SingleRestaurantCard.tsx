@@ -5,10 +5,8 @@ import {
   Image,
   Heading,
   Stack,
-  Text,
   ButtonGroup,
   Button,
-  CardFooter,
 } from "@chakra-ui/react";
 
 import { formatPriceCategory } from "../../utils/formatPriceCategory";
@@ -27,7 +25,10 @@ const SingleRestaurantCard = ({
   const navigate = useNavigate();
   const rating = restaurant.reviews;
   const ratingArray = rating.map((ratingElement) => ratingElement.rating_value);
-
+  const category = restaurant.food_category.category_name;
+  const priceCategory = formatPriceCategory(restaurant.price_category);
+  // const location = restaurant.location.location_name;
+  console.log(restaurant);
   const card = (
     <Card marginBottom={4} className="single-restaurant-card">
       <CardBody className="single-card-body">
@@ -39,9 +40,15 @@ const SingleRestaurantCard = ({
 
           <div className="card-info">
             <ul>
-              <li> {restaurant.food_category.category_name}</li>
-              <li>{formatPriceCategory(restaurant.price_category)}</li>
+              <li>
+                {category}, {priceCategory}
+              </li>
+              {/* <li>{priceCategory}</li> */}
               <li>{restaurant.address}</li>
+
+              {/* <li>
+                {category}, {priceCategory}, {location},
+              </li> */}
             </ul>
           </div>
 

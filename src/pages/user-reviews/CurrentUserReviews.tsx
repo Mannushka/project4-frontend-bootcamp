@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { validateId } from "../../utils/validateId";
 import ReviewCard from "../../components/review/restaurantReviews/ReviewCard";
 import NavBar from "../../components/navbar/NavBar";
+import { Box, Spinner, Text } from "@chakra-ui/react";
+import "./CurrentUserReviews.css";
 const CurrentUserReviews = () => {
   const [myReviews, setMyReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -35,16 +37,22 @@ const CurrentUserReviews = () => {
   }, [userId]);
 
   const myReviewsList = myReviews.map((review) => (
-    <div key={review.id}>
+    <div key={review.id} className="my-review-card">
       <ReviewCard review={review} displayResturantName={true} />
     </div>
   ));
 
   return (
-    <div>
+    <Box>
       <NavBar />
-      {myReviewsList}
-    </div>
+      <Box className="my-reviews-page-container">
+        <Text className="my-reviews-header">My reviews</Text>
+        <Box className="my-reviews-container">
+          {!loading && !!myReviews.length && myReviewsList}
+        </Box>
+        {loading && <Spinner />}
+      </Box>
+    </Box>
   );
 };
 

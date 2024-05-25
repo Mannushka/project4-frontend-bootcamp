@@ -5,6 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/navbar/NavBar";
 import { BACKEND_URL } from "./constants";
 import { useUserInfo } from "./context/UserInfoContext";
+import HomePage from "./pages/homepage/HomePage";
+import ImageCarousel from "./components/ui/imageGallery/ImageCarousel";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // import imagePath from "./assets/dumbling.png";
 
@@ -64,6 +66,7 @@ function App(): JSX.Element {
   return (
     <div className="app">
       <NavBar />
+      <HomePage />
     </div>
   );
 }

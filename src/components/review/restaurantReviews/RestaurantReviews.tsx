@@ -28,11 +28,13 @@ const RestaurantReviews = ({
         if (!restaurantId || isNaN(restaurantId)) {
           throw new Error("Invalid restaurant ID");
         }
-        const params: { restaurantId: number } = {
-          restaurantId: restaurantId,
-        };
+        // const params: { restaurantId: number } = {
+        //   restaurantId: restaurantId,
+        // };
 
-        const response = await axios.get(`${BACKEND_URL}/reviews`, { params });
+        const response = await axios.get(
+          `${BACKEND_URL}/reviews/restaurant/${restaurantId}`
+        );
         setReviews(response.data);
 
         setLoading(false);

@@ -1,4 +1,5 @@
 #navbar {
+  background-color: antiquewhite;
   /* background-color: #a6e4e7; */
   /* background-color: #85c8dd; */
   /* background-color: #bae8e8; */
@@ -7,14 +8,16 @@
     rgb(137, 210, 253) 0%,
     rgb(255, 241, 188) 90%
   ); */
-  background: linear-gradient(
-    109.6deg,
-    rgb(120, 212, 234) 11.2%,
-    rgb(216, 226, 253) 72.1%
-  );
+
   /* background: radial-gradient(
     circle at 0.7% 1%,
     rgb(215, 248, 247) 0%,
     rgb(102, 188, 239) 100.2%
+  ); */
+
+  /* background: linear-gradient(
+    109.6deg,
+    rgb(120, 212, 234) 11.2%,
+    #d8e2fd 72.1%
   ); */
 }

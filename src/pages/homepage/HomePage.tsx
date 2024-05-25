@@ -6,7 +6,7 @@ import { BACKEND_URL } from "../../constants";
 import AllReviews from "../../components/review/restaurantReviews/AllReviews";
 
 const HomePage = (): JSX.Element => {
-  const [reviewPage, setReviewPage] = useState<number>(1);
+  // const [reviewPage, setReviewPage] = useState<number>(1);
   const homepafeSlides = [
     {
       src: "https://firebasestorage.googleapis.com/v0/b/food-harbour.appspot.com/o/homepage-images%2Fchef.JPEG?alt=media&token=46229385-c095-44f6-8794-01a4645052c7",
@@ -24,7 +24,7 @@ const HomePage = (): JSX.Element => {
         <Heading> Recent activities</Heading>
       </Box>
       <Box>
-        <AllReviews reviewPage={reviewPage} />
+        <AllReviews reviewPage />
       </Box>
     </Stack>
   );

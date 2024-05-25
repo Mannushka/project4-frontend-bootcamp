@@ -29,7 +29,7 @@ const HomePage = (): JSX.Element => {
         <ImageCarousel slides={homepafeSlides} />
       </Box>
       <Box className="recent-activities">
-        <Heading> Recent activities</Heading>
+        <Heading> Recent activity</Heading>
       </Box>
       <Box>
         <AllReviews />

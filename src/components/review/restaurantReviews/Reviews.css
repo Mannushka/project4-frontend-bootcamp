@@ -1,3 +1,4 @@
+/* all-reviews */
 .centered-container {
   display: flex;
   justify-content: center;
@@ -9,9 +10,23 @@
   gap: 1rem;
 }
 
+/* review-card */
 .restaurant-name-link {
   font-weight: bold;
 }
 .restaurant-name-link:hover {
   color: rgb(85, 80, 80);
+}
+
+.review-text-not-expanded {
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+}
+
+.show-more-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
 }

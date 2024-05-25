@@ -5,18 +5,12 @@ import { ImageGrid } from "../../ui/imageGallery/ImageGrid";
 import { useUserInfo } from "../../../context/UserInfoContext";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import "./Reviews.css";
 
 interface ReviewCardProps {
   review: Review;
   displayResturantName: boolean;
 }
-
-const textStyle = {
-  WebkitLineClamp: 3,
-  WebkitBoxOrient: "vertical" as string,
-  overflow: "hidden",
-  display: "-webkit-box",
-};
 
 const ReviewCard = ({
   review,
@@ -40,7 +34,7 @@ const ReviewCard = ({
   }, []);
 
   const reviewCard = (
-    <Card>
+    <Card className="review-card">
       <CardBody>
         <Text>
           {userId === review.user_id
@@ -83,7 +77,7 @@ const ReviewCard = ({
   );
 
   console.log(review);
-  return <Box marginBottom="15px">{reviewCard}</Box>;
+  return <Box className="review-card">{reviewCard}</Box>;
 };
 
 export default ReviewCard;

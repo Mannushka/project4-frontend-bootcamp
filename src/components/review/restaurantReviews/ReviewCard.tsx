@@ -3,6 +3,7 @@ import StarRatingDisplay from "../starRating/StarRatingDisplay";
 import { formatDate } from "../../../utils/formatDate";
 import { ImageGrid } from "../../ui/imageGallery/ImageGrid";
 import { useUserInfo } from "../../../context/UserInfoContext";
+import { Link } from "react-router-dom";
 
 interface ReviewCardProps {
   review: Review;
@@ -28,7 +29,12 @@ const ReviewCard = ({
             : userName + " created a review "}
           {displayResturantName && (
             <>
-              for <b> {restaurantName} </b>
+              for{" "}
+              <span className="restaurant-name-link">
+                <Link to={`/restaurants/${review.restaurant_id}`}>
+                  {restaurantName}
+                </Link>
+              </span>
             </>
           )}
         </Text>

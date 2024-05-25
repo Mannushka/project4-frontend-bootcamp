@@ -8,3 +8,10 @@
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 1rem;
 }
+
+.restaurant-name-link {
+  font-weight: bold;
+}
+.restaurant-name-link:hover {
+  color: rgb(85, 80, 80);
+}

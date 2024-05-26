@@ -34,12 +34,14 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
     <Card
       direction="column"
       overflow="hidden"
-      variant="outline"
+      variant="unstyled"
       width="30rem"
+      marginBottom={4}
+
       // height="32rem"
       // style={{ border: "none" }}
     >
-      <Stack>
+      <Stack alignItems="center">
         <CardBody>
           <Heading className="restaurant-details" size="md">
             Details
@@ -49,7 +51,6 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
           </Box>
           <Text>
             <b>
-              {" "}
               {restaurant.food_category
                 ? restaurant.food_category.category_name
                 : ""}
@@ -63,7 +64,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
               Website <ExternalLinkIcon mx="2px" />
             </b>
           </Link>
-          <Heading className="restaurant-details" size="md">
+          <Heading className="restaurant-details" size="md" marginTop={4}>
             Contact info
           </Heading>
 

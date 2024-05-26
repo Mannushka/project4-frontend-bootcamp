@@ -1,14 +1,4 @@
-import {
-  Card,
-  CardBody,
-  Stack,
-  Text,
-  Heading,
-  Link,
-  CardFooter,
-  Box,
-  Flex,
-} from "@chakra-ui/react";
+import { Card, CardBody, Stack, Text, Heading } from "@chakra-ui/react";
 import { formatBusinessHours } from "../../utils/formatBusinessHours";
 
 interface BussinessHoursCardProps {
@@ -17,11 +7,11 @@ interface BussinessHoursCardProps {
 
 const BussinessHoursCard = ({ restaurant }: BussinessHoursCardProps) => {
   const card = (
-    <Card marginTop="20px">
+    <Card variant="unstyled">
       <CardBody>
         <Stack>
           <Heading size="md">Business hours </Heading>
-          <Text style={{ fontSize: 14 }}>
+          <Text style={{ fontSize: 15 }}>
             {formatBusinessHours(restaurant.business_hours)}
           </Text>
         </Stack>

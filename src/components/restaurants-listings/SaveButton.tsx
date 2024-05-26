@@ -1,4 +1,3 @@
-import { MdBookmarks } from "react-icons/md";
 import { useUserInfo } from "../../context/UserInfoContext";
 import { BACKEND_URL, RESTAURANT, USER } from "../../constants";
 import axios from "axios";
@@ -8,8 +7,12 @@ import { Button } from "@chakra-ui/react";
 
 interface SaveButtonProps {
   restaurantId: number;
+  buttonVariant: string;
 }
-const SaveButton = ({ restaurantId }: SaveButtonProps): JSX.Element => {
+const SaveButton = ({
+  restaurantId,
+  buttonVariant,
+}: SaveButtonProps): JSX.Element => {
   const { userId } = useUserInfo();
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
@@ -87,12 +90,12 @@ const SaveButton = ({ restaurantId }: SaveButtonProps): JSX.Element => {
     <div className="save-button">
       {!!userId && (
         <Button
-          variant={isSaved ? "ghost" : "solid"}
+          variant={buttonVariant}
           onClick={handleClick}
           style={{ backgroundColor: "white" }}
         >
           <span className="single-restaurant-button-text">
-            {isSaved ? "Remove from saved" : <MdBookmarks />}
+            {isSaved ? "Remove from saved" : "Add to saved"}
           </span>
         </Button>
       )}

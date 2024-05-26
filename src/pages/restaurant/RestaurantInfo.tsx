@@ -12,6 +12,9 @@ import NavBar from "../../components/navbar/NavBar";
 import GoogleMap from "../../components/map/GoogleMap";
 import { useRestaurantInfo } from "../../context/RestaurantInfoContext";
 import BussinessHoursCard from "../../components/restaurant/BussinessHoursCard";
+import ImageCarousel from "../../components/ui/imageGallery/ImageCarousel";
+import LocationCard from "../../components/restaurant/LocationCard";
+import SaveButton from "../../components/restaurants-listings/SaveButton";
 
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
@@ -52,18 +55,51 @@ const RestaurantInfo = () => {
     setShowReviewForm((prevState) => !prevState);
   };
 
+  console.log(restaurant);
   return (
     <div>
       <NavBar />
       <div>{loading && <Spinner />}</div>
       <div className="restaurant-container">
         <div className="restaurant-name">{restaurant.name}</div>
-        <Flex flexWrap="wrap" className="image-details-wrapper">
+        <Flex flexWrap="wrap-reverse" className="image-details-wrapper">
+          <Stack>
+            <Box className="restaurant-image-container">
+              <Image
+                src={`${restaurant.img_url}`}
+                alt="image"
+                className="restaurant-image"
+              />
+            </Box>
+            <Flex className="restaurant-info-flex-container">
+              <Box className="restaurant-info-bottom-container">
+                <BussinessHoursCard restaurant={restaurant} />
+              </Box>
+              {/* <GoogleMap address={restaurant.address} /> */}
+              <Box className="restaurant-info-bottom-container">
+                <LocationCard address={restaurant.address} />
+              </Box>
+            </Flex>
+          </Stack>
           <Stack>
             <RestaurantCard restaurant={restaurant} />
-            <Box marginTop={2}>
+            <Box className="single-restaurant-page-button">
+              <SaveButton
+                restaurantId={Number(restaurantId)}
+                buttonVariant="outline"
+              />
+            </Box>
+            <Box marginTop={2} className="single-restaurant-page-button">
               {!showReviewForm && (
-                <Button onClick={handleLeaveReview}>Leave a review</Button>
+                <Button
+                  variant="outline"
+                  onClick={handleLeaveReview}
+                  style={{ backgroundColor: "white" }}
+                >
+                  <span className="leave-review-button-text">
+                    Leave a review
+                  </span>
+                </Button>
               )}
               {showReviewForm && (
                 <ReviewForm
@@ -76,23 +112,6 @@ const RestaurantInfo = () => {
               )}
               {/* {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>} */}
             </Box>
-          </Stack>
-          <Stack>
-            <Box className="restaurant-image">
-              <Image
-                src={`${restaurant.img_url}`}
-                alt="image"
-                width="45rem"
-                height="32rem"
-                objectFit="cover"
-                borderRadius={5}
-              />
-            </Box>
-            <Flex justifyContent="space-between">
-              {/* <Box width={600}></Box> */}
-              <BussinessHoursCard restaurant={restaurant} />
-              <GoogleMap address={restaurant.address} />
-            </Flex>
           </Stack>
         </Flex>
 

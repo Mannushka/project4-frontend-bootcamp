@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import {
@@ -7,7 +6,6 @@ import {
   AdvancedMarker,
   Pin,
   InfoWindow,
-  MapMouseEvent,
 } from "@vis.gl/react-google-maps";
 
 import { Box } from "@chakra-ui/react";
@@ -24,7 +22,7 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
   const [latitude, setLatitude] = useState<number>(22.28100746317362);
   const [longitude, setLongitude] = useState<number>(114.15245889816494);
-  const position = { lat: 22.28100746317362, lng: 114.15245889816494 }; // Hong Kong
+  // const position = { lat: 22.28100746317362, lng: 114.15245889816494 }; // Hong Kong
   const newAddress = address + ", Hong Kong";
 
   useEffect(() => {
@@ -56,10 +54,10 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
   }, [newAddress, latitude, longitude]);
 
   return (
-    <Box marginTop="20px">
+    <Box>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
         <Map
-          style={{ width: "20vw", height: "40vh" }}
+          style={{ width: "100%", height: "203px" }}
           center={{ lat: latitude, lng: longitude }}
           defaultZoom={15}
           gestureHandling={"greedy"}

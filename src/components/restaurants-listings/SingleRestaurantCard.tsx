@@ -70,7 +70,7 @@ const SingleRestaurantCard = ({
                 View details
               </span>
             </Button>
-            <SaveButton restaurantId={restaurant.id} />
+            <SaveButton restaurantId={restaurant.id} buttonVariant="ghost" />
           </ButtonGroup>
         </Stack>
       </CardBody>

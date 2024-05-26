@@ -1,4 +1,4 @@
-import { Card, CardBody, Stack, Text, Heading } from "@chakra-ui/react";
+import { Card, CardBody, Stack, Text, Heading, Flex } from "@chakra-ui/react";
 import GoogleMap from "../map/GoogleMap";
 
 interface LocationCardProps {
@@ -10,10 +10,12 @@ const LocationCard = ({ address }: LocationCardProps) => {
     <Card variant="unstyled">
       <CardBody>
         <Stack>
-          <Text>
-            <Heading size="md">Address</Heading>
-            {address}
-          </Text>
+          <Flex>
+            <Heading size="md" marginRight={2}>
+              Address:
+            </Heading>
+            <Text> {address}</Text>
+          </Flex>
           <GoogleMap address={address} />
         </Stack>
       </CardBody>

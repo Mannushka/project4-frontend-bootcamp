@@ -59,6 +59,8 @@ const ReviewCard = ({
           }
           ref={ref}
           marginTop={4}
+          paddingLeft={3}
+          paddingRight={3}
         >
           {review.text}
         </Text>

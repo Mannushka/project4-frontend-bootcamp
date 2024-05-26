@@ -77,7 +77,6 @@ const RestaurantInfo = () => {
               <Box className="restaurant-info-bottom-container">
                 <BussinessHoursCard restaurant={restaurant} />
               </Box>
-              {/* <GoogleMap address={restaurant.address} /> */}
               <Box className="restaurant-info-bottom-container">
                 <LocationCard address={restaurant.address} />
               </Box>
@@ -120,11 +119,10 @@ const RestaurantInfo = () => {
         {/* <Flex justifyContent="space-between">
           <GoogleMap address={restaurant.address} />
         </Flex> */}
-        <Box width="70%">
+        <Box className="review-card-container" width={{ lg: "50%", sm: "90%" }}>
           <RestaurantReviews
             // restaurantId={Number(restaurantId)}
             newReview={newReview}
-            setNewReview={setNewReview}
           />
         </Box>
       </div>

@@ -94,7 +94,7 @@ const RestaurantsList = () => {
   return (
     <>
       <NavBar />
-      <Flex wrap="wrap" margin={4} padding={2}>
+      <Flex wrap="wrap" margin={4} padding={2} justifyContent="center">
         <Box className="restaurant-list-box" id="restaurant-filters">
           <SearchBar nameParams={nameParams} setNameParams={setNameParams} />
 

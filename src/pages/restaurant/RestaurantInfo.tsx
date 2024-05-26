@@ -62,7 +62,7 @@ const RestaurantInfo = () => {
       <div>{loading && <Spinner />}</div>
       <div className="restaurant-container">
         <div className="restaurant-name">{restaurant.name}</div>
-        <Flex flexWrap="wrap-reverse" className="image-details-wrapper">
+        <Flex className="image-details-wrapper">
           <Stack>
             <Box className="restaurant-image-container">
               <Image

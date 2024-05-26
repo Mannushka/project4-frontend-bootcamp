@@ -181,7 +181,7 @@ const ReviewForm = ({
 
   return (
     <Flex direction="column" width="400px" margin="20px">
-      <Heading textAlign="center" marginTop={3}>
+      <Heading size="lg" textAlign="center" marginTop={4}>
         Your review
       </Heading>
       <StarRatingInput rating={rating} setRating={setRating} />

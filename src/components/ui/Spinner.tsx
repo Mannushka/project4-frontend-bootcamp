@@ -1,5 +1,4 @@
-import React from "react";
-import { CircularProgress, CircularProgressLabel, Box } from "@chakra-ui/react";
+import { CircularProgress, Box } from "@chakra-ui/react";
 
 const Spinner = () => {
   return (
@@ -12,7 +11,7 @@ const Spinner = () => {
       transform="translate(-50%, -50%)"
       zIndex="9999"
     >
-      <CircularProgress isIndeterminate color="purple.400" thickness="12px" />
+      <CircularProgress isIndeterminate color="#ff9a3c" thickness="12px" />
     </Box>
   );
 };

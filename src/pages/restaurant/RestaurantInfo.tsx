@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantCard from "../../components/restaurant/RestaurantCard";
 import "./Restaurant.css";
-import { Flex, Box, Image, Button } from "@chakra-ui/react";
+import { Flex, Box, Image, Button, Stack } from "@chakra-ui/react";
 import Spinner from "../../components/ui/Spinner";
 import RestaurantReviews from "../../components/review/restaurantReviews/RestaurantReviews";
 import ReviewForm from "../../components/review/restaurantReviews/ReviewForm";
 import NavBar from "../../components/navbar/NavBar";
 import GoogleMap from "../../components/map/GoogleMap";
 import { useRestaurantInfo } from "../../context/RestaurantInfoContext";
+import BussinessHoursCard from "../../components/restaurant/BussinessHoursCard";
 
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
@@ -57,47 +58,71 @@ const RestaurantInfo = () => {
       <div>{loading && <Spinner />}</div>
       <div className="restaurant-container">
         <div className="restaurant-name">{restaurant.name}</div>
-        {/* <div className="restaurant-image"> */}
-        {/* <img src={`${restaurant.img_url}`} alt="image" /> */}
-        {/* </div> */}
         <Flex flexWrap="wrap" className="image-details-wrapper">
-          <Box className="restaurant-image">
-            <Image
-              src={`${restaurant.img_url}`}
-              alt="image"
-              width="45rem"
-              height="32rem"
-              objectFit="cover"
-              borderRadius={5}
-            />
-          </Box>
-
-          <Box>
+          <Stack>
             <RestaurantCard restaurant={restaurant} />
-          </Box>
+            <Box marginTop={2}>
+              {!showReviewForm && (
+                <Button onClick={handleLeaveReview}>Leave a review</Button>
+              )}
+              {showReviewForm && (
+                <ReviewForm
+                  // restaurantId={Number(restaurantId)}
+                  showReviewForm={showReviewForm}
+                  setShowReviewForm={setShowReviewForm}
+                  newReview={newReview}
+                  setNewReview={setNewReview}
+                />
+              )}
+              {/* {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>} */}
+            </Box>
+          </Stack>
+          <Stack>
+            <Box className="restaurant-image">
+              <Image
+                src={`${restaurant.img_url}`}
+                alt="image"
+                width="45rem"
+                height="32rem"
+                objectFit="cover"
+                borderRadius={5}
+              />
+            </Box>
+            <Flex justifyContent="space-between">
+              {/* <Box width={600}></Box> */}
+              <BussinessHoursCard restaurant={restaurant} />
+              <GoogleMap address={restaurant.address} />
+            </Flex>
+          </Stack>
         </Flex>
-        <GoogleMap address={restaurant.address} />
+
+        {/* <Flex justifyContent="space-between">
+          <GoogleMap address={restaurant.address} />
+        </Flex> */}
+        <RestaurantReviews
+          // restaurantId={Number(restaurantId)}
+          newReview={newReview}
+          setNewReview={setNewReview}
+        />
       </div>
-      <Box margin="20px">
+      {/* <Box margin="20px">
         {!showReviewForm && (
           <Button onClick={handleLeaveReview}>Leave a review</Button>
         )}
         {showReviewForm && (
           <ReviewForm
-            // restaurantId={Number(restaurantId)}
             showReviewForm={showReviewForm}
             setShowReviewForm={setShowReviewForm}
             newReview={newReview}
             setNewReview={setNewReview}
           />
         )}
-        {/* {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>} */}
-      </Box>
-      <RestaurantReviews
+      </Box> */}
+      {/* <RestaurantReviews
         // restaurantId={Number(restaurantId)}
         newReview={newReview}
         setNewReview={setNewReview}
-      />
+      /> */}
     </div>
   );
 };

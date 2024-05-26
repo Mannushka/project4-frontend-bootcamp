@@ -1,5 +1,9 @@
 .restaurant-container {
   margin: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .restaurant-name {
@@ -19,6 +23,7 @@
 
 .restaurant-details {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .image-details-wrapper {

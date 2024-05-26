@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { BACKEND_URL } from "../../../constants";
 import axios from "axios";
@@ -9,17 +8,17 @@ import { useRestaurantInfo } from "../../../context/RestaurantInfoContext";
 interface RestaurantReviewsProps {
   // restaurantId: number;
   newReview: boolean;
-  setNewReview: React.Dispatch<React.SetStateAction<boolean>>;
+  // setNewReview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const RestaurantReviews = ({
   // restaurantId,
   newReview,
-  setNewReview,
 }: RestaurantReviewsProps): JSX.Element => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { restaurantId } = useRestaurantInfo();
+  const [isReviewDeleted, setIsReviewDeleted] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -43,11 +42,15 @@ const RestaurantReviews = ({
       }
     };
     getReviews();
-  }, [restaurantId, newReview]);
+  }, [restaurantId, newReview, isReviewDeleted]);
 
   const reviewsList = reviews.map((review) => (
     <div key={review.id}>
-      <ReviewCard review={review} displayResturantName={false} />
+      <ReviewCard
+        review={review}
+        displayResturantName={false}
+        setIsReviewDeleted={setIsReviewDeleted}
+      />
     </div>
   ));
   return (

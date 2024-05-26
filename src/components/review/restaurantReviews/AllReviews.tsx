@@ -3,19 +3,16 @@ import { BACKEND_URL } from "../../../constants";
 import axios from "axios";
 import ReviewCard from "./ReviewCard";
 import { Box } from "@chakra-ui/react";
-// import Spinner from "../../ui/Spinner";
 import "./Reviews.css";
 import PaginationComponent from "../../ui/pagination/PaginationComponent";
 
-// interface AllReviewsProps {
-//   reviewPage: number;
-// }
 const AllReviews = (): JSX.Element => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [totalPagesNum, setTotalPagesNum] = useState<number>(0);
   const [totalReviewsNum, setTotalReviewsNum] = useState<number>(0);
+  const [isReviewDeleted, setIsReviewDeleted] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -29,24 +26,26 @@ const AllReviews = (): JSX.Element => {
         setReviews(response.data.reviews);
         setTotalPagesNum(response.data.totalPages);
         setTotalReviewsNum(response.data.totalCount);
-        console.log(response.data);
+
         setLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     getReviews();
-  }, [page]);
+  }, [page, isReviewDeleted]);
 
-  console.log(reviews);
   const reviewsList = reviews.map((review) => (
     <Box key={review.id}>
-      <ReviewCard review={review} displayResturantName={true} />
+      <ReviewCard
+        review={review}
+        displayResturantName={true}
+        setIsReviewDeleted={setIsReviewDeleted}
+      />
     </Box>
   ));
   return (
     <div className="centered-container">
-      {/* {loading && <Spinner />} */}
       <Box className="all-reviews-container">
         {!loading && !!reviews.length && reviewsList}
       </Box>

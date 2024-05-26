@@ -1,4 +1,4 @@
-import { Card, CardBody, Text, Box, Button } from "@chakra-ui/react";
+import { Card, CardBody, Text, Box, Button, Flex } from "@chakra-ui/react";
 import StarRatingDisplay from "../starRating/StarRatingDisplay";
 import { formatDate } from "../../../utils/formatDate";
 import { ImageGrid } from "../../ui/imageGallery/ImageGrid";
@@ -6,18 +6,22 @@ import { useUserInfo } from "../../../context/UserInfoContext";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import "./Reviews.css";
+import DeleteReviewButton from "./DeleteReviewButton";
 
 interface ReviewCardProps {
   review: Review;
   displayResturantName: boolean;
+  setIsReviewDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ReviewCard = ({
   review,
   displayResturantName,
+  setIsReviewDeleted,
 }: ReviewCardProps): JSX.Element => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [showReadMoreButton, setShowReadMoreButton] = useState<boolean>(false);
+  // const [isReviewDeleted, setIsReviewDeleted] = useState<boolean>(false);
   const date = formatDate(review.createdAt);
   const images = review.review_photos;
   const userName = review.user.first_name;
@@ -51,6 +55,7 @@ const ReviewCard = ({
             </>
           )}
         </Text>
+
         <Text> {date}</Text>
         <StarRatingDisplay rating={review.rating_value} />
         <Text
@@ -75,6 +80,14 @@ const ReviewCard = ({
           </Box>
         )}
         <ImageGrid images={images} />
+        <Box>
+          {userId === review.user_id && (
+            <DeleteReviewButton
+              reviewId={review.id}
+              setIsReviewDeleted={setIsReviewDeleted}
+            />
+          )}
+        </Box>
       </CardBody>
     </Card>
   );

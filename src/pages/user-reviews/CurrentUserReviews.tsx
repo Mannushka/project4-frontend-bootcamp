@@ -10,6 +10,7 @@ import "./CurrentUserReviews.css";
 const CurrentUserReviews = () => {
   const [myReviews, setMyReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isReviewDeleted, setIsReviewDeleted] = useState<boolean>(false);
   const { userId } = useUserInfo();
 
   useEffect(() => {
@@ -34,11 +35,16 @@ const CurrentUserReviews = () => {
       }
     };
     getReviews();
-  }, [userId]);
+  }, [userId, isReviewDeleted]);
+  console.log(isReviewDeleted);
 
   const myReviewsList = myReviews.map((review) => (
     <div key={review.id} className="my-review-card">
-      <ReviewCard review={review} displayResturantName={true} />
+      <ReviewCard
+        review={review}
+        displayResturantName={true}
+        setIsReviewDeleted={setIsReviewDeleted}
+      />
     </div>
   ));
 

@@ -52,7 +52,7 @@ const RestaurantReviews = ({
   ));
   return (
     <Flex direction="column" margin="20px">
-      <Heading as="h4" size="md">
+      <Heading textAlign="center" marginBottom={10}>
         Reviews
       </Heading>
       {reviews.length ? reviewsList : <p>No reviews yet.</p>}

@@ -118,11 +118,13 @@ const RestaurantInfo = () => {
         {/* <Flex justifyContent="space-between">
           <GoogleMap address={restaurant.address} />
         </Flex> */}
-        <RestaurantReviews
-          // restaurantId={Number(restaurantId)}
-          newReview={newReview}
-          setNewReview={setNewReview}
-        />
+        <Box width="70%">
+          <RestaurantReviews
+            // restaurantId={Number(restaurantId)}
+            newReview={newReview}
+            setNewReview={setNewReview}
+          />
+        </Box>
       </div>
       {/* <Box margin="20px">
         {!showReviewForm && (

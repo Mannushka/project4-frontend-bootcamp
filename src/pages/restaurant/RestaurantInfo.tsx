@@ -15,6 +15,7 @@ import BussinessHoursCard from "../../components/restaurant/BussinessHoursCard";
 import ImageCarousel from "../../components/ui/imageGallery/ImageCarousel";
 import LocationCard from "../../components/restaurant/LocationCard";
 import SaveButton from "../../components/restaurants-listings/SaveButton";
+import { useUserInfo } from "../../context/UserInfoContext";
 
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
@@ -23,6 +24,7 @@ const RestaurantInfo = () => {
   const [newReview, setNewReview] = useState<boolean>(false);
   const { restaurantId } = useParams();
   const { updateRestaurantId } = useRestaurantInfo();
+  const { userId } = useUserInfo();
 
   useEffect(() => {
     setLoading(true);
@@ -90,7 +92,7 @@ const RestaurantInfo = () => {
               />
             </Box>
             <Box marginTop={2} className="single-restaurant-page-button">
-              {!showReviewForm && (
+              {!showReviewForm && !!userId && (
                 <Button
                   variant="outline"
                   onClick={handleLeaveReview}

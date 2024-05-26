@@ -9,6 +9,7 @@ import {
   Flex,
   Heading,
   Input,
+  Box,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
@@ -109,12 +110,14 @@ const ReviewForm = ({
         height="200px"
       />
 
-      <input
-        type="file"
-        multiple
-        accept=".jpg, .jpeg, .png"
-        onChange={handleFileInputChange}
-      ></input>
+      <Box marginTop={3}>
+        <input
+          type="file"
+          multiple
+          accept=".jpg, .jpeg, .png"
+          onChange={handleFileInputChange}
+        ></input>
+      </Box>
     </FormControl>
   );
 
@@ -178,9 +181,11 @@ const ReviewForm = ({
 
   return (
     <Flex direction="column" width="400px" margin="20px">
-      <Heading>Your review</Heading>
+      <Heading textAlign="center" marginTop={3}>
+        Your review
+      </Heading>
       <StarRatingInput rating={rating} setRating={setRating} />
-      {reviewForm}
+      <Box> {reviewForm}</Box>
       <Flex gap="10px">
         <Button width="25%" marginTop="10px" onClick={handleSubmit}>
           Submit

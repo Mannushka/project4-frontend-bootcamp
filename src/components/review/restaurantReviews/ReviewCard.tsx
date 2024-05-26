@@ -58,6 +58,7 @@ const ReviewCard = ({
             isExpanded ? "review-text-expanded" : "review-text-not-expanded"
           }
           ref={ref}
+          marginTop={4}
         >
           {review.text}
         </Text>

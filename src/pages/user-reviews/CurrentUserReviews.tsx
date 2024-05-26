@@ -46,7 +46,7 @@ const CurrentUserReviews = () => {
     <Box>
       <NavBar />
       <Box className="my-reviews-page-container">
-        <Text className="my-reviews-header">My reviews</Text>
+        <Text className="page-header">My reviews</Text>
         <Box className="my-reviews-container">
           {!loading && !!myReviews.length && myReviewsList}
         </Box>

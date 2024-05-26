@@ -14,7 +14,7 @@
   align-items: center;
   gap: 2rem;
 }
-.my-reviews-header {
+.page-header {
   display: flex;
   justify-content: center;
   margin: 30px auto;

@@ -39,6 +39,7 @@ const SearchBar = ({
           onChange={(event) => setNameParams(event.target.value)}
           placeholder="Restaurant name"
           aria-label="Search"
+          style={{ borderRadius: 5 }}
         />
         <div className="input-group-append">
           <button className="btn btn-outline-dark my-2 my-sm-0" type="submit">

@@ -29,7 +29,7 @@ const NavBar = (): JSX.Element => {
       navigate("/restaurants");
     }
     if (item === "About us") {
-      navigate("/about");
+      navigate("/about-us");
     }
   };
 

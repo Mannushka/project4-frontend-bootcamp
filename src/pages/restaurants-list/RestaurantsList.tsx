@@ -146,7 +146,7 @@ const RestaurantsList = () => {
           >
             {!loading && !!restaurants.length && restaurantsList}
           </div>
-          {!!restaurants.length && (
+          {!!restaurants.length && totalPagesNum > 1 && (
             <PaginationComponent
               page={page}
               setPage={setPage}

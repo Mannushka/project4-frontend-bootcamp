@@ -1,14 +1,9 @@
-import React from "react";
 import {
   Button,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Textarea,
   Flex,
   Heading,
-  Input,
   Box,
 } from "@chakra-ui/react";
 
@@ -16,7 +11,7 @@ import { useState } from "react";
 import StarRatingInput from "../starRating/StarRatingInput";
 import axios from "axios";
 import { BACKEND_URL, RESTAURANT, USER } from "../../../constants";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import { storage } from "../../../firebaseSetup";
 import {
   ref as storageRef,
@@ -26,6 +21,7 @@ import {
 import { useRestaurantInfo } from "../../../context/RestaurantInfoContext";
 import { useUserInfo } from "../../../context/UserInfoContext";
 import { validateId } from "../../../utils/validateId";
+import { CircularProgress } from "@chakra-ui/react";
 
 interface ReviewFormProps {
   // restaurantId: number;
@@ -40,15 +36,15 @@ const ReviewForm = ({
   // restaurantId,
   showReviewForm,
   setShowReviewForm,
-  newReview,
   setNewReview,
 }: ReviewFormProps) => {
   const { restaurantId } = useRestaurantInfo();
   const [reviewText, setReviewText] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   // const [imgURLs, setImgURLs] = useState<string[]>([]);
   const [rating, setRating] = useState<number>(0);
-  const { user } = useAuth0();
+  // const { user } = useAuth0();
   const { userId } = useUserInfo();
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -108,6 +104,7 @@ const ReviewForm = ({
         value={reviewText}
         onChange={handleTextInputChange}
         height="200px"
+        disabled={loading}
       />
 
       <Box marginTop={3}>
@@ -130,6 +127,7 @@ const ReviewForm = ({
       // if (!restaurantId || isNaN(restaurantId)) {
       //   throw new Error("Restaurant ID is missing or invalid 🥺");
       // }
+
       validateId(restaurantId, RESTAURANT);
       validateId(userId, USER);
       if (!rating) {
@@ -160,6 +158,7 @@ const ReviewForm = ({
       setRating(0);
       setShowReviewForm(!showReviewForm);
       // setImgURLs([]);
+
       console.log("Review posted");
     } catch (error) {
       console.log(error);
@@ -168,9 +167,11 @@ const ReviewForm = ({
 
   const handleSubmit = async (): Promise<void> => {
     try {
+      setLoading(true);
       const newImgURLs = await uploadPhotosToStorage();
       // setImgURLs(newImgURLs);
-      postReview(newImgURLs);
+      await postReview(newImgURLs);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -185,7 +186,31 @@ const ReviewForm = ({
         Your review
       </Heading>
       <StarRatingInput rating={rating} setRating={setRating} />
-      <Box> {reviewForm}</Box>
+      <Box position="relative">
+        {loading && (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            position="absolute"
+            top="0"
+            left="0"
+            width="100%"
+            height="100%"
+            backgroundColor="rgba(255, 255, 255, 0.8)"
+            zIndex="9999"
+          >
+            <CircularProgress
+              isIndeterminate
+              color="#ff9a3c"
+              thickness="12px"
+            />
+          </Box>
+        )}
+        <Box>{reviewForm}</Box>
+      </Box>
+
+      {/* <Box> {reviewForm}</Box> */}
       <Flex gap="10px">
         <Button width="25%" marginTop="10px" onClick={handleSubmit}>
           Submit

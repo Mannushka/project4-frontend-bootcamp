@@ -1,31 +1,26 @@
 import { Stack, Heading } from "@chakra-ui/react";
+import { useState } from "react";
 interface searchBarProps {
-  nameParams: string;
+  // nameParams: string;
   setNameParams: React.Dispatch<React.SetStateAction<string>>;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const SearchBar = ({
-  nameParams,
+  // nameParams,
   setNameParams,
+  page,
+  setPage,
 }: searchBarProps): JSX.Element => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Redirect the user to the restaurants page with the restaurant name as a query parameter
+    setNameParams(inputValue);
+    if (page > 1) setPage(1);
   };
+
+  const [inputValue, setInputValue] = useState<string>("");
   const searchBar = (
-    // <form className=" d-flex me-5 mb-2" role="search" onSubmit={handleSubmit}>
-    //   <input
-    //     className="form-control me-2"
-    //     type="text"
-    //     value={nameParams}
-    //     onChange={(event) => setNameParams(event.target.value)}
-    //     placeholder="Restaunrant name"
-    //     aria-label="Search"
-    //   />
-    //   <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-    //     Search
-    //   </button>
-    // </form>
     <form
       className="d-flex flex-wrap justify-content-end align-items-center me-5 mb-2"
       role="search"
@@ -35,8 +30,8 @@ const SearchBar = ({
         <input
           className="form-control  me-2 flex-grow-1 search-input "
           type="text"
-          value={nameParams}
-          onChange={(event) => setNameParams(event.target.value)}
+          value={inputValue}
+          onChange={(event) => setInputValue(event.target.value)}
           placeholder="Restaurant name"
           aria-label="Search"
           style={{ borderRadius: 5 }}

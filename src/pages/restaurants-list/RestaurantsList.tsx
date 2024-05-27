@@ -1,11 +1,8 @@
-import React from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../../constants";
 import { useState, useEffect } from "react";
 import SingleRestaurantCard from "../../components/restaurants-listings/SingleRestaurantCard";
 import Spinner from "../../components/ui/Spinner";
-import FoodCategoryFilter from "../../components/filters/FoodCategoryFilter";
-import LocationFilter from "../../components/filters/LocationFilter";
 import FilterOptions from "../../components/filters/FilterOptions";
 import FilterButtonGroup from "../../components/filters/FilterButtonGroup";
 import { convertPriceCategoriesToNums } from "../../utils/convertPriceCategoriesToNums";
@@ -16,7 +13,7 @@ import PaginationComponent from "../../components/ui/pagination/PaginationCompon
 import SearchBar from "../../components/SearchBar";
 import SortByMenu from "../../components/restaurants-listings/SortByMenu";
 
-const RestaurantsList = () => {
+const RestaurantsList = (): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false);
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [categoryParams, setCategoryParams] = useState<string[]>([]);
@@ -68,7 +65,6 @@ const RestaurantsList = () => {
         setRestaurants(response.data.restaurants);
         setTotalPagesNum(response.data.totalPages);
         setTotalRestautantsNum(response.data.totalCount);
-        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error(error);

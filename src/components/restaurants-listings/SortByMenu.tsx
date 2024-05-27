@@ -3,10 +3,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   Box,
   Heading,
 } from "@chakra-ui/react";
@@ -30,7 +26,6 @@ const SortByMenu = ({
     const newOption = option.toLowerCase().replace(/\s+/g, "_");
     setSortByParams(newOption);
   };
-  console.log(sortByParams);
 
   const menu = (
     <Menu isLazy>

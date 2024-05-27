@@ -92,7 +92,6 @@ const ReviewCard = ({
     </Card>
   );
 
-  console.log(review);
   return <Box className="review-card">{reviewCard}</Box>;
 };
 

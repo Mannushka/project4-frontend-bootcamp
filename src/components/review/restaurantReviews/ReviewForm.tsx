@@ -90,7 +90,7 @@ const ReviewForm = ({
         })
       );
 
-      console.log("Files uploaded successfully:", updatedURLs);
+      // console.log("Files uploaded successfully:", updatedURLs);
       return updatedURLs;
     } catch (error) {
       console.error("Error uploading files:", error);

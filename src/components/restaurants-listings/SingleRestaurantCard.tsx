@@ -28,7 +28,7 @@ const SingleRestaurantCard = ({
   const category = restaurant.food_category.category_name;
   const priceCategory = formatPriceCategory(restaurant.price_category);
   // const location = restaurant.location.location_name;
-  console.log(restaurant);
+
   const card = (
     <Card className="single-restaurant-card">
       <CardBody className="single-card-body">

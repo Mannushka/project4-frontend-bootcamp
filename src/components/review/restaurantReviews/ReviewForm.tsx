@@ -158,7 +158,6 @@ const ReviewForm = ({
       setRating(0);
       setShowReviewForm(!showReviewForm);
       // setImgURLs([]);
-
       console.log("Review posted");
     } catch (error) {
       console.log(error);

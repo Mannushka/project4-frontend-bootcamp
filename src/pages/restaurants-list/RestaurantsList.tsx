@@ -57,7 +57,6 @@ const RestaurantsList = (): JSX.Element => {
           params.sortBy = sortByParams;
         }
         params.page = page;
-        console.log(params);
 
         const response = await axios.get(`${BACKEND_URL}/restaurants`, {
           params: params,

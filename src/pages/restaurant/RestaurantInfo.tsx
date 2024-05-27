@@ -9,10 +9,8 @@ import Spinner from "../../components/ui/Spinner";
 import RestaurantReviews from "../../components/review/restaurantReviews/RestaurantReviews";
 import ReviewForm from "../../components/review/restaurantReviews/ReviewForm";
 import NavBar from "../../components/navbar/NavBar";
-import GoogleMap from "../../components/map/GoogleMap";
 import { useRestaurantInfo } from "../../context/RestaurantInfoContext";
 import BussinessHoursCard from "../../components/restaurant/BussinessHoursCard";
-import ImageCarousel from "../../components/ui/imageGallery/ImageCarousel";
 import LocationCard from "../../components/restaurant/LocationCard";
 import SaveButton from "../../components/restaurants-listings/SaveButton";
 import { useUserInfo } from "../../context/UserInfoContext";
@@ -57,7 +55,6 @@ const RestaurantInfo = () => {
     setShowReviewForm((prevState) => !prevState);
   };
 
-  console.log(restaurant);
   return (
     <div>
       <NavBar />
@@ -111,7 +108,6 @@ const RestaurantInfo = () => {
                   setNewReview={setNewReview}
                 />
               )}
-              {/* {showReviewForm && <Button onClick={handleLeaveReview}>Cancel</Button>} */}
             </Box>
           </Stack>
         </Flex>

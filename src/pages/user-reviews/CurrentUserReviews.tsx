@@ -26,7 +26,6 @@ const CurrentUserReviews = () => {
           params,
         });
         setMyReviews(response.data);
-        console.log(response.data);
 
         setLoading(false);
       } catch (error) {
@@ -36,7 +35,6 @@ const CurrentUserReviews = () => {
     };
     getReviews();
   }, [userId, isReviewDeleted]);
-  console.log(isReviewDeleted);
 
   const myReviewsList = myReviews.map((review) => (
     <div key={review.id} className="my-review-card">

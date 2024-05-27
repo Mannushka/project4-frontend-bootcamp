@@ -1,4 +1,4 @@
-import { Card, CardBody, Text, Box, Button, Flex } from "@chakra-ui/react";
+import { Card, CardBody, Text, Box, Button } from "@chakra-ui/react";
 import StarRatingDisplay from "../starRating/StarRatingDisplay";
 import { formatDate } from "../../../utils/formatDate";
 import { ImageGrid } from "../../ui/imageGallery/ImageGrid";

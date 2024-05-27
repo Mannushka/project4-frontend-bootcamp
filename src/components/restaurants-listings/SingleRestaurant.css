@@ -8,6 +8,7 @@
   padding: 2px;
   margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px !important;
+  width: 500px;
 }
 
 .single-card-body {

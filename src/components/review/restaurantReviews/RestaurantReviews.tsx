@@ -56,9 +56,9 @@ const RestaurantReviews = ({
   return (
     <Flex direction="column" margin="20px">
       <Heading textAlign="center" marginBottom={10}>
-        Reviews
+        {reviews.length ? " Reviews" : "No reviews yet"}
       </Heading>
-      {reviews.length ? reviewsList : <p>No reviews yet.</p>}
+      {reviewsList}
     </Flex>
   );
 };

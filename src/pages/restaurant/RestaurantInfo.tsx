@@ -119,7 +119,7 @@ const RestaurantInfo = () => {
         {/* <Flex justifyContent="space-between">
           <GoogleMap address={restaurant.address} />
         </Flex> */}
-        <Box className="review-card-container" width={{ lg: "50%", sm: "90%" }}>
+        <Box className="review-card-container" width={{ lg: "70%", sm: "90%" }}>
           <RestaurantReviews
             // restaurantId={Number(restaurantId)}
             newReview={newReview}

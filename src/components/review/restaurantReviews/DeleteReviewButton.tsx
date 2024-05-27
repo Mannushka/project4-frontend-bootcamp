@@ -33,7 +33,7 @@ const DeleteReviewButton = ({
   };
 
   return (
-    <Flex justifyContent="flex-end">
+    <Flex justifyContent="flex-start" marginTop={2}>
       <Button variant="ghost" onClick={() => deleteReview()}>
         Delete review
       </Button>

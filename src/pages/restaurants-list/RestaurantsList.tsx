@@ -113,6 +113,8 @@ const RestaurantsList = () => {
               setSelectedItems={setCategoryParams}
               filterType="category"
               path="categories"
+              page={page}
+              setPage={setPage}
             />
           </div>
           <div>
@@ -123,6 +125,8 @@ const RestaurantsList = () => {
               filterItems={priceCategoriesArray}
               selectedItems={priceParams}
               setSelectedItems={setPriceParams}
+              page={page}
+              setPage={setPage}
             />
           </div>
           <div>
@@ -131,6 +135,8 @@ const RestaurantsList = () => {
               setSelectedItems={setLocationParams}
               filterType="location"
               path="locations"
+              page={page}
+              setPage={setPage}
             />
           </div>
         </Box>

@@ -9,6 +9,8 @@ interface FilterProps {
   path: string;
   selectedItems: string[];
   setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const FilterOptions = ({
@@ -16,6 +18,8 @@ const FilterOptions = ({
   setSelectedItems,
   path,
   filterType,
+  page,
+  setPage,
 }: FilterProps): JSX.Element => {
   const [filterItems, setFilterItems] = useState<string[]>([]);
   const capitalizedFilterType =
@@ -48,6 +52,8 @@ const FilterOptions = ({
         filterItems={filterItems}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}
+        page={page}
+        setPage={setPage}
       />
     </div>
   );

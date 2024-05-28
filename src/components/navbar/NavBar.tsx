@@ -135,7 +135,7 @@ const NavBar = (): JSX.Element => {
                   setSelectedIndex(index);
                   navigateToPage(item);
                 }}
-                className={selectedIndex === index ? "active fw-bold" : ""}
+                // className={selectedIndex === index ? "active fw-bold" : ""}
               >
                 {item}
               </Nav.Link>

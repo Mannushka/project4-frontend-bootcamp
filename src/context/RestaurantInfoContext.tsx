@@ -5,7 +5,6 @@ interface RestaurantInfoProviderProps {
 
 interface RestaurantInfoContext {
   restaurantId: number;
-  // setRestaurantId: React.Dispatch<React.SetStateAction<number>>;
   updateRestaurantId: (id: number) => void;
   ratingArray: number[];
   updateRatingArray: (allRatings: number[]) => void;

@@ -4,14 +4,7 @@ import { Stack, Box, Heading } from "@chakra-ui/react";
 import AllReviews from "../../components/review/restaurantReviews/AllReviews";
 
 const HomePage = (): JSX.Element => {
-  // const [reviewPage, setReviewPage] = useState<number>(1);
   const homepafeSlides = [
-    // {
-    //   src: "https://firebasestorage.googleapis.com/v0/b/food-harbour.appspot.com/o/homepage-images%2Fparadise-dynasty.JPEG?alt=media&token=3b2597d4-be44-4ba4-ada0-2a2e6e68d7a1",
-    // },
-    // {
-    //   src: "https://media.timeout.com/images/105554269/image.jpg",
-    // },
     {
       src: "https://firebasestorage.googleapis.com/v0/b/food-harbour.appspot.com/o/homepage-images%2Fparadise-dynasty3.JPEG?alt=media&token=5d7d71f9-60a3-4669-a11d-4e4cf5084516",
     },

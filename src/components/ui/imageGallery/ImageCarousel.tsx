@@ -18,7 +18,6 @@ const ImageCarousel = ({ slides }: ImageCarouselProps) => {
         plugins={[Inline]}
         on={{
           view: updateIndex,
-          // click: toggleOpen(true),
         }}
         carousel={{
           padding: 0,

@@ -1,5 +1,4 @@
-// import { Pagination, Box, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ReactPaginate from "react-paginate";
 import { Flex } from "@chakra-ui/react";
 import "./Pagination.css";
@@ -14,7 +13,6 @@ const PaginationComponent = ({
   page,
   setPage,
   totalPagesNum,
-  totalItemsNum,
 }: PaginationComponentProps): JSX.Element => {
   const handlePageChange = (selectedItem: { selected: number }) => {
     setPage(selectedItem.selected + 1);

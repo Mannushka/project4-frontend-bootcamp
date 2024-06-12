@@ -1,14 +1,12 @@
 import { Stack, Heading } from "@chakra-ui/react";
 import { useState } from "react";
 interface searchBarProps {
-  // nameParams: string;
   setNameParams: React.Dispatch<React.SetStateAction<string>>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const SearchBar = ({
-  // nameParams,
   setNameParams,
   page,
   setPage,

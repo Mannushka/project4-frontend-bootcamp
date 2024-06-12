@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import "./Reviews.css";
 import DeleteReviewButton from "./DeleteReviewButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface ReviewCardProps {
   review: Review;
@@ -21,7 +22,7 @@ const ReviewCard = ({
 }: ReviewCardProps): JSX.Element => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [showReadMoreButton, setShowReadMoreButton] = useState<boolean>(false);
-  // const [isReviewDeleted, setIsReviewDeleted] = useState<boolean>(false);
+  const { isAuthenticated } = useAuth0();
   const date = formatDate(review.createdAt);
   const images = review.review_photos;
   const userName = review.user.first_name;
@@ -81,7 +82,7 @@ const ReviewCard = ({
         )}
         <ImageGrid images={images} />
         <Box>
-          {userId === review.user_id && (
+          {isAuthenticated && userId === review.user_id && (
             <DeleteReviewButton
               reviewId={review.id}
               setIsReviewDeleted={setIsReviewDeleted}

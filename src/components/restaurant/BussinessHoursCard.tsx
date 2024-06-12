@@ -5,7 +5,9 @@ interface BussinessHoursCardProps {
   restaurant: Restaurant;
 }
 
-const BussinessHoursCard = ({ restaurant }: BussinessHoursCardProps) => {
+const BussinessHoursCard = ({
+  restaurant,
+}: BussinessHoursCardProps): JSX.Element => {
   const bussinessHours = formatBusinessHours(restaurant.business_hours);
   const newBussinessHours = bussinessHours.map((day, index) => (
     <div key={index} style={{ fontSize: 15 }}>
@@ -17,9 +19,6 @@ const BussinessHoursCard = ({ restaurant }: BussinessHoursCardProps) => {
       <CardBody>
         <Stack>
           <Heading size="md">Business hours </Heading>
-          {/* <Text style={{ fontSize: 15 }}>
-            {formatBusinessHours(restaurant.business_hours)}
-          </Text> */}
           {newBussinessHours}
         </Stack>
       </CardBody>

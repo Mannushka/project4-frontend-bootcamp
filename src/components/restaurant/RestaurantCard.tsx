@@ -5,16 +5,11 @@ import {
   Text,
   Heading,
   Link,
-  CardFooter,
   Box,
-  Flex,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { formatPriceCategory } from "../../utils/formatPriceCategory";
-import { formatBusinessHours } from "../../utils/formatBusinessHours";
 import RestaurantRating from "./RestaurantRating";
-import { IoCall } from "react-icons/io5";
-import { BiSolidMessage } from "react-icons/bi";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -37,9 +32,6 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
       variant="unstyled"
       width="30rem"
       marginBottom={4}
-
-      // height="32rem"
-      // style={{ border: "none" }}
     >
       <Stack alignItems="center">
         <CardBody>
@@ -57,7 +49,6 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
               , {formatPriceCategory(restaurant.price_category)}
             </b>
           </Text>
-          {/* <Text>{formatPriceCategory(restaurant.price_category)}</Text> */}
 
           <Link href={restaurant.website} isExternal>
             <b>
@@ -76,14 +67,6 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
                   {restaurant.phone_number}
                 </Link>
               </Text>
-              {/* <Flex gap={4}>
-                <Link href={`tel:${restaurant.phone_number}`}>
-                  <IoCall />
-                </Link>
-                <Link href={`sms:${restaurant.phone_number}`}>
-                  <BiSolidMessage />
-                </Link>
-              </Flex> */}
             </Stack>
           )}
 
@@ -91,21 +74,14 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
             <>
               <Text>
                 <b>Email:</b>{" "}
-                <Link href={`tel:${restaurant.email}`}>{restaurant.email}</Link>
+                <Link href={`mailto:${restaurant.email}`}>
+                  {restaurant.email}
+                </Link>
               </Text>
-              {/* <Link href={`tel:${restaurant.email}`}>
-                <b> Write an email</b>
-              </Link> */}
             </>
           )}
         </CardBody>
       </Stack>
-      {/* <CardFooter>
-        <Stack>
-          <Heading size="md">Business hours: </Heading>
-          <Text>{formatBusinessHours(restaurant.business_hours)}</Text>
-        </Stack>
-      </CardFooter> */}
     </Card>
   );
 

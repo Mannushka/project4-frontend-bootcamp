@@ -5,7 +5,7 @@ interface LocationCardProps {
   address: string;
 }
 
-const LocationCard = ({ address }: LocationCardProps) => {
+const LocationCard = ({ address }: LocationCardProps): JSX.Element => {
   const card = (
     <Card variant="unstyled">
       <CardBody>

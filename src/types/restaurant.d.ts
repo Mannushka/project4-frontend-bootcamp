@@ -24,7 +24,7 @@ interface Restaurant {
   reviews: {
     rating_value: number;
   }[];
-  // [key: string]: string;
+
   [key: string]: string | number | object;
 }
 

@@ -93,7 +93,6 @@ const RestaurantsList = (): JSX.Element => {
       <Flex wrap="wrap" margin={4} padding={2} justifyContent="center">
         <Box className="restaurant-list-box" id="restaurant-filters">
           <SearchBar
-            // nameParams={nameParams}
             setNameParams={setNameParams}
             page={page}
             setPage={setPage}
@@ -141,15 +140,7 @@ const RestaurantsList = (): JSX.Element => {
             setSortByParams={setSortByParams}
           />
           <div>{loading && !restaurants.length && <Spinner />}</div>
-          <div
-            // style={{
-            //   display: "flex",
-            //   flexDirection: "column",
-            //   alignItems: "flex-start",
-            //   justifyContent: "flex-start",
-            // }}
-            className="restaurants-list"
-          >
+          <div className="restaurants-list">
             {!loading && !!restaurants.length && restaurantsList}
           </div>
           {!!restaurants.length && totalPagesNum > 1 && (
@@ -167,20 +158,3 @@ const RestaurantsList = (): JSX.Element => {
 };
 
 export default RestaurantsList;
-
-{
-  /* <div>
-        <FoodCategoryFilter
-          selectedItems={categoryParams}
-          setSelectedItems={setCategoryParams}
-        />
-      </div> */
-}
-{
-  /* <div>
-        <LocationFilter
-          selectedItems={locationParams}
-          setSelectedItems={setLocationParams}
-        />
-      </div> */
-}

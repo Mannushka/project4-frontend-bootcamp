@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react";
-import { BACKEND_URL } from "../../../constants";
+import { BACKEND_URL, RESTAURANT } from "../../../constants";
 import axios from "axios";
 import ReviewCard from "./ReviewCard";
 import { Heading, Flex } from "@chakra-ui/react";
 import { useRestaurantInfo } from "../../../context/RestaurantInfoContext";
+import { validateId } from "../../../utils/validateId";
 
 interface RestaurantReviewsProps {
-  // restaurantId: number;
   newReview: boolean;
-  // setNewReview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const RestaurantReviews = ({
-  // restaurantId,
   newReview,
 }: RestaurantReviewsProps): JSX.Element => {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -24,18 +22,11 @@ const RestaurantReviews = ({
     setLoading(true);
     const getReviews = async (): Promise<void> => {
       try {
-        if (!restaurantId || isNaN(restaurantId)) {
-          throw new Error("Invalid restaurant ID");
-        }
-        // const params: { restaurantId: number } = {
-        //   restaurantId: restaurantId,
-        // };
-
+        validateId(restaurantId, RESTAURANT);
         const response = await axios.get(
           `${BACKEND_URL}/reviews/restaurant/${restaurantId}`
         );
         setReviews(response.data);
-
         setLoading(false);
       } catch (error) {
         console.error(error);

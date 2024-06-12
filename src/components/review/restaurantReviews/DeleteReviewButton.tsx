@@ -25,7 +25,6 @@ const DeleteReviewButton = ({
           },
         }
       );
-      console.log("success!");
       setIsReviewDeleted((prevState) => !prevState);
     } catch (error) {
       console.error(error);

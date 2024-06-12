@@ -11,7 +11,6 @@ import { useState } from "react";
 import StarRatingInput from "../starRating/StarRatingInput";
 import axios from "axios";
 import { BACKEND_URL, RESTAURANT, USER } from "../../../constants";
-// import { useAuth0 } from "@auth0/auth0-react";
 import { storage } from "../../../firebaseSetup";
 import {
   ref as storageRef,
@@ -24,7 +23,6 @@ import { validateId } from "../../../utils/validateId";
 import { CircularProgress } from "@chakra-ui/react";
 
 interface ReviewFormProps {
-  // restaurantId: number;
   showReviewForm: boolean;
   setShowReviewForm: React.Dispatch<React.SetStateAction<boolean>>;
   newReview: boolean;
@@ -33,7 +31,6 @@ interface ReviewFormProps {
 
 const STORAGE_KEY = "/review-photos";
 const ReviewForm = ({
-  // restaurantId,
   showReviewForm,
   setShowReviewForm,
   setNewReview,
@@ -42,16 +39,13 @@ const ReviewForm = ({
   const [reviewText, setReviewText] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  // const [imgURLs, setImgURLs] = useState<string[]>([]);
+
   const [rating, setRating] = useState<number>(0);
-  // const { user } = useAuth0();
+
   const { userId } = useUserInfo();
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setReviewText(e.target.value);
-  // console.log(reviewText);
-  // console.log(rating);
-  // console.log(restaurantId);
 
   const handleFileInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -63,16 +57,9 @@ const ReviewForm = ({
       allowedFormats.includes(file.type)
     );
     setFiles(validFiles);
-    // console.log(files);
-    // console.log(validFiles);
   };
 
   const uploadPhotosToStorage = async (): Promise<string[]> => {
-    const maxNumOfPhotos = 5;
-    if (files.length > maxNumOfPhotos) {
-      throw new Error("Sorry but you can only upload 5 pictures max. 🥺");
-    }
-
     const fullStorageRef = storageRef(storage, STORAGE_KEY);
 
     try {
@@ -90,7 +77,6 @@ const ReviewForm = ({
         })
       );
 
-      // console.log("Files uploaded successfully:", updatedURLs);
       return updatedURLs;
     } catch (error) {
       console.error("Error uploading files:", error);
@@ -99,7 +85,6 @@ const ReviewForm = ({
   };
   const reviewForm = (
     <FormControl>
-      {/* <FormControlLabel>Write something</FormLabel> */}
       <Textarea
         value={reviewText}
         onChange={handleTextInputChange}
@@ -120,14 +105,6 @@ const ReviewForm = ({
 
   const postReview = async (imgURLs: string[]): Promise<void> => {
     try {
-      // if (!user?.email) {
-      //   throw new Error("User email is required 🥺");
-      // }
-
-      // if (!restaurantId || isNaN(restaurantId)) {
-      //   throw new Error("Restaurant ID is missing or invalid 🥺");
-      // }
-
       validateId(restaurantId, RESTAURANT);
       validateId(userId, USER);
       if (!rating) {
@@ -157,8 +134,6 @@ const ReviewForm = ({
       setReviewText("");
       setRating(0);
       setShowReviewForm(!showReviewForm);
-      // setImgURLs([]);
-      console.log("Review posted");
     } catch (error) {
       console.log(error);
     }
@@ -168,7 +143,6 @@ const ReviewForm = ({
     try {
       setLoading(true);
       const newImgURLs = await uploadPhotosToStorage();
-      // setImgURLs(newImgURLs);
       await postReview(newImgURLs);
       setLoading(false);
     } catch (error) {
@@ -208,8 +182,6 @@ const ReviewForm = ({
         )}
         <Box>{reviewForm}</Box>
       </Box>
-
-      {/* <Box> {reviewForm}</Box> */}
       <Flex gap="10px">
         <Button width="25%" marginTop="10px" onClick={handleSubmit}>
           Submit

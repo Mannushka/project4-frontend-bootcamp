@@ -13,7 +13,7 @@ import { useRestaurantInfo } from "../../context/RestaurantInfoContext";
 import BussinessHoursCard from "../../components/restaurant/BussinessHoursCard";
 import LocationCard from "../../components/restaurant/LocationCard";
 import SaveButton from "../../components/restaurants-listings/SaveButton";
-import { useUserInfo } from "../../context/UserInfoContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const RestaurantInfo = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>({} as Restaurant);
@@ -22,7 +22,7 @@ const RestaurantInfo = () => {
   const [newReview, setNewReview] = useState<boolean>(false);
   const { restaurantId } = useParams();
   const { updateRestaurantId } = useRestaurantInfo();
-  const { userId } = useUserInfo();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     setLoading(true);
@@ -41,18 +41,14 @@ const RestaurantInfo = () => {
       }
     };
     getRestaurantInfo();
-  }, [updateRestaurantId, restaurantId]);
-
-  // const displayRestaurantInfo = (): JSX.Element[] => {
-  //   const infoElements = [];
-  //   for (const key in restaurant) {
-  //     infoElements.push(<p key={key}>{`${key}: ${restaurant[key]}`}</p>);
-  //   }
-  //   return infoElements;
-  // };
+  }, [updateRestaurantId, restaurantId, newReview]);
 
   const handleLeaveReview = () => {
-    setShowReviewForm((prevState) => !prevState);
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    } else {
+      setShowReviewForm((prevState) => !prevState);
+    }
   };
 
   return (
@@ -88,7 +84,7 @@ const RestaurantInfo = () => {
               />
             </Box>
             <Box marginTop={2} className="single-restaurant-page-button">
-              {!showReviewForm && !!userId && (
+              {!showReviewForm && (
                 <Button
                   variant="outline"
                   onClick={handleLeaveReview}
@@ -101,7 +97,6 @@ const RestaurantInfo = () => {
               )}
               {showReviewForm && (
                 <ReviewForm
-                  // restaurantId={Number(restaurantId)}
                   showReviewForm={showReviewForm}
                   setShowReviewForm={setShowReviewForm}
                   newReview={newReview}
@@ -112,34 +107,10 @@ const RestaurantInfo = () => {
           </Stack>
         </Flex>
 
-        {/* <Flex justifyContent="space-between">
-          <GoogleMap address={restaurant.address} />
-        </Flex> */}
         <Box className="review-card-container" width={{ lg: "70%", sm: "90%" }}>
-          <RestaurantReviews
-            // restaurantId={Number(restaurantId)}
-            newReview={newReview}
-          />
+          <RestaurantReviews newReview={newReview} />
         </Box>
       </div>
-      {/* <Box margin="20px">
-        {!showReviewForm && (
-          <Button onClick={handleLeaveReview}>Leave a review</Button>
-        )}
-        {showReviewForm && (
-          <ReviewForm
-            showReviewForm={showReviewForm}
-            setShowReviewForm={setShowReviewForm}
-            newReview={newReview}
-            setNewReview={setNewReview}
-          />
-        )}
-      </Box> */}
-      {/* <RestaurantReviews
-        // restaurantId={Number(restaurantId)}
-        newReview={newReview}
-        setNewReview={setNewReview}
-      /> */}
     </div>
   );
 };

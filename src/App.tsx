@@ -6,8 +6,6 @@ import NavBar from "./components/navbar/NavBar";
 import { BACKEND_URL } from "./constants";
 import { useUserInfo } from "./context/UserInfoContext";
 import HomePage from "./pages/homepage/HomePage";
-// import "bootstrap/dist/js/bootstrap.bundle.min.js";
-// import imagePath from "./assets/dumbling.png";
 
 function App(): JSX.Element {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -21,7 +19,6 @@ function App(): JSX.Element {
             email: user?.email,
           },
         });
-        console.log(response.data);
         updateUserId(response.data);
         if (response.data === null) {
           return false;

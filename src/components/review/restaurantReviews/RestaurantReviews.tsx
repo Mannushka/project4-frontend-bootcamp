@@ -41,7 +41,9 @@ const RestaurantReviews = ({
         console.error(error);
       }
     };
-    getReviews();
+    if (restaurantId) {
+      getReviews();
+    }
   }, [restaurantId, newReview, isReviewDeleted]);
 
   const reviewsList = reviews.map((review) => (

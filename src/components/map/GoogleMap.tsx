@@ -21,8 +21,7 @@ interface GeoLocation {
 const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
   const [latitude, setLatitude] = useState<number>(22.28100746317362);
-  const [longitude, setLongitude] = useState<number>(114.15245889816494);
-  // const position = { lat: 22.28100746317362, lng: 114.15245889816494 }; // Hong Kong
+  const [longitude, setLongitude] = useState<number>(114.15245889816494); //default coordinates for Hong Kong
   const newAddress = address + ", Hong Kong";
 
   useEffect(() => {
@@ -70,7 +69,6 @@ const GoogleMap = ({ address }: GoogleMapProps): JSX.Element => {
         {latitude && longitude && (
           <AdvancedMarker
             position={{ lat: latitude, lng: longitude }}
-            // position={position}
             onClick={() => setOpen(true)}
           >
             <Pin

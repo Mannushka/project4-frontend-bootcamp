@@ -54,32 +54,3 @@ const FilterButtonGroup = ({
 };
 
 export default FilterButtonGroup;
-
-// const handleClick = (item: string) => {
-//   if (!selectedItems) {
-//     setSelectedItems(item);
-//   } else {
-//     if (typeof selectedItems === "string") {
-//       if (selectedItems === item) {
-//         setSelectedItems("");
-//       } else {
-//         setSelectedItems([selectedItems, item]);
-//       }
-//     } else if (Array.isArray(selectedItems)) {
-//       if (selectedItems.includes(item)) {
-//         setSelectedItems((prevSelectedItems) =>
-//           (prevSelectedItems as string[]).filter(
-//             (selectedItem: string) => selectedItem !== item
-//           )
-//         );
-//       } else {
-//         setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
-//       }
-//     }
-//   }
-// };
-
-//RETURN
-//  <Wrap spacing={2}>
-//    <ButtonGroup>{buttons}</ButtonGroup>
-//  </Wrap>;

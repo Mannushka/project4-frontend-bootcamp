@@ -4,6 +4,7 @@ import axios from "axios";
 import { validateId } from "../../utils/validateId";
 import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
+import useAuth from "../../hooks/useAuth";
 
 interface SaveButtonProps {
   restaurantId: number;
@@ -15,6 +16,8 @@ const SaveButton = ({
 }: SaveButtonProps): JSX.Element => {
   const { userId } = useUserInfo();
   const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [token, setToken] = useState<string>("");
+  const { checkUser } = useAuth();
 
   useEffect(() => {
     const checkIfRestaurantSaved = async (): Promise<void> => {
@@ -22,12 +25,26 @@ const SaveButton = ({
         validateId(restaurantId, RESTAURANT);
         validateId(userId, USER);
 
-        const response = await axios.get(
-          `${BACKEND_URL}/users/${userId}/check-saved-restaurant`,
-          { params: { restaurantId } }
-        );
+        // const response = await axios.get(
+        //   `${BACKEND_URL}/users/${userId}/check-saved-restaurant`,
+        //   { params: { restaurantId } },
+        // );
 
-        setIsSaved(response.data.isRestaurantSaved);
+        console.log(token);
+        if (token) {
+          const response = await axios.get(
+            `${BACKEND_URL}/users/${userId}/check-saved-restaurant`,
+            {
+              params: { restaurantId },
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          setIsSaved(response.data.isRestaurantSaved);
+          console.log("success");
+        }
       } catch (error) {
         console.error(error);
         throw new Error(
@@ -37,24 +54,42 @@ const SaveButton = ({
     };
 
     checkIfRestaurantSaved();
-  }, [restaurantId, userId, isSaved]);
+  }, [restaurantId, userId, isSaved, token]);
+
+  useEffect(() => {
+    const handleCheckUser = async (): Promise<void> => {
+      try {
+        const accessToken = await checkUser();
+        if (accessToken) setToken(accessToken);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    handleCheckUser();
+  }, [checkUser, userId]);
 
   const saveRestaurant = async (): Promise<void> => {
     try {
       validateId(restaurantId, RESTAURANT);
       validateId(userId, USER);
+      if (token) {
+        const response = await axios.post(
+          `${BACKEND_URL}/users/${userId}/my-restaurants`,
+          {
+            restaurantId: restaurantId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      const response = await axios.post(
-        `${BACKEND_URL}/users/${userId}/my-restaurants`,
-        {
-          restaurantId: restaurantId,
+        if (response.status === 201) {
+          console.log("Restaurant saved!");
         }
-      );
-
-      if (response.status === 201) {
-        console.log("Restaurant saved!");
+        setIsSaved(true);
       }
-      setIsSaved(true);
     } catch (error) {
       console.error(error);
     }
@@ -64,16 +99,22 @@ const SaveButton = ({
     try {
       validateId(restaurantId, RESTAURANT);
       validateId(userId, USER);
+      if (token) {
+        const response = await axios.delete(
+          `${BACKEND_URL}/users/${userId}/my-restaurants`,
+          {
+            params: { restaurantId },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      const response = await axios.delete(
-        `${BACKEND_URL}/users/${userId}/my-restaurants`,
-        { params: { restaurantId } }
-      );
-
-      if (response.status === 204) {
-        setIsSaved(false);
+        if (response.status === 204) {
+          setIsSaved(false);
+        }
+        console.log("Restaurant removed!");
       }
-      console.log("Restaurant removed!");
     } catch (error) {
       console.error(error);
     }

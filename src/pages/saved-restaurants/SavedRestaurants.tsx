@@ -7,20 +7,30 @@ import SingleRestaurantCard from "../../components/restaurants-listings/SingleRe
 import NavBar from "../../components/navbar/NavBar";
 import "./SavedRestaurants.css";
 import { Box, Text } from "@chakra-ui/react";
+import useAuth from "../../hooks/useAuth";
 
 const SavedRestaurants = () => {
   const [savedRestaurants, setSavedRestaurants] = useState<Restaurant[]>([]);
+  const [token, setToken] = useState<string>("");
   const { userId } = useUserInfo();
+  const { checkUser } = useAuth();
 
   useEffect(() => {
     const getSavedRestaurants = async (): Promise<void> => {
       try {
         validateId(userId, USER);
-        const response = await axios.get(
-          `${BACKEND_URL}/users/${userId}/my-restaurants`
-        );
+        if (token) {
+          const response = await axios.get(
+            `${BACKEND_URL}/users/${userId}/my-restaurants`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
 
-        setSavedRestaurants(response.data);
+          setSavedRestaurants(response.data);
+        }
       } catch (error) {
         console.error(error);
         throw new Error("An error occurred while fetching saved restaurants.");
@@ -28,7 +38,19 @@ const SavedRestaurants = () => {
     };
 
     getSavedRestaurants();
-  }, [userId, savedRestaurants]);
+  }, [userId, savedRestaurants, token]);
+
+  useEffect(() => {
+    const handleCheckUser = async (): Promise<void> => {
+      try {
+        const accessToken = await checkUser();
+        if (accessToken) setToken(accessToken);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    handleCheckUser();
+  }, [checkUser, userId]);
 
   const savedRestaurantsList = savedRestaurants.map((restaurant) => {
     return (

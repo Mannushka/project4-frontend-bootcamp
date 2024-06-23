@@ -7,7 +7,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StarRatingInput from "../starRating/StarRatingInput";
 import axios from "axios";
 import { BACKEND_URL, RESTAURANT, USER } from "../../../constants";
@@ -21,6 +21,7 @@ import { useRestaurantInfo } from "../../../context/RestaurantInfoContext";
 import { useUserInfo } from "../../../context/UserInfoContext";
 import { validateId } from "../../../utils/validateId";
 import { CircularProgress } from "@chakra-ui/react";
+import useAuth from "../../../hooks/useAuth";
 
 interface ReviewFormProps {
   showReviewForm: boolean;
@@ -39,10 +40,22 @@ const ReviewForm = ({
   const [reviewText, setReviewText] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-
   const [rating, setRating] = useState<number>(0);
-
   const { userId } = useUserInfo();
+  const [token, setToken] = useState<string>("");
+  const { checkUser } = useAuth();
+
+  useEffect(() => {
+    const handleCheckUser = async (): Promise<void> => {
+      try {
+        const accessToken = await checkUser();
+        if (accessToken) setToken(accessToken);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    handleCheckUser();
+  }, [checkUser, userId]);
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setReviewText(e.target.value);
@@ -83,6 +96,7 @@ const ReviewForm = ({
       throw error;
     }
   };
+
   const reviewForm = (
     <FormControl>
       <Textarea
@@ -122,14 +136,22 @@ const ReviewForm = ({
         throw new Error("Review  should be at least 80 characters long");
       }
 
-      const response = await axios.post(`${BACKEND_URL}/reviews`, {
-        // email: user?.email,
-        userId: userId,
-        restaurantId: restaurantId,
-        rating_value: rating,
-        text: reviewText,
-        photoURLs: imgURLs,
-      });
+      const response = await axios.post(
+        `${BACKEND_URL}/reviews`,
+        {
+          // email: user?.email,
+          userId: userId,
+          restaurantId: restaurantId,
+          rating_value: rating,
+          text: reviewText,
+          photoURLs: imgURLs,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setNewReview((prevState) => !prevState);
       setReviewText("");
       setRating(0);

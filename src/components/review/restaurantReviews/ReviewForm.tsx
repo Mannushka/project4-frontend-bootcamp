@@ -136,26 +136,28 @@ const ReviewForm = ({
         throw new Error("Review  should be at least 80 characters long");
       }
 
-      const response = await axios.post(
-        `${BACKEND_URL}/reviews`,
-        {
-          // email: user?.email,
-          userId: userId,
-          restaurantId: restaurantId,
-          rating_value: rating,
-          text: reviewText,
-          photoURLs: imgURLs,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      if (token) {
+        const response = await axios.post(
+          `${BACKEND_URL}/reviews`,
+          {
+            // email: user?.email,
+            userId: userId,
+            restaurantId: restaurantId,
+            rating_value: rating,
+            text: reviewText,
+            photoURLs: imgURLs,
           },
-        }
-      );
-      setNewReview((prevState) => !prevState);
-      setReviewText("");
-      setRating(0);
-      setShowReviewForm(!showReviewForm);
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setNewReview((prevState) => !prevState);
+        setReviewText("");
+        setRating(0);
+        setShowReviewForm(!showReviewForm);
+      }
     } catch (error) {
       console.log(error);
     }

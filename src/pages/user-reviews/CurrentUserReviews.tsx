@@ -7,11 +7,27 @@ import ReviewCard from "../../components/review/restaurantReviews/ReviewCard";
 import NavBar from "../../components/navbar/NavBar";
 import { Box, Spinner, Text } from "@chakra-ui/react";
 import "./CurrentUserReviews.css";
+import useAuth from "../../hooks/useAuth";
+
 const CurrentUserReviews = () => {
   const [myReviews, setMyReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [isReviewDeleted, setIsReviewDeleted] = useState<boolean>(false);
   const { userId } = useUserInfo();
+  const [token, setToken] = useState<string>("");
+  const { checkUser } = useAuth();
+
+  useEffect(() => {
+    const handleCheckUser = async (): Promise<void> => {
+      try {
+        const accessToken = await checkUser();
+        if (accessToken) setToken(accessToken);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    handleCheckUser();
+  }, [checkUser, userId]);
 
   useEffect(() => {
     setLoading(true);
@@ -22,17 +38,25 @@ const CurrentUserReviews = () => {
           userId: userId,
         };
 
-        const response = await axios.get(`${BACKEND_URL}/reviews/my-reviews`, {
-          params,
-        });
-        setMyReviews(response.data);
-        setLoading(false);
+        if (token) {
+          const response = await axios.get(
+            `${BACKEND_URL}/reviews/my-reviews`,
+            {
+              params,
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setMyReviews(response.data);
+          setLoading(false);
+        }
       } catch (error) {
         console.error(error);
       }
     };
     getReviews();
-  }, [userId, isReviewDeleted]);
+  }, [userId, isReviewDeleted, token]);
 
   const myReviewsList = myReviews.map((review) => (
     <div key={review.id} className="my-review-card">

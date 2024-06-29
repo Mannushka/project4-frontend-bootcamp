@@ -8,15 +8,27 @@ import { useUserInfo } from "./context/UserInfoContext";
 import HomePage from "./pages/homepage/HomePage";
 
 function App(): JSX.Element {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
+    useAuth0();
   const { updateUserId } = useUserInfo();
+
+  useEffect(() => {
+    if (user) {
+      postNewUserToDb();
+    }
+  }, [user]);
 
   const checkIfUserIsInDb = async (): Promise<boolean> => {
     if (isAuthenticated && user?.email) {
       try {
+        const accessToken = await getAccessTokenSilently();
+
         const response = await axios.get(`${BACKEND_URL}/users/find-user`, {
           params: {
             email: user?.email,
+          },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
           },
         });
         updateUserId(response.data);
@@ -48,12 +60,6 @@ function App(): JSX.Element {
       }
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      postNewUserToDb();
-    }
-  }, [user]);
 
   if (isLoading) {
     return <div>Loading ...</div>;

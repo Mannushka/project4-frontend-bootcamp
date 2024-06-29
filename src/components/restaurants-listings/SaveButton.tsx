@@ -25,12 +25,6 @@ const SaveButton = ({
         validateId(restaurantId, RESTAURANT);
         validateId(userId, USER);
 
-        // const response = await axios.get(
-        //   `${BACKEND_URL}/users/${userId}/check-saved-restaurant`,
-        //   { params: { restaurantId } },
-        // );
-
-        console.log(token);
         if (token) {
           const response = await axios.get(
             `${BACKEND_URL}/users/${userId}/check-saved-restaurant`,
@@ -41,9 +35,7 @@ const SaveButton = ({
               },
             }
           );
-
           setIsSaved(response.data.isRestaurantSaved);
-          console.log("success");
         }
       } catch (error) {
         console.error(error);
@@ -84,11 +76,7 @@ const SaveButton = ({
             },
           }
         );
-
-        if (response.status === 201) {
-          console.log("Restaurant saved!");
-        }
-        setIsSaved(true);
+        if (response.status === 201) setIsSaved(true);
       }
     } catch (error) {
       console.error(error);
@@ -110,10 +98,7 @@ const SaveButton = ({
           }
         );
 
-        if (response.status === 204) {
-          setIsSaved(false);
-        }
-        console.log("Restaurant removed!");
+        if (response.status === 204) setIsSaved(false);
       }
     } catch (error) {
       console.error(error);

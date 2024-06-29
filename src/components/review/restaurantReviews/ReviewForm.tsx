@@ -140,7 +140,6 @@ const ReviewForm = ({
         const response = await axios.post(
           `${BACKEND_URL}/reviews`,
           {
-            // email: user?.email,
             userId: userId,
             restaurantId: restaurantId,
             rating_value: rating,

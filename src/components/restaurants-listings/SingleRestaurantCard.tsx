@@ -27,7 +27,6 @@ const SingleRestaurantCard = ({
   const ratingArray = rating.map((ratingElement) => ratingElement.rating_value);
   const category = restaurant.food_category.category_name;
   const priceCategory = formatPriceCategory(restaurant.price_category);
-  // const location = restaurant.location.location_name;
 
   const card = (
     <Card className="single-restaurant-card">
@@ -49,12 +48,7 @@ const SingleRestaurantCard = ({
               <li>
                 {category}, {priceCategory}
               </li>
-              {/* <li>{priceCategory}</li> */}
               <li>{restaurant.address}</li>
-
-              {/* <li>
-                {category}, {priceCategory}, {location},
-              </li> */}
             </ul>
           </div>
 

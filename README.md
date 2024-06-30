@@ -1,8 +1,50 @@
-# Food harbour app
+# Food harbour app: front-end
 
 Food Harbour is a comprehensive online platform that serves as a catalogue of local restaurants in Hong Kong. It is designed to help customers find the best dining option based on their budget, preferred location, specific food preferences and restairant's rating. The app also provides its users with an opportunity to rate restaurants and leave a feedback for a particular restaurant as well as view the reviews written by others.
 
-## How to use the app
+## Setup
+
+1. Clone the repository to your local machine.
+2. Open the terminal and run npm install to install dependencies.
+3. Create a .env file in the root directory of the project.
+4. Set the following environmental variables in the .env file:
+   VITE_AUTH0_DOMAIN=your_auth0_domain
+   VITE_AUTH0_CLIENT_ID=your_auth0_client_id
+   VITE_AUTH0_AUDIENCE=your_auth0_audience
+   VITE_GOOGLE_API_KEY=your_google_api_key
+   VITE_MAP_ID=your_map_id
+   VITE_FIREBASE_API_KEY=your_firebase_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+   VITE_FIREBASE_APP_ID=your_firebase_app_id
+   VITE_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
+
+Replace your*auth0_domain, your_auth0_client_id, your_auth0_audience with the corresponding values from your Auth0 configuration. Similarly, replace the variables starting with your_google* and your*firebase* with the respective API keys and IDs from your Google and Firebase configurations.
+
+### Auth0 Configuration:
+
+1.  Set up an Auth0 account and create a new application at https://auth0.com .
+2.  Configure the application with the appropriate domain, client ID, and audience.
+3.  Update the VITE_AUTH0_DOMAIN, VITE_AUTH0_CLIENT_ID, and VITE_AUTH0_AUDIENCE variables in the .env file with the corresponding values from your Auth0 configuration.
+
+### Google Configuration:
+
+1.  Obtain a Google API key by creating a project in the Google Cloud Console and enabling the necessary APIs at https://developers.google.com/maps/documentation/javascript/cloud-setup .
+2.  Replace your_google_api_key and your_map_id in the .env file with your Google API key and the desired map ID.
+
+### Firebase Configuration:
+
+1.  Set up a Firebase account at https://console.firebase.google.com .
+2.  Create a Firebase project in the Firebase Console.
+3.  Obtain the Firebase configuration values (API key, auth domain, project ID, etc.) from the Firebase project settings.
+4.  Update the VITE_FIREBASE variables in the .env file with the corresponding values from your Firebase configuration.
+
+5.  Once the dependencies and environmental variables are set, start the development server using the following command: npm run dev.
+    This will start the app in development mode. Open http://localhost:5173 in your web browser to view the app.
+
+## Usage
 
 1. Guest users can browse the restaurants catalog, view any restaurant's info, read the previosly written reviews. However they are not able to write their own reviews or add a restaurant to their saved list.
 
@@ -27,3 +69,12 @@ https://drawsql.app/teams/dream-team-107/diagrams/foodharbour
 ## Wireframes:
 
 https://whimsical.com/food-harbour-FsXEiGE3pGqCbdQJKdFkhg
+
+## Built with
+
+## Built with
+
+![Static Badge](https://img.shields.io/badge/React-61DBFB?style=for-the-badge&logo=React&labelColor=black) ![Static Badge](https://img.shields.io/badge/vite-%237c73e6?style=for-the-badge&logo=vite&labelColor=black) ![Static Badge](https://img.shields.io/badge/typescript-%239fd3c7?style=for-the-badge&logo=typescript&logoColor=%239fd3c7&labelColor=black&color=%239fd3c7)
+![Static Badge](https://img.shields.io/badge/auth0-%20%23f95959?style=for-the-badge&logo=auth0&labelColor=black) ![Static Badge](https://img.shields.io/badge/firebase-%23afc5ff?style=for-the-badge&logo=chakra%20ui&logoColor=%20%23afc5ff&labelColor=black&color=%20%23afc5ff)
+![Static Badge](https://img.shields.io/badge/Axios-FAFAF9?style=for-the-badge&logo=Axios&labelColor=black) ![Static Badge](https://img.shields.io/badge/chakra%20UI-%23ff9a3c?style=for-the-badge&logo=chakra%20ui&logoColor=%23ff9a3c&labelColor=black&color=%23ff9a3c)
+![Static Badge](https://img.shields.io/badge/.env-4AE97A?style=for-the-badge&logo=dotenv&logoColor=4AE97A&labelColor=black)

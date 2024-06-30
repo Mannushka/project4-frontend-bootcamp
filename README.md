@@ -72,8 +72,6 @@ https://whimsical.com/food-harbour-FsXEiGE3pGqCbdQJKdFkhg
 
 ## Built with
 
-## Built with
-
 ![Static Badge](https://img.shields.io/badge/React-61DBFB?style=for-the-badge&logo=React&labelColor=black) ![Static Badge](https://img.shields.io/badge/vite-%237c73e6?style=for-the-badge&logo=vite&labelColor=black) ![Static Badge](https://img.shields.io/badge/typescript-%239fd3c7?style=for-the-badge&logo=typescript&logoColor=%239fd3c7&labelColor=black&color=%239fd3c7)
 ![Static Badge](https://img.shields.io/badge/auth0-%20%23f95959?style=for-the-badge&logo=auth0&labelColor=black) ![Static Badge](https://img.shields.io/badge/firebase-%23afc5ff?style=for-the-badge&logo=firebase&logoColor=%20%23afc5ff&labelColor=black&color=%20%23afc5ff)
 ![Static Badge](https://img.shields.io/badge/Axios-FAFAF9?style=for-the-badge&logo=Axios&labelColor=black) ![Static Badge](https://img.shields.io/badge/chakra%20UI-%23ff9a3c?style=for-the-badge&logo=chakra%20ui&logoColor=%23ff9a3c&labelColor=black&color=%23ff9a3c)

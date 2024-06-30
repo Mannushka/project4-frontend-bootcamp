@@ -12,6 +12,14 @@ Food Harbour is a comprehensive online platform that serves as a catalogue of lo
 
 4. On the restaurants page, accessible by clicking "Restaurants" on the navbar, users can view a list of all restaurants. By default, the list is sorted by highest rating, meaning the best-rated restaurants appear at the top. If the user wishes to sort the restaurants by price or most recent review, they may do so by clicking "sort by" button and selecting the desired option.
 
+5. To learn more about a specific restaurant, user can click "View details" on the restaurant card. They will be redirected to the restaurant's page, which contains such information as the restaurant's phone, email, precise address, location on the map, rating as well as all reviews for the restaurant left by previous users.
+
+6. To leave a review, user can click "Leave a review" button on the restaurant's page. A form will show up, where user can rate ther restaurant from 1 to 5 stars, write a paragraph describing their dining experience, and upload pictures of the menu, food, restaurant's interior etc. Users are able to submit a review only if they have rated the restaurant and the review text is at least 80 characters long. The review can also be deleted by clicking "Delete review".
+
+7. Users can view a list of all their reviews by clicking on their name on the navbar and selecting "My reviews".
+
+8. To add a restaurant to saved list, users can click "Save restaurant" button. The saved list is accessible by clicking on the current user's name on the navbar and selecting "Saved restaurants".
+
 ## ERD:
 
 https://drawsql.app/teams/dream-team-107/diagrams/foodharbour

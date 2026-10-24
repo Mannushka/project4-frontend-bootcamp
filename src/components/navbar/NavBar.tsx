@@ -35,13 +35,13 @@ const NavBar = (): JSX.Element => {
     <Navbar expand="lg" className="shadow" id="navbar">
       <Container fluid>
         <Navbar.Brand href="#">
-          <img
+          {/* <img
             src={imagePath}
             width="55"
             height="50"
             className="d-inline-block align-center me-2"
-            alt="food_harbour"
-          />
+            alt="food-harbour"
+          /> */}
           <span className="fw-bolder fs-4"> {brandName}</span>
         </Navbar.Brand>
 

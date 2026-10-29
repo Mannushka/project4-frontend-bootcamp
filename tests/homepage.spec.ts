@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { HomePage } from "./pages/homepage";
 import {
   FIRST_IMAGE_ALT,
   SECOND_IMAGE_ALT,
@@ -14,34 +15,34 @@ const carouselSlideNavigationCases = [
   { button: "Previous", clicks: 2, expectedAlt: SECOND_IMAGE_ALT },
 ];
 
-test.beforeEach(async ({ page }) => {
-  await page.goto("/");
-});
+test.describe("homepage rendering", () => {
+  let homePage: HomePage;
 
-test("homepage has correct title", async ({ page }) => {
-  await expect(page).toHaveTitle(/Food Harbour/);
-});
-
-test("imageCarousel is rendered correctly", async ({ page }) => {
-  const imageCarousel = page.getByRole("region", { name: "Image Carousel" });
-  await expect(imageCarousel).toBeVisible();
-});
-
-for (const { button, clicks, expectedAlt } of carouselSlideNavigationCases) {
-  test(`"${expectedAlt}" becomes visible after ${clicks} ${button} button clicks`, async ({
-    page,
-  }) => {
-    const imageCarousel = page.getByRole("region", { name: "Image Carousel" });
-    const navigationButton = imageCarousel.getByRole("button", {
-      name: button,
-    });
-    const currentImage = imageCarousel.locator(".yarl__slide_current");
-    for (let i = 0; i < clicks; i++) {
-      await navigationButton.click();
-    }
-
-    await expect(currentImage.getByRole("img")).toHaveAccessibleName(
-      expectedAlt,
-    );
+  test.beforeEach(async ({ page }) => {
+    homePage = new HomePage(page);
+    await homePage.navigateToHomePage();
   });
-}
+
+  test("homepage has correct title", async ({ page }) => {
+    await expect(page).toHaveTitle(/Food Harbour/);
+  });
+  test("imageCarousel is rendered correctly", async () => {
+    await expect(homePage.imageCarousel).toBeVisible();
+  });
+
+  for (const { button, clicks, expectedAlt } of carouselSlideNavigationCases) {
+    test(`"${expectedAlt}" becomes visible after ${clicks} ${button} button clicks`, async () => {
+      for (let i = 0; i < clicks; i++) {
+        const navButton =
+          button === "Next"
+            ? homePage.carouselNextButton
+            : homePage.carouselPreviousButton;
+        await navButton.click();
+      }
+
+      await expect(homePage.carouselActiveSlide).toHaveAccessibleName(
+        expectedAlt,
+      );
+    });
+  }
+});

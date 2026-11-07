@@ -7,6 +7,9 @@ export class HomePage {
   readonly carouselPreviousButton: Locator;
   readonly carouselSlide: Locator;
   readonly carouselActiveSlide: Locator;
+  readonly recentActivityHeading: Locator;
+  readonly reviewCardsContainer: Locator;
+  readonly reviewCards: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -20,6 +23,14 @@ export class HomePage {
     this.carouselSlide = this.imageCarousel.locator(".yarl__slide_current");
 
     this.carouselActiveSlide = this.carouselSlide.getByRole("img");
+
+    this.recentActivityHeading = page.getByRole("heading", {
+      level: 2,
+      name: "Recent activity",
+      exact: true,
+    });
+    this.reviewCardsContainer = page.locator(".all-reviews-container");
+    this.reviewCards = this.reviewCardsContainer.locator(".review-card");
   }
 
   async navigateToHomePage() {

@@ -36,7 +36,7 @@ const AllReviews = (): JSX.Element => {
   }, [page, isReviewDeleted]);
 
   const reviewsList = reviews.map((review) => (
-    <Box key={review.id}>
+    <Box key={review.id} className="review-card">
       <ReviewCard
         review={review}
         displayResturantName={true}

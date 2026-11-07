@@ -33,13 +33,13 @@ const ReviewCard = ({
   useEffect(() => {
     if (ref.current) {
       setShowReadMoreButton(
-        ref.current.scrollHeight !== ref.current.clientHeight
+        ref.current.scrollHeight !== ref.current.clientHeight,
       );
     }
   }, []);
 
   const reviewCard = (
-    <Card className="review-card">
+    <Card className="review-card-content">
       <CardBody>
         <Text>
           {userId === review.user_id
@@ -93,7 +93,7 @@ const ReviewCard = ({
     </Card>
   );
 
-  return <Box className="review-card">{reviewCard}</Box>;
+  return <Box className="review-card-content">{reviewCard}</Box>; //need to revisit this part, I think the Box is not necessary, but I will keep it for now, because I need to check if the review card is rendered correctly in the test, and the Box is needed for that. I will remove it later if I can find a better way to test it.
 };
 
 export default ReviewCard;

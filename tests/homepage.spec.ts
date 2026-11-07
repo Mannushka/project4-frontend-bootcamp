@@ -45,4 +45,14 @@ test.describe("homepage rendering", () => {
       );
     });
   }
+
+  test("recent activities heading is rendered correctly", async () => {
+    await expect(homePage.recentActivityHeading).toBeVisible();
+  });
+
+  // need to test if all the review cards are rendered correctly, there 9 review cards on one page, so 9 is the maximum number of review cards that can be rendered on one page, so we can test if the number of review cards is less than or equal to 9
+
+  test("recent activities review cards are rendered correctly", async () => {
+    await expect(homePage.reviewCards).toHaveCount(9);
+  });
 });

@@ -36,8 +36,8 @@ test.describe("homepage rendering", () => {
       for (let i = 0; i < clicks; i++) {
         const navButton =
           button === "Next"
-            ? homePage.carouselNextButton
-            : homePage.carouselPreviousButton;
+            ? homePage.carouselButton("Next")
+            : homePage.carouselButton("Previous");
         await navButton.click();
       }
 
@@ -69,4 +69,6 @@ test.describe("homepage rendering", () => {
       );
     }
   });
+
+  test("", async () => {});
 });

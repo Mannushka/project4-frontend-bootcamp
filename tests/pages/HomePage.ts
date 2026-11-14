@@ -10,6 +10,11 @@ export class HomePage {
   readonly recentActivityHeading: Locator;
   readonly reviewCardsContainer: Locator;
   readonly reviewCards: Locator;
+  reviewCardByRestaurant(restaurantName: string): Locator {
+    return this.reviewCardsContainer.locator(".review-card", {
+      hasText: restaurantName,
+    });
+  }
   imagesInReviewCard(card: Locator): Locator {
     return card.locator(".images-container").getByRole("img");
   }

@@ -58,7 +58,7 @@ test.describe("homepage rendering", () => {
 
     const reviews = REVIEW_CARD_CONTENT_TEST_DATA; //later we can fetch the review data from the backend, but for now we can use the test data from the fixture file
     for (let i = 0; i < reviews.length; i++) {
-      const reviewCard = homePage.reviewCards.nth(i);
+      const reviewCard = homePage.reviewCardByRestaurant(reviews[i].restaurant);
       await expect(reviewCard).toContainText(
         `${reviews[i].author} created a review for ${reviews[i].restaurant}`,
       );

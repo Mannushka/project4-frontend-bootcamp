@@ -10,6 +10,9 @@ export class HomePage {
   readonly recentActivityHeading: Locator;
   readonly reviewCardsContainer: Locator;
   readonly reviewCards: Locator;
+  imagesInReviewCard(card: Locator): Locator {
+    return card.locator(".images-container").getByRole("img");
+  }
 
   constructor(page: Page) {
     this.page = page;

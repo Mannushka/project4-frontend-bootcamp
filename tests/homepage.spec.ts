@@ -5,6 +5,7 @@ import {
   SECOND_IMAGE_ALT,
   THIRD_IMAGE_ALT,
 } from "../src/constants";
+import { REVIEW_CARD_CONTENT_TEST_DATA } from "./fixtures/reviewCardContentTestData";
 
 const carouselSlideNavigationCases = [
   { button: "Next", clicks: 0, expectedAlt: FIRST_IMAGE_ALT },
@@ -54,5 +55,18 @@ test.describe("homepage rendering", () => {
 
   test("recent activities review cards are rendered correctly", async () => {
     await expect(homePage.reviewCards).toHaveCount(9);
+
+    const reviews = REVIEW_CARD_CONTENT_TEST_DATA; //later we can fetch the review data from the backend, but for now we can use the test data from the fixture file
+    for (let i = 0; i < reviews.length; i++) {
+      const reviewCard = homePage.reviewCards.nth(i);
+      await expect(reviewCard).toContainText(
+        `${reviews[i].author} created a review for ${reviews[i].restaurant}`,
+      );
+
+      await expect(reviewCard).toContainText(reviews[i].textSnippet);
+      await expect(homePage.imagesInReviewCard(reviewCard)).toHaveCount(
+        reviews[i].photoCount,
+      );
+    }
   });
 });

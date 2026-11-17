@@ -8,9 +8,9 @@ export class HomePage {
   readonly recentActivityHeading: Locator;
   readonly reviewCardsContainer: Locator;
   readonly reviewCards: Locator;
-  reviewCardByRestaurant(restaurantName: string): Locator {
+  reviewCardByRestaurant(restaurantName: string, author: string): Locator {
     return this.reviewCardsContainer.locator(".review-card", {
-      hasText: restaurantName,
+      hasText: `${author} created a review for ${restaurantName}`,
     });
   }
   imagesInReviewCard(card: Locator): Locator {
@@ -18,6 +18,13 @@ export class HomePage {
   }
   carouselButton(buttonName: "Next" | "Previous"): Locator {
     return this.imageCarousel.getByRole("button", { name: buttonName });
+  }
+
+  reviewCardButton(
+    card: Locator,
+    buttonName: "Show more..." | "Show less",
+  ): Locator {
+    return card.getByRole("button", { name: buttonName });
   }
 
   constructor(page: Page) {

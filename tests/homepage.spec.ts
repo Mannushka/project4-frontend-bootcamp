@@ -5,7 +5,7 @@ import {
   SECOND_IMAGE_ALT,
   THIRD_IMAGE_ALT,
 } from "../src/constants";
-import { REVIEW_CARD_CONTENT_TEST_DATA } from "./fixtures/reviewCardContentTestData";
+import { PAGE_ONE_REVIEWS } from "./fixtures/reviewCardContentTestData";
 
 const carouselSlideNavigationCases = [
   { button: "Next", clicks: 0, expectedAlt: FIRST_IMAGE_ALT },
@@ -15,6 +15,8 @@ const carouselSlideNavigationCases = [
   { button: "Previous", clicks: 1, expectedAlt: THIRD_IMAGE_ALT },
   { button: "Previous", clicks: 2, expectedAlt: SECOND_IMAGE_ALT },
 ];
+const reviews = PAGE_ONE_REVIEWS;
+const longReviews = reviews.filter((review) => review.isLong);
 
 test.describe("homepage rendering", () => {
   let homePage: HomePage;
@@ -56,9 +58,12 @@ test.describe("homepage rendering", () => {
   test("recent activities review cards are rendered correctly", async () => {
     await expect(homePage.reviewCards).toHaveCount(9);
 
-    const reviews = REVIEW_CARD_CONTENT_TEST_DATA; //later we can fetch the review data from the backend, but for now we can use the test data from the fixture file
     for (let i = 0; i < reviews.length; i++) {
-      const reviewCard = homePage.reviewCardByRestaurant(reviews[i].restaurant);
+      const reviewCard = homePage.reviewCardByRestaurant(
+        reviews[i].restaurant,
+        reviews[i].author,
+      );
+
       await expect(reviewCard).toContainText(
         `${reviews[i].author} created a review for ${reviews[i].restaurant}`,
       );
@@ -70,5 +75,22 @@ test.describe("homepage rendering", () => {
     }
   });
 
-  test("", async () => {});
+  test("clicking 'Show more' expands the review card and changes the button text to 'Show less' and vice versa", async () => {
+    for (let i = 0; i < longReviews.length; i++) {
+      const reviewCard = homePage.reviewCardByRestaurant(
+        longReviews[i].restaurant,
+        longReviews[i].author,
+      );
+      await homePage.reviewCardButton(reviewCard, "Show more...").click();
+      await expect(
+        homePage.reviewCardButton(reviewCard, "Show less"),
+      ).toBeVisible();
+      await homePage.reviewCardButton(reviewCard, "Show less").click();
+      await expect(
+        homePage.reviewCardButton(reviewCard, "Show more..."),
+      ).toBeVisible();
+    }
+  });
+
+  // short reviews do not have "Show more..." button, so we can test that the "Show more..." button is not visible for short reviews
 });

@@ -19,6 +19,9 @@ export class HomePage {
   carouselButton(buttonName: "Next" | "Previous"): Locator {
     return this.imageCarousel.getByRole("button", { name: buttonName });
   }
+  reviewText(card: Locator, textSnippet: string): Locator {
+    return card.locator("p", { hasText: textSnippet });
+  }
 
   reviewCardButton(
     card: Locator,

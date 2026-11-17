@@ -85,10 +85,17 @@ test.describe("homepage rendering", () => {
       await expect(
         homePage.reviewCardButton(reviewCard, "Show less"),
       ).toBeVisible();
+      await expect(
+        homePage.reviewText(reviewCard, longReviews[i].textSnippet),
+      ).toHaveClass(/review-text-expanded/);
+
       await homePage.reviewCardButton(reviewCard, "Show less").click();
       await expect(
         homePage.reviewCardButton(reviewCard, "Show more..."),
       ).toBeVisible();
+      await expect(
+        homePage.reviewText(reviewCard, longReviews[i].textSnippet),
+      ).toHaveClass(/review-text-not-expanded/);
     }
   });
 

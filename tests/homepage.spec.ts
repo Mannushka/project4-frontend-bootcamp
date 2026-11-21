@@ -53,7 +53,7 @@ test.describe("homepage rendering", () => {
 
   // need to test if all the review cards are rendered correctly, there 9 review cards on one page, so 9 is the maximum number of review cards that can be rendered on one page, so we can test if the number of review cards is less than or equal to 9
 
-  test("recent activities review cards are rendered correctly", async () => {
+  test("recent activity page 1: 9 review cards render with author, rating, text and photos", async () => {
     await expect(homePage.reviewCards).toHaveCount(9);
 
     for (const review of reviews) {
@@ -65,7 +65,9 @@ test.describe("homepage rendering", () => {
       await expect(reviewCard).toContainText(
         `${review.author} created a review for ${review.restaurant}`,
       );
-
+      await expect(homePage.starRating(reviewCard)).toHaveAccessibleName(
+        `Rating: ${review.rating} out of 5`,
+      );
       await expect(reviewCard).toContainText(review.textSnippet);
       await expect(homePage.imagesInReviewCard(reviewCard)).toHaveCount(
         review.photoCount,

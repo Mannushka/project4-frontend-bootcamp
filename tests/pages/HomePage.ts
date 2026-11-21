@@ -30,6 +30,10 @@ export class HomePage {
     return card.getByRole("button", { name: buttonName });
   }
 
+  starRating(card: Locator): Locator {
+    return card.getByRole("img", { name: /Rating:/ });
+  }
+
   constructor(page: Page) {
     this.page = page;
     this.imageCarousel = page.getByRole("region", { name: "Image Carousel" });

@@ -14,7 +14,7 @@ const carouselSlideNavigationCases = [
   { button: "Previous", clicks: 0, expectedAlt: FIRST_IMAGE_ALT },
   { button: "Previous", clicks: 1, expectedAlt: THIRD_IMAGE_ALT },
   { button: "Previous", clicks: 2, expectedAlt: SECOND_IMAGE_ALT },
-];
+] as const;
 const reviews = PAGE_ONE_REVIEWS;
 const longReviews = reviews.filter((review) => review.isLong);
 const shortReviews = reviews.filter((review) => !review.isLong);
@@ -30,17 +30,14 @@ test.describe("homepage rendering", () => {
   test("homepage has correct title", async ({ page }) => {
     await expect(page).toHaveTitle(/Food Harbour/);
   });
-  test("imageCarousel is rendered correctly", async () => {
+  test("imageCarousel is visible on homepage", async () => {
     await expect(homePage.imageCarousel).toBeVisible();
   });
 
   for (const { button, clicks, expectedAlt } of carouselSlideNavigationCases) {
     test(`"${expectedAlt}" becomes visible after ${clicks} ${button} button clicks`, async () => {
+      const navButton = homePage.carouselButton(button);
       for (let i = 0; i < clicks; i++) {
-        const navButton =
-          button === "Next"
-            ? homePage.carouselButton("Next")
-            : homePage.carouselButton("Previous");
         await navButton.click();
       }
 

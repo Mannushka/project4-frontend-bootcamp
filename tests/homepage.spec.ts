@@ -17,6 +17,7 @@ const carouselSlideNavigationCases = [
 ];
 const reviews = PAGE_ONE_REVIEWS;
 const longReviews = reviews.filter((review) => review.isLong);
+const shortReviews = reviews.filter((review) => !review.isLong);
 
 test.describe("homepage rendering", () => {
   let homePage: HomePage;
@@ -100,4 +101,15 @@ test.describe("homepage rendering", () => {
   });
 
   // short reviews do not have "Show more..." button, so we can test that the "Show more..." button is not visible for short reviews
+  test("short reviews do not have 'Show more...' button", async () => {
+    for (const review of shortReviews) {
+      const reviewCard = homePage.reviewCardByRestaurant(
+        review.restaurant,
+        review.author,
+      );
+      await expect(
+        homePage.reviewCardButton(reviewCard, "Show more..."),
+      ).toHaveCount(0);
+    }
+  });
 });

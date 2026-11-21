@@ -59,35 +59,35 @@ test.describe("homepage rendering", () => {
   test("recent activities review cards are rendered correctly", async () => {
     await expect(homePage.reviewCards).toHaveCount(9);
 
-    for (let i = 0; i < reviews.length; i++) {
+    for (const review of reviews) {
       const reviewCard = homePage.reviewCardByRestaurant(
-        reviews[i].restaurant,
-        reviews[i].author,
+        review.restaurant,
+        review.author,
       );
 
       await expect(reviewCard).toContainText(
-        `${reviews[i].author} created a review for ${reviews[i].restaurant}`,
+        `${review.author} created a review for ${review.restaurant}`,
       );
 
-      await expect(reviewCard).toContainText(reviews[i].textSnippet);
+      await expect(reviewCard).toContainText(review.textSnippet);
       await expect(homePage.imagesInReviewCard(reviewCard)).toHaveCount(
-        reviews[i].photoCount,
+        review.photoCount,
       );
     }
   });
 
   test("clicking 'Show more' expands the review card and changes the button text to 'Show less' and vice versa", async () => {
-    for (let i = 0; i < longReviews.length; i++) {
+    for (const review of longReviews) {
       const reviewCard = homePage.reviewCardByRestaurant(
-        longReviews[i].restaurant,
-        longReviews[i].author,
+        review.restaurant,
+        review.author,
       );
       await homePage.reviewCardButton(reviewCard, "Show more...").click();
       await expect(
         homePage.reviewCardButton(reviewCard, "Show less"),
       ).toBeVisible();
       await expect(
-        homePage.reviewText(reviewCard, longReviews[i].textSnippet),
+        homePage.reviewText(reviewCard, review.textSnippet),
       ).toHaveClass(/review-text-expanded/);
 
       await homePage.reviewCardButton(reviewCard, "Show less").click();
@@ -95,7 +95,7 @@ test.describe("homepage rendering", () => {
         homePage.reviewCardButton(reviewCard, "Show more..."),
       ).toBeVisible();
       await expect(
-        homePage.reviewText(reviewCard, longReviews[i].textSnippet),
+        homePage.reviewText(reviewCard, review.textSnippet),
       ).toHaveClass(/review-text-not-expanded/);
     }
   });

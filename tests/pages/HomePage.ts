@@ -20,7 +20,7 @@ export class HomePage {
     return this.imageCarousel.getByRole("button", { name: buttonName });
   }
   reviewText(card: Locator, textSnippet: string): Locator {
-    return card.locator("p", { hasText: textSnippet });
+    return card.getByText(textSnippet);
   }
 
   reviewCardButton(
